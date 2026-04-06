@@ -1,0 +1,156 @@
+---
+import '../styles/global.css';
+const {
+  title = "The Princeton Journal",
+  description = "The Princeton Journal is Princeton Texas’s leading independent source for local news, city government coverage, and community reporting.",
+  url = "https://theprincetonjournal.com",
+  ogImage = "https://theprincetonjournal.com/tpj-logo.jpg",
+  ogType = "website"
+} = Astro.props;
+
+const websiteSchema =
+  ogType === "website" && url === "https://theprincetonjournal.com"
+    ? {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "The Princeton Journal",
+        "url": "https://theprincetonjournal.com/"
+      }
+    : null;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-R726F2LG18"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-R726F2LG18');
+  </script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="google-site-verification" content="q2FhOIt2RvOTMfmnH1qgdFheMFXS6RNchAsDJliiDWY" />
+
+<link rel="icon" type="image/png" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+<link rel="shortcut icon" href="/favicon-32.png?v=4" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=4" />
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png?v=4" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=4" />
+<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon-precomposed.png?v=4" />
+<meta name="application-name" content="The Princeton Journal" />
+<meta name="apple-mobile-web-app-title" content="The Princeton Journal" />
+<meta property="og:site_name" content="The Princeton Journal" />
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={url} />
+<link rel="alternate" type="application/rss+xml" title="The Princeton Journal RSS Feed" href="https://theprincetonjournal.com/rss.xml" />
+<meta property="og:title" content={title} />
+
+<meta property="og:description" content={description} />
+<meta property="og:type" content={ogType} />
+<meta property="og:url" content={url} />
+<meta property="og:image" content={ogImage} />
+<meta property="fb:app_id" content="1600725191074059" />
+
+{websiteSchema && (
+  <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+)}
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage} />
+
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "The Princeton Journal",
+  "url": "https://theprincetonjournal.com",
+  "logo": "https://theprincetonjournal.com/tpj-logo.jpg",
+  "sameAs": [
+    "https://www.facebook.com/profile.php?id=61581999665231"
+  ]
+})} />
+
+</head>
+
+<body class="bg-white text-black">
+
+<header class="site-header border-b border-gray-200">
+  <div class="site-header-inner mx-auto max-w-6xl px-6 py-4 flex items-center justify-between">
+    <a href="/" class="logo text-xl">
+      The Princeton Journal
+    </a>
+
+    <button
+      class="menu-toggle text-2xl"
+      aria-label="Open navigation"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+      type="button"
+    >
+      ☰
+    </button>
+
+    <nav class="desktop-nav flex gap-6 text-sm font-medium">
+      <a href="/">Home</a>
+      <a href="/princeton-governance">Princeton Governance</a>
+      <a href="/us-news">US News</a>
+      <a href="/about">About</a>
+      <a href="/contact">Contact</a>
+    </nav>
+  </div>
+
+  <div id="mobile-menu" class="mobile-menu border-t border-gray-200">
+    <nav class="mobile-nav mx-auto max-w-6xl px-6 py-4 flex flex-col gap-4 text-sm font-medium">
+      <a href="/">Home</a>
+      <a href="/princeton-governance">Princeton Governance</a>
+      <a href="/us-news">US News</a>
+      <a href="/about">About</a>
+      <a href="/contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<slot />
+
+<footer class="border-t border-gray-200 mt-20">
+  <div class="mx-auto max-w-6xl px-6 py-10">
+    <div class="flex flex-wrap gap-6 text-sm font-medium text-gray-700">
+      <a href="/about">About</a>
+<a href="/staff">Staff</a>
+      <a href="/privacy">Privacy Policy</a>
+<a href="/terms">Terms of Service</a>
+      <a href="/contact">Contact</a>
+      <a href="/subscribe">Subscribe</a>
+    </div>
+
+    <div class="mt-6 text-sm text-gray-500">
+      © {new Date().getFullYear()} The Princeton Journal
+    </div>
+  </div>
+</footer>
+
+</body>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const toggle = document.querySelector('.menu-toggle');
+    const mobileMenu = document.querySelector('.mobile-menu');
+
+    if (toggle && mobileMenu) {
+      toggle.addEventListener('click', () => {
+        mobileMenu.classList.toggle('open');
+        const expanded = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+      });
+    }
+  });
+</script>
+</html>

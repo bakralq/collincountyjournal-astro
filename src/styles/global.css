@@ -1,0 +1,171 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "GrenzeGotisch";
+  src: url("/fonts/GrenzeGotisch-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+.logo {
+  font-family: "GrenzeGotisch", serif;
+  font-weight: 700;
+  font-size: 2.6rem;
+  letter-spacing: 0.02em;
+}
+.article-content p {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.article-content h2 {
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 700;
+  color: black;
+}
+
+.article-content h3 {
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 700;
+  color: black;
+}
+
+.article-content ul,
+.article-content ol {
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
+  padding-left: 1.5rem;
+}
+
+.article-content ul {
+  list-style-type: disc;
+}
+
+.article-content ol {
+  list-style-type: decimal;
+}
+
+.article-content li {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.article-content strong {
+  font-weight: 700;
+  color: black;
+}
+
+.article-content em {
+  font-style: italic;
+}
+
+.article-content hr {
+  margin-top: 2rem;
+  margin-bottom: 1.5rem;
+  border: 0;
+  border-top: 1px solid #e5e7eb;
+}
+
+.article-content .published-note {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e5e7eb;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: #6b7280;
+}
+.menu-toggle {
+  display: none;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  color: #000;
+}
+
+.mobile-menu {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.3s ease, opacity 0.25s ease;
+}
+
+@media (max-width: 768px) {
+  .desktop-nav {
+    display: none !important;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .mobile-menu.open {
+    max-height: 500px;
+    opacity: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .site-header-inner {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .logo {
+    font-size: 1.75rem;
+    line-height: 1.1;
+    white-space: nowrap;
+    max-width: 70%;
+  }
+
+  .menu-toggle {
+    flex-shrink: 0;
+    margin-left: 0.5rem;
+  }
+}
+.article-content figure {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.article-content figure img {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  margin-bottom: 0.75rem;
+}
+
+.article-content figure img:last-of-type {
+  margin-bottom: 0;
+}
+.article-content figcaption {
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: #6b7280;
+}
+.card-description-clamp {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.article-hero-caption {
+  margin-top: -2.5rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  color: #6b7280;
+}
+.article-content .article-hero-caption {
+  margin-top: -1.25rem !important;
+  margin-bottom: 1.5rem !important;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  color: #6b7280;
+}

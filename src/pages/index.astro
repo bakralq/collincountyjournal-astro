@@ -1,0 +1,128 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import ArticleCard from '../components/ArticleCard.astro';
+
+const posts = await getCollection('posts', ({ data }) => !data.draft);
+
+const sortedPosts = posts.sort(
+  (a, b) =>
+    new Date(`${b.data.date}T12:00:00`).getTime() -
+    new Date(`${a.data.date}T12:00:00`).getTime()
+);
+const getReadingTime = (content) => {
+  const wordCount = (content || '').trim().split(/\s+/).filter(Boolean).length;
+  return Math.max(1, Math.ceil(wordCount / 200));
+};
+
+const topPost = sortedPosts[0];
+const truncateDescription = (text, limit = 140) => {
+  if (!text || text.length <= limit) return text;
+  return text.slice(0, limit).trimEnd() + '...';
+};
+const princetonGovernancePosts = sortedPosts
+  .filter(
+    (post) =>
+      post.data.section === 'Princeton Governance' &&
+      post.id !== topPost?.id
+  )
+  .slice(0, 3);
+
+const usNewsPosts = sortedPosts
+  .filter(
+    (post) =>
+      post.data.section === 'US News' &&
+      post.id !== topPost?.id
+  )
+  .slice(0, 3);
+---
+
+<Layout
+  title="The Princeton Journal"
+  description="Princeton’s leading source for local news, city government coverage, development, public safety, and community reporting."
+  url="https://theprincetonjournal.com"
+>
+  <main class="mx-auto max-w-6xl px-6 py-8">
+    {topPost && (
+      <section class="mt-0">
+        <p class="text-sm font-medium uppercase tracking-wide text-gray-500">
+          Top Story
+        </p>
+
+        <a
+          href={`/posts/${topPost.id.replace(/\.md$/, '')}`}
+          class="mt-4 block overflow-hidden rounded-2xl border border-gray-200 transition hover:border-gray-300"
+        >
+
+          <div class="p-8">
+            <p class="text-sm font-medium uppercase tracking-wide text-gray-500">
+              {topPost.data.section}
+            </p>
+
+            <h1 class="mt-3 text-3xl font-bold tracking-tight">
+              {topPost.data.title}
+            </h1>
+
+            <p class="mt-3 text-gray-600">
+  {truncateDescription(topPost.data.description, 140)}
+            </p>
+          </div>
+        </a>
+      </section>
+    )}
+
+    <section class="mt-16">
+<div class="flex items-center justify-between gap-2">
+  <h2 class="text-xl font-bold tracking-tight sm:text-2xl">
+    Latest Princeton Governance
+  </h2>
+  <a
+    href="/princeton-governance"
+    class="text-sm font-medium text-gray-600 hover:text-black whitespace-nowrap shrink-0"
+  >
+    View all
+  </a>
+</div>
+      <div class="mt-6 grid gap-6 md:grid-cols-3">
+        {princetonGovernancePosts.map((post) => (
+          <ArticleCard
+            title={post.data.title}
+            description={post.data.description}
+            href={`/posts/${post.id.replace(/\.md$/, '')}`}
+            date={post.data.date}
+            image={post.data.image}
+  readingTime={getReadingTime(post.body)}
+            variant="stacked"
+          />
+        ))}
+      </div>
+    </section>
+
+    <section class="mt-16">
+<div class="flex items-center justify-between gap-2">
+  <h2 class="text-xl font-bold tracking-tight sm:text-2xl">
+    Latest U.S. News
+  </h2>
+  <a
+    href="/us-news"
+    class="text-sm font-medium text-gray-600 hover:text-black whitespace-nowrap shrink-0"
+  >
+    View all
+  </a>
+</div>
+      <div class="mt-6 grid gap-6 md:grid-cols-3">
+        {usNewsPosts.map((post) => (
+          <ArticleCard
+            title={post.data.title}
+            description={post.data.description}
+            href={`/posts/${post.id.replace(/\.md$/, '')}`}
+            date={post.data.date}
+            image={post.data.image}
+  readingTime={getReadingTime(post.body)}
+            variant="stacked"
+          />
+        ))}
+      </div>
+    </section>
+  </main>
+</Layout>

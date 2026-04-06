@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://theprincetonjournal.com/sitemap.xml
+Sitemap: https://theprincetonjournal.com/news-sitemap.xml
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /

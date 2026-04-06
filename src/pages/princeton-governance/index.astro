@@ -1,0 +1,241 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+const posts = await getCollection('posts', ({ data }) =>
+  !data.draft && data.section === 'Princeton Governance'
+);
+
+const sortedPosts = posts.sort(
+  (a, b) =>
+    new Date(`${b.data.date}T12:00:00`).getTime() -
+    new Date(`${a.data.date}T12:00:00`).getTime()
+);
+
+const postsData = sortedPosts.map((post) => ({
+  title: post.data.title,
+  description: post.data.description,
+  date: post.data.date,
+  image: post.data.image || null,
+  href: `/posts/${post.id.replace(/\.md$/, '')}`,
+  content: post.body || ''
+}));
+
+const uniqueDates = [
+  ...new Set(sortedPosts.map((post) => post.data.date))
+].sort(
+  (a, b) =>
+    new Date(`${b}T12:00:00`).getTime() -
+    new Date(`${a}T12:00:00`).getTime()
+);
+
+const formatDate = (date) =>
+  new Date(`${date}T12:00:00`).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+---
+
+<Layout
+  title="Princeton Governance | The Princeton Journal"
+  description="Reporting and analysis on Princeton city government, public meetings, development, policy, and accountability."
+  url="https://theprincetonjournal.com/princeton-governance"
+>
+  <main class="mx-auto max-w-5xl px-6 py-16">
+    <h1 class="text-4xl font-bold tracking-tight">Princeton Governance</h1>
+
+    <p class="mt-4 text-lg text-gray-700">
+      Reporting and analysis on Princeton city government, public meetings, development, policy, and accountability.
+    </p>
+
+    <div class="mt-8 grid gap-4 md:grid-cols-2">
+      <div>
+        <label class="mb-2 block text-sm font-medium text-gray-700">
+          Search articles
+        </label>
+        <input
+          id="searchInput"
+          type="text"
+          placeholder="Search by title or description"
+          class="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm outline-none focus:border-black"
+        />
+      </div>
+
+      <div>
+        <label class="mb-2 block text-sm font-medium text-gray-700">
+          Filter by date
+        </label>
+        <select
+          id="dateFilter"
+          class="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm outline-none focus:border-black"
+        >
+          <option value="">All dates</option>
+          {uniqueDates.map((date) => (
+            <option value={date}>{formatDate(date)}</option>
+          ))}
+        </select>
+      </div>
+    </div>
+
+    <p id="resultsCount" class="mt-6 text-sm text-gray-500"></p>
+
+    <div id="articlesList" class="mt-6 grid gap-6"></div>
+
+    <div id="pagination" class="mt-10 flex justify-center gap-2 text-sm"></div>
+
+    <p id="noResultsMessage" class="mt-8 hidden text-gray-500">
+      No articles found.
+    </p>
+  </main>
+</Layout>
+
+<script define:vars={{ postsData }}>
+  const posts = postsData;
+  const pageSize = 10;
+function getReadingTime(content) {
+  const wordCount = (content || '').trim().split(/\s+/).filter(Boolean).length;
+  return Math.max(1, Math.ceil(wordCount / 200));
+}
+function truncateDescription(text, limit = 140) {
+  if (!text || text.length <= limit) return text;
+  return text.slice(0, limit).trimEnd() + '...';
+}
+  let filteredPosts = [...posts];
+  let currentPage = 1;
+
+  const searchInput = document.getElementById('searchInput');
+  const dateFilter = document.getElementById('dateFilter');
+  const articlesList = document.getElementById('articlesList');
+  const pagination = document.getElementById('pagination');
+  const resultsCount = document.getElementById('resultsCount');
+  const noResultsMessage = document.getElementById('noResultsMessage');
+
+  function formatPrettyDate(date) {
+    return new Date(`${date}T12:00:00`).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    });
+  }
+
+  function renderCards(pagePosts) {
+    articlesList.innerHTML = '';
+
+    pagePosts.forEach((post) => {
+      const wrapper = document.createElement('div');
+
+      wrapper.innerHTML = `
+        <a
+          href="${post.href}"
+          class="block overflow-hidden rounded-xl border border-gray-200 hover:shadow-lg transition"
+        >
+          <div class="flex flex-col sm:flex-row">
+            ${post.image ? `
+              <div class="sm:w-1/4 shrink-0">
+                <img
+                  src="${post.image}"
+                  alt="${post.title}"
+                  class="h-48 w-full object-cover"
+                />
+              </div>
+            ` : ''}
+
+            <div class="p-6 ${post.image ? 'sm:w-3/4' : 'w-full'}">
+<p class="text-sm text-gray-500">${formatPrettyDate(post.date)} • ${getReadingTime(post.content)} min read</p>
+              <h2 class="mt-1 text-xl font-semibold">${post.title}</h2>
+<p class="mt-2 text-gray-600 text-sm">${truncateDescription(post.description, 140)}</p>
+            </div>
+          </div>
+        </a>
+      `;
+
+      articlesList.appendChild(wrapper);
+    });
+  }
+
+  function renderPagination(totalPages) {
+    pagination.innerHTML = '';
+
+    if (totalPages <= 1) return;
+
+    const prevBtn = document.createElement('button');
+    prevBtn.textContent = '←';
+    prevBtn.className = 'px-3 py-1 border rounded hover:bg-gray-100 disabled:opacity-50';
+    prevBtn.disabled = currentPage === 1;
+    prevBtn.onclick = () => {
+      if (currentPage > 1) {
+        currentPage--;
+        render();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    };
+    pagination.appendChild(prevBtn);
+
+    for (let i = 1; i <= totalPages; i++) {
+      const btn = document.createElement('button');
+      btn.textContent = i;
+      btn.className = `px-3 py-1 border rounded ${
+        i === currentPage ? 'bg-black text-white' : 'hover:bg-gray-100'
+      }`;
+      btn.onclick = () => {
+        currentPage = i;
+        render();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      };
+      pagination.appendChild(btn);
+    }
+
+    const nextBtn = document.createElement('button');
+    nextBtn.textContent = '→';
+    nextBtn.className = 'px-3 py-1 border rounded hover:bg-gray-100 disabled:opacity-50';
+    nextBtn.disabled = currentPage === totalPages;
+    nextBtn.onclick = () => {
+      if (currentPage < totalPages) {
+        currentPage++;
+        render();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    };
+    pagination.appendChild(nextBtn);
+  }
+
+  function render() {
+    const start = (currentPage - 1) * pageSize;
+    const pagePosts = filteredPosts.slice(start, start + pageSize);
+    const totalPages = Math.ceil(filteredPosts.length / pageSize);
+
+    renderCards(pagePosts);
+    renderPagination(totalPages);
+
+    resultsCount.textContent =
+      `Showing ${filteredPosts.length} article${filteredPosts.length === 1 ? '' : 's'}`;
+
+    noResultsMessage.classList.toggle('hidden', filteredPosts.length !== 0);
+  }
+
+  function applyFilters() {
+    const searchValue = searchInput.value.trim().toLowerCase();
+    const dateValue = dateFilter.value;
+
+    filteredPosts = posts.filter((post) => {
+      const matchesSearch =
+        searchValue === '' ||
+        post.title.toLowerCase().includes(searchValue) ||
+        post.description.toLowerCase().includes(searchValue);
+
+      const matchesDate =
+        dateValue === '' || post.date === dateValue;
+
+      return matchesSearch && matchesDate;
+    });
+
+    currentPage = 1;
+    render();
+  }
+
+  searchInput?.addEventListener('input', applyFilters);
+  dateFilter?.addEventListener('change', applyFilters);
+
+  render();
+</script>
