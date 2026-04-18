@@ -2,21 +2,27 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="Contact | The Princeton Journal">
+<Layout
+  title="Contact | Collin County Journal"
+  description="Contact Collin County Journal for tips, corrections, documents, interview requests, and general inquiries."
+  url="https://collincountyjournal.com/contact"
+>
   <main class="mx-auto max-w-4xl px-6 py-10">
-
     <p class="text-sm font-medium uppercase tracking-wide text-gray-500">
       Contact
     </p>
 
     <h1 class="mt-3 text-4xl font-bold tracking-tight">
-      Contact The Princeton Journal
+      Contact Collin County Journal
     </h1>
 
     <div class="mt-8 space-y-6 text-lg leading-8 text-gray-800">
+      <p>
+        For questions, corrections, tips, documents, interview requests, or general inquiries, use the form below or email us directly at <strong>collincountyjournal@gmail.com</strong>.
+      </p>
 
       <p>
-        For questions, corrections, tips, documents, or general inquiries, use the form below or email us directly at <strong>theprincetonjournal@gmail.com</strong>.
+        We review submissions with care, but submission of a message, tip, or document does not guarantee publication, response, or follow-up.
       </p>
 
       <form
@@ -26,7 +32,6 @@ import Layout from '../layouts/Layout.astro';
         data-netlify="true"
         class="mt-8 space-y-6 rounded-2xl border border-gray-200 p-6 shadow-sm"
       >
-
         <input type="hidden" name="form-name" value="contact" />
 
         <div>
@@ -42,30 +47,29 @@ import Layout from '../layouts/Layout.astro';
           />
         </div>
 
-<div>
-  <label class="mb-2 block text-sm font-medium text-gray-700">
-    Subject
-  </label>
-  <select
-    name="subject"
-    required
-    class="w-full rounded-xl border border-gray-300 px-4 py-3 text-base outline-none focus:border-black bg-white"
-  >
-    <option value="">Select a subject</option>
-    <option value="News Tip">News Tip</option>
-    <option value="Correction Request">Correction Request</option>
-    <option value="Clarification Request">Clarification Request</option>
-    <option value="Document Submission">Document Submission</option>
-    <option value="Public Records / FOIA">Public Records / FOIA</option>
-    <option value="Story Idea">Story Idea</option>
-    <option value="Interview / Comment Request">Interview / Comment Request</option>
-    <option value="Partnership / Collaboration">Partnership / Collaboration</option>
-    <option value="Advertising / Sponsorship">Advertising / Sponsorship</option>
-    <option value="Technical Issue">Technical Issue</option>
-    <option value="General Inquiry">General Inquiry</option>
-    <option value="Other">Other</option>
-  </select>
-</div>
+        <div>
+          <label class="mb-2 block text-sm font-medium text-gray-700">
+            Subject
+          </label>
+          <select
+            name="subject"
+            required
+            class="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-base outline-none focus:border-black"
+          >
+            <option value="">Select a subject</option>
+            <option value="News Tip">News Tip</option>
+            <option value="Correction Request">Correction Request</option>
+            <option value="Clarification Request">Clarification Request</option>
+            <option value="Document Submission">Document Submission</option>
+            <option value="Story Idea">Story Idea</option>
+            <option value="Interview / Comment Request">Interview / Comment Request</option>
+            <option value="Advertising / Sponsorship">Advertising / Sponsorship</option>
+            <option value="Partnership / Collaboration">Partnership / Collaboration</option>
+            <option value="Technical Issue">Technical Issue</option>
+            <option value="General Inquiry">General Inquiry</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
 
         <div>
           <label class="mb-2 block text-sm font-medium text-gray-700">
@@ -86,7 +90,6 @@ import Layout from '../layouts/Layout.astro';
         >
           Submit
         </button>
-
       </form>
 
       <h2 class="text-2xl font-bold tracking-tight">
@@ -98,7 +101,7 @@ import Layout from '../layouts/Layout.astro';
       </p>
 
       <p>
-        Submission of information does not guarantee publication. All materials are reviewed for relevance, accuracy, and verification.
+        We review submitted materials using editorial judgment and verification standards. Submission alone does not guarantee publication.
       </p>
 
       <h2 class="text-2xl font-bold tracking-tight">
@@ -106,20 +109,19 @@ import Layout from '../layouts/Layout.astro';
       </h2>
 
       <p>
-        If you believe an article contains an error or requires clarification, please contact us with the relevant details.
+        If you believe an article contains a factual error or needs clarification, contact us with the article, the issue you identified, and any supporting information you want us to review.
       </p>
 
       <p>
-        Corrections and clarifications are posted at the end of the relevant article with a timestamp and a note describing what changed.
+        When a material correction or clarification is made, it may be noted in the relevant article so readers can understand what changed.
       </p>
 
       <hr class="border-gray-200" />
 
       <p class="text-base text-gray-600">
-        We appreciate readers who help strengthen local reporting by sharing information and engaging with the community responsibly.
+        Clear communication from readers helps strengthen accountable local reporting across Collin County.
       </p>
-
     </div>
-
   </main>
 </Layout>
+

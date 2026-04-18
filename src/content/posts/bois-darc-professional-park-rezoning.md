@@ -3,7 +3,7 @@ title: "53-Acre Rezoning Proposal Could Reshape Princeton’s Job Base"
 description: "Princeton Economic Development Corporation is requesting a rezoning for about 53.3865 acres at Bois D’ Arc Professional Park that would shift the site from light industrial use to a planned commercial business park."
 date: "2025-12-13"
 section: "Princeton Governance"
-author: "Bakr Al Qaraghuli, Editor"
+author: "Christian J. Remington, Editor in Chief"
 image: /images/bois-darc-professional-park-rezoning.jpg
 draft: false
 ---

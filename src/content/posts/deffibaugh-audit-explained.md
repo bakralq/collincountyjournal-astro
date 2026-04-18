@@ -3,7 +3,7 @@ title: "The Deffibaugh Audit"
 description: "A plain-English breakdown of what Weaver reviewed, what Phase One found, what Phase Two could have included, and why the investigation ended where it did."
 date: "2026-03-02"
 section: "Princeton Governance"
-author: "Bakr Al Qaraghuli, Editor"
+author: "Christian J. Remington, Editor in Chief"
 image: /images/deffibaugh-audit-explained.jpeg
 draft: false
 ---

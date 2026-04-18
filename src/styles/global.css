@@ -13,6 +13,13 @@
   font-size: 2.6rem;
   letter-spacing: 0.02em;
 }
+
+.journal-wordmark {
+  font-family: "GrenzeGotisch", serif;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
 .article-content p {
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
@@ -80,6 +87,7 @@
   line-height: 1.25rem;
   color: #6b7280;
 }
+
 .menu-toggle {
   display: none;
   background: transparent;
@@ -93,6 +101,51 @@
   overflow: hidden;
   opacity: 0;
   transition: max-height 0.3s ease, opacity 0.25s ease;
+}
+
+.support-ticker {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border-bottom: 1px solid #111827;
+  background: #111827;
+  color: #fff;
+  text-decoration: none;
+}
+
+.support-ticker-track {
+  display: flex;
+  width: max-content;
+  min-width: 100%;
+  align-items: center;
+  gap: 2.5rem;
+  padding: 0.82rem 0;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  animation: support-ticker-scroll 22s linear infinite;
+}
+
+.support-ticker-track span::after {
+  content: "•";
+  margin-left: 2.5rem;
+  opacity: 0.8;
+}
+
+.support-ticker:hover .support-ticker-track {
+  animation-play-state: paused;
+}
+
+@keyframes support-ticker-scroll {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(-33.333%, 0, 0);
+  }
 }
 
 @media (max-width: 768px) {
@@ -127,7 +180,19 @@
     flex-shrink: 0;
     margin-left: 0.5rem;
   }
+
+  .support-ticker-track {
+    gap: 1.6rem;
+    padding: 0.72rem 0;
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+  }
+
+  .support-ticker-track span::after {
+    margin-left: 1.6rem;
+  }
 }
+
 .article-content figure {
   margin-top: 2rem;
   margin-bottom: 2rem;
@@ -143,18 +208,21 @@
 .article-content figure img:last-of-type {
   margin-bottom: 0;
 }
+
 .article-content figcaption {
   margin-top: 0.5rem;
   font-size: 0.85rem;
   line-height: 1.4;
   color: #6b7280;
 }
+
 .card-description-clamp {
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+
 .article-hero-caption {
   margin-top: -2.5rem;
   margin-bottom: 1.5rem;
@@ -162,10 +230,100 @@
   line-height: 1.4;
   color: #6b7280;
 }
+
 .article-content .article-hero-caption {
   margin-top: -1.25rem !important;
   margin-bottom: 1.5rem !important;
   font-size: 0.875rem;
   line-height: 1.4;
   color: #6b7280;
+}
+
+.article-inline-subscribe {
+  display: grid;
+  gap: 0.8rem;
+  margin: 2.2rem 0;
+  padding: 1rem 1.1rem;
+  border: 1px solid #e5e7eb;
+  background: linear-gradient(180deg, #ffffff 0%, #f9fafb 100%);
+  box-shadow: 0 10px 24px rgba(17, 24, 39, 0.05);
+}
+
+.article-inline-subscribe-kicker {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #6b7280;
+}
+
+.article-inline-subscribe-title {
+  margin-top: 0.1rem;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.4;
+  color: #111827;
+}
+
+.article-inline-subscribe-text,
+.article-inline-subscribe-note,
+.article-inline-subscribe-success {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: #4b5563;
+}
+
+.article-inline-subscribe-form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.6rem;
+  align-items: center;
+}
+
+.article-inline-subscribe-preferences,
+.article-inline-subscribe-select {
+  grid-column: 1 / -1;
+}
+
+.article-inline-subscribe-preferences {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.6rem;
+}
+
+.article-inline-subscribe-select,
+.article-inline-subscribe-input {
+  min-width: 0;
+  border: 1px solid #d1d5db;
+  background: #fff;
+  padding: 0.8rem 0.95rem;
+  font-size: 0.95rem;
+  color: #111827;
+}
+
+.article-inline-subscribe-button {
+  border: 1px solid #111827;
+  background: #111827;
+  padding: 0.8rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #fff;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.article-inline-subscribe-button:hover {
+  background: #fff;
+  color: #111827;
+}
+
+@media (max-width: 720px) {
+  .article-inline-subscribe-form {
+    grid-template-columns: 1fr;
+  }
+
+  .article-inline-subscribe-preferences {
+    grid-template-columns: 1fr;
+  }
 }

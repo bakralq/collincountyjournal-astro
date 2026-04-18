@@ -3,7 +3,7 @@ title: "$249.6M on Hand: What Princeton’s Q1 Budget Report Really Shows"
 description: "Princeton’s first quarter FY 2025–2026 budget report shows strong cash reserves, significant interest earnings, restricted bond balances, and longer-term pressure in water and wastewater operations."
 date: "2026-02-07"
 section: "Princeton Governance"
-author: "Bakr Al Qaraghuli, Editor"
+author: "Christian J. Remington, Editor in Chief"
 image: /images/princeton-q1-budget-report-fy2025-2026.jpeg
 draft: false
 ---

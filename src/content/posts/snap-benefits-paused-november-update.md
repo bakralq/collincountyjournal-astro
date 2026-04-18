@@ -3,7 +3,7 @@ title: "SNAP Benefits Paused Nationwide: November Update for 42 Million Recipien
 description: "Federal shutdown disruptions paused new November SNAP benefit loads as courts and states await USDA guidance."
 date: "2025-11-02"
 section: "US News"
-author: "Bakr Al Qaraghuli, Editor"
+author: "Christian J. Remington, Editor in Chief"
 draft: false
 ---
 

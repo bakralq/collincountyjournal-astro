@@ -3,7 +3,7 @@ title: "Princeton Town Center Update: Drainage Review Status"
 description: "Public engineering documents show unresolved drainage review items for Princeton Town Center as of October 1, 2025."
 date: "2026-02-18"
 section: "Princeton Governance"
-author: "Bakr Al Qaraghuli, Editor"
+author: "Christian J. Remington, Editor in Chief"
 image: /images/princeton-town-center-drainage-review-update.jpeg
 draft: false
 ---

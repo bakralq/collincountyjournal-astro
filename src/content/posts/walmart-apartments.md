@@ -3,7 +3,7 @@ title: "Princeton’s Delays Left the Walmart Apartments Half-Built and Rotting"
 description: "A look at the city notices, hearing delays, and how timing pushed critical repair work into the rainy season."
 date: "2025-09-13"
 section: "Princeton Governance"
-author: "Bakr Al Qaraghuli, Editor"
+author: "Christian J. Remington, Editor in Chief"
 draft: false
 ---
 

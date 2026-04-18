@@ -3,7 +3,7 @@ title: "Are Princeton Homes Built in Hidden Flood Zones? What the Records Show"
 description: "An examination of council records, drainage standards, and floodplain oversight in Princeton."
 date: "2025-09-01"
 section: "Princeton Governance"
-author: "Bakr Al Qaraghuli, Editor"
+author: "Christian J. Remington, Editor in Chief"
 draft: false
 ---
 

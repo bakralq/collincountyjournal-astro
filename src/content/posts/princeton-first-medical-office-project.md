@@ -3,7 +3,7 @@ title: "Princeton’s First Medical Office Project Announced"
 description: "The City of Princeton announced plans for what it says will be the city’s first medical office development in Princeton Professional Park."
 date: "2026-03-08"
 section: "Princeton Governance"
-author: "Bakr Al Qaraghuli, Editor"
+author: "Christian J. Remington, Editor in Chief"
 image: /images/princeton-first-medical-office-project.jpg
 draft: false
 ---

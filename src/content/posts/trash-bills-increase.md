@@ -3,7 +3,7 @@ title: "Princeton Trash Bills Going Up October 1: Here’s the Full Breakdown"
 description: "A plain-English breakdown of Princeton’s new trash rate, what changed, what did not, and why residents will pay more starting October 1."
 date: "2025-08-29"
 section: "Princeton Governance"
-author: "Bakr Al Qaraghuli, Editor"
+author: "Christian J. Remington, Editor in Chief"
 draft: false
 ---
 

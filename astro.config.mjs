@@ -5,7 +5,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://theprincetonjournal.com',
+  site: 'https://collincountyjournal.com',
 
   integrations: [
     sitemap()

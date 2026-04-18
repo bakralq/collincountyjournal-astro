@@ -3,7 +3,7 @@ title: "Princeton Police in 2025: Calls, Crime, Traffic, and Growth"
 description: "City Council is set to hear a presentation on the Princeton Police Department’s 2025 activity, including calls for service, arrests, traffic accidents, staffing, and the annual racial profiling report."
 date: "2026-01-25"
 section: "Princeton Governance"
-author: "Bakr Al Qaraghuli, Editor"
+author: "Christian J. Remington, Editor in Chief"
 image: /images/princeton-police-2025-activity-report.jpg
 draft: false
 ---

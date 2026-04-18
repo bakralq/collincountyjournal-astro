@@ -3,7 +3,7 @@ title: "A sneak peek at the 100-acre Princeton Town Center and what it will brin
 description: "A look at the planned Princeton Town Center retail development at U.S. 380 and Beauchamp Blvd., including proposed anchors, zoning progress, and what comes next."
 date: "2025-10-24"
 section: "Princeton Governance"
-author: "Bakr Al Qaraghuli, Editor"
+author: "Christian J. Remington, Editor in Chief"
 image: /images/princeton-town-center-sneak-peek.jpg
 draft: false
 ---

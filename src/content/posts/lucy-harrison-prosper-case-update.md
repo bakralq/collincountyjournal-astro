@@ -3,7 +3,7 @@ title: "Collin County Father Avoids Charges After Daughter Killed Following Argu
 description: "A Prosper, Texas, father was not charged after the fatal shooting of his daughter, while a UK coroner later recorded the death as unlawful killing."
 date: "2026-02-11"
 section: "US News"
-author: "Bakr Al Qaraghuli, Editor"
+author: "Christian J. Remington, Editor in Chief"
 image: /images/lucy-harrison-prosper-case-update.jpg
 draft: false
 ---

@@ -1,0 +1,295 @@
+---
+import {
+  getCityConfigByKey,
+  subscribeAudienceOptions,
+} from '../lib/cityJournalData';
+
+const {
+  enabled = true,
+  contextCity = '',
+  pagePath = '/',
+} = Astro.props;
+
+const contextConfig = contextCity ? getCityConfigByKey(contextCity) : null;
+---
+
+{enabled && (
+  <div
+    id="subscribeModalRoot"
+    class="pointer-events-none fixed inset-0 z-50 hidden opacity-0 transition-opacity duration-300"
+    aria-hidden="true"
+  >
+    <div
+      id="subscribeModalBackdrop"
+      class="absolute inset-0 bg-black/55 backdrop-blur-[2px]"
+    ></div>
+
+    <div class="relative flex min-h-screen items-center justify-center p-4 sm:p-6">
+      <section
+        id="subscribeModalPanel"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="subscribeModalTitle"
+        class="pointer-events-auto relative w-full max-w-xl overflow-hidden rounded-[2rem] border border-gray-200 bg-white shadow-[0_28px_90px_rgba(17,24,39,0.28)]"
+      >
+        <div class="bg-gradient-to-br from-stone-950 via-neutral-900 to-zinc-800 px-6 py-5 text-white sm:px-8">
+          <p class="text-xs font-semibold uppercase tracking-[0.24em] text-white/70">
+            Stay In The Loop
+          </p>
+          <h2 id="subscribeModalTitle" class="mt-3 text-3xl font-bold tracking-tight">
+            Get Collin County Journal updates before everyone else.
+          </h2>
+          <p class="mt-3 max-w-lg text-sm leading-7 text-white/80">
+            {contextConfig
+              ? `Choose all city journals or just ${contextConfig.shortName}, and get the big local stories before they disappear into the scroll.`
+              : 'Choose all city journals or just the city you care about most. Major reporting, growth pressure, public safety, and city hall all in one inbox flow.'}
+          </p>
+        </div>
+
+        <div class="px-6 py-6 sm:px-8 sm:py-7">
+          <form
+            id="subscribeModalForm"
+            name="newsletter-subscribe"
+            method="POST"
+            action="/subscribe-thank-you"
+            data-netlify="true"
+            netlify-honeypot="bot-field"
+            class="space-y-5"
+          >
+            <input type="hidden" name="form-name" value="newsletter-subscribe" />
+            <input type="hidden" name="signup_source" value="modal" />
+            <input type="hidden" name="signup_page" value={pagePath} />
+
+            <p class="hidden">
+              <label>
+                Don’t fill this out if you’re human:
+                <input name="bot-field" />
+              </label>
+            </p>
+
+            <div>
+              <label for="subscribeModalEmail" class="mb-2 block text-sm font-semibold text-gray-700">
+                Email address
+              </label>
+              <input
+                id="subscribeModalEmail"
+                type="email"
+                name="email"
+                required
+                placeholder="you@example.com"
+                class="w-full rounded-2xl border border-gray-300 px-4 py-3 text-base outline-none transition focus:border-black"
+              />
+            </div>
+
+            {contextConfig ? (
+              <fieldset>
+                <legend class="mb-2 block text-sm font-semibold text-gray-700">
+                  Which updates do you want?
+                </legend>
+
+                <div class="grid gap-3 sm:grid-cols-2">
+                  <label class="group relative block cursor-pointer">
+                    <input
+                      class="peer sr-only"
+                      type="radio"
+                      name="subscription_preference"
+                      value="all"
+                      checked
+                    />
+                    <span class="block rounded-2xl border border-gray-300 p-4 transition peer-checked:border-black peer-checked:bg-gray-100">
+                      <span class="block text-sm font-semibold text-black">All city journals</span>
+                      <span class="mt-1 block text-sm leading-6 text-gray-600">
+                        Countywide coverage plus every city’s biggest stories.
+                      </span>
+                    </span>
+                  </label>
+
+                  <label class="group relative block cursor-pointer">
+                    <input
+                      class="peer sr-only"
+                      type="radio"
+                      name="subscription_preference"
+                      value={contextConfig.key}
+                    />
+                    <span class="block rounded-2xl border border-gray-300 p-4 transition peer-checked:border-black peer-checked:bg-gray-100">
+                      <span class="block text-sm font-semibold text-black">
+                        Just {contextConfig.shortName}
+                      </span>
+                      <span class="mt-1 block text-sm leading-6 text-gray-600">
+                        Stay tight on {contextConfig.shortName}-specific coverage only.
+                      </span>
+                    </span>
+                  </label>
+                </div>
+              </fieldset>
+            ) : (
+              <div>
+                <label for="subscribeAudience" class="mb-2 block text-sm font-semibold text-gray-700">
+                  Which updates do you want?
+                </label>
+                <select
+                  id="subscribeAudience"
+                  name="subscription_preference"
+                  class="w-full rounded-2xl border border-gray-300 bg-white px-4 py-3 text-base outline-none transition focus:border-black"
+                >
+                  {subscribeAudienceOptions.map((option) => (
+                    <option value={option.value}>{option.label}</option>
+                  ))}
+                </select>
+              </div>
+            )}
+
+            <div class="flex flex-col gap-3 sm:flex-row sm:items-center">
+              <button
+                type="submit"
+                class="inline-flex items-center justify-center rounded-2xl border border-black bg-black px-5 py-3 text-sm font-semibold text-white transition hover:bg-white hover:text-black"
+              >
+                Subscribe
+              </button>
+
+              <button
+                id="subscribeModalDismiss"
+                type="button"
+                class="inline-flex items-center justify-center rounded-2xl border border-gray-300 px-5 py-3 text-sm font-semibold text-gray-700 transition hover:border-black hover:text-black"
+              >
+                Not now
+              </button>
+            </div>
+
+            <p class="text-sm leading-6 text-gray-500">
+              Email updates only. Unsubscribe anytime.
+            </p>
+          </form>
+
+          <div
+            id="subscribeModalSuccess"
+            class="hidden rounded-2xl border border-emerald-200 bg-emerald-50 p-5 text-sm leading-7 text-emerald-950"
+          >
+            <p class="font-semibold">You’re on the list.</p>
+            <p class="mt-2">
+              Thanks for subscribing. We’ll send major updates from Collin County Journal to your inbox.
+            </p>
+          </div>
+        </div>
+
+        <button
+          id="subscribeModalClose"
+          type="button"
+          aria-label="Close subscribe popup"
+          class="absolute right-4 top-4 inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/10 text-xl text-white transition hover:bg-white hover:text-black"
+        >
+          ×
+        </button>
+      </section>
+    </div>
+
+    <script>
+      const root = document.getElementById('subscribeModalRoot');
+      const backdrop = document.getElementById('subscribeModalBackdrop');
+      const closeButton = document.getElementById('subscribeModalClose');
+      const dismissButton = document.getElementById('subscribeModalDismiss');
+      const form = document.getElementById('subscribeModalForm');
+      const success = document.getElementById('subscribeModalSuccess');
+      const emailInput = document.getElementById('subscribeModalEmail');
+      const storageKey = 'ccj-subscribe-modal-state';
+      const dismissalWindowMs = 24 * 60 * 60 * 1000;
+
+      const readState = () => {
+        try {
+          return JSON.parse(localStorage.getItem(storageKey) || 'null');
+        } catch {
+          return null;
+        }
+      };
+
+      const writeState = (state) => {
+        try {
+          localStorage.setItem(storageKey, JSON.stringify(state));
+        } catch {}
+      };
+
+      const shouldShow = () => {
+        const state = readState();
+        if (!state) return true;
+        if (state.subscribed) return false;
+        if (state.dismissedAt && Date.now() - state.dismissedAt < dismissalWindowMs) {
+          return false;
+        }
+        return true;
+      };
+
+      const openModal = () => {
+        if (!root) return;
+        root.classList.remove('hidden');
+        requestAnimationFrame(() => {
+          root.classList.remove('pointer-events-none');
+          root.classList.add('opacity-100');
+          root.setAttribute('aria-hidden', 'false');
+        });
+        document.body.style.overflow = 'hidden';
+        window.setTimeout(() => emailInput?.focus(), 120);
+      };
+
+      const closeModal = (persistDismissal = true) => {
+        if (!root) return;
+        if (persistDismissal) {
+          writeState({ dismissedAt: Date.now(), subscribed: false });
+        }
+        root.classList.add('pointer-events-none');
+        root.classList.remove('opacity-100');
+        root.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        window.setTimeout(() => root.classList.add('hidden'), 250);
+      };
+
+      const markSubscribed = () => {
+        writeState({ dismissedAt: Date.now(), subscribed: true });
+      };
+
+      if (root && shouldShow()) {
+        window.setTimeout(openModal, 1400);
+      }
+
+      closeButton?.addEventListener('click', () => closeModal(true));
+      dismissButton?.addEventListener('click', () => closeModal(true));
+      backdrop?.addEventListener('click', () => closeModal(true));
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && root && !root.classList.contains('hidden')) {
+          closeModal(true);
+        }
+      });
+
+      form?.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        if (!(form instanceof HTMLFormElement)) return;
+
+        const formData = new FormData(form);
+        const body = new URLSearchParams();
+
+        for (const [key, value] of formData.entries()) {
+          if (typeof value === 'string') body.append(key, value);
+        }
+
+        try {
+          const response = await fetch('/', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: body.toString(),
+          });
+
+          if (!response.ok) throw new Error('Subscribe request failed');
+
+          markSubscribed();
+          form.classList.add('hidden');
+          success?.classList.remove('hidden');
+          window.setTimeout(() => closeModal(false), 1600);
+        } catch {
+          form.submit();
+        }
+      });
+    </script>
+  </div>
+)}

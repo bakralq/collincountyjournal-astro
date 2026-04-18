@@ -11,9 +11,10 @@ export async function GET(context: { site?: URL }) {
   );
 
   return rss({
-    title: 'The Princeton Journal',
-    description: 'Princeton’s leading source for local news, governance coverage, and community reporting.',
-    site: context.site?.toString() || 'https://theprincetonjournal.com',
+    title: 'Collin County Journal',
+    description:
+      'Independent local reporting across Collin County, including city hall, growth, schools, public safety, and community coverage.',
+    site: context.site?.toString() || 'https://collincountyjournal.com',
     items: sortedPosts.map((post) => ({
       title: post.data.title,
       description: post.data.description,

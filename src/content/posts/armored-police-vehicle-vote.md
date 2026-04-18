@@ -3,7 +3,7 @@ title: "$355K Armored Police Vehicle Up for Vote in Princeton"
 description: "Princeton City Council is set to vote on accepting $355,066 from the Princeton Community Development Corporation to purchase a replacement armored emergency response vehicle for the police department."
 date: "2026-03-08"
 section: "Princeton Governance"
-author: "Bakr Al Qaraghuli, Editor"
+author: "Christian J. Remington, Editor in Chief"
 image: /images/armored-police-vehicle-vote.png
 draft: false
 ---

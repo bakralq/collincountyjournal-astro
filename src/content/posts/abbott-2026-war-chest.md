@@ -3,7 +3,7 @@ title: "Governor Abbott Enters 2026 Cycle With Large War Chest"
 description: "Gov. Greg Abbott began the 2026 campaign cycle with more than $105 million cash on hand after raising $22.7 million in the second half of 2025."
 date: "2026-01-16"
 section: "US News"
-author: "Bakr Al Qaraghuli, Editor"
+author: "Christian J. Remington, Editor in Chief"
 image: /images/abbott-2026-war-chest.jpg
 draft: false
 ---

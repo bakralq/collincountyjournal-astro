@@ -3,7 +3,7 @@ title: "0 Traffic Deaths? Princeton Council Reviews Vision Zero Framework"
 description: "Princeton City Council is set to review a Vision Zero presentation as part of the city’s first Mobility and Safety Action Plan."
 date: "2026-01-08"
 section: "Princeton Governance"
-author: "Bakr Al Qaraghuli, Editor"
+author: "Christian J. Remington, Editor in Chief"
 image: /images/princeton-vision-zero-framework.jpeg
 draft: false
 ---

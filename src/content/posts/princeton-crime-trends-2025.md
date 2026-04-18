@@ -3,7 +3,7 @@ title: "Behind the Scenes of Princeton’s 2025 Crime Trends: Homes, Roads, and 
 description: "An analysis of Princeton Police Department activity from January through October 2025, showing how traffic, domestic incidents, and rapid population growth shape the city’s crime patterns."
 date: "2025-11-25"
 section: "Princeton Governance"
-author: "Bakr Al Qaraghuli, Editor"
+author: "Christian J. Remington, Editor in Chief"
 image: /images/princeton-crime-trends-2025.jpg
 draft: false
 ---

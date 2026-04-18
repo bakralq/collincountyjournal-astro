@@ -3,7 +3,7 @@ title: "Major Police Response Across Princeton: Full Breakdown of Today’s Inci
 description: "Multiple police responses across Princeton, including an arrest, school secure status, and ongoing activity near Walmart."
 date: "2026-03-27"
 section: "Princeton Governance"
-author: "Bakr Al Qaraghuli, Editor"
+author: "Christian J. Remington, Editor in Chief"
 image: "/images/princeton-police-response.jpg"
 ---
 

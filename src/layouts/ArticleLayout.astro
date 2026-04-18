@@ -1,15 +1,19 @@
 ---
 import Layout from './Layout.astro';
+import ArticleInlineSubscribe from '../components/ArticleInlineSubscribe.astro';
+import { getCityConfigBySection } from '../lib/cityJournalData';
 
-const { title, section, author, date, description, url, image, imageCaption, nextPost, readingTime, preview } = Astro.props;
+const { title, section, author, date, description, url, image, imageCaption, imageSourceUrl, nextPost, readingTime, preview } = Astro.props;
+const subscribeCity = getCityConfigBySection(section);
 ---
 
 <Layout
-  title={`${title} | The Princeton Journal`}
+  title={`${title} | Collin County Journal`}
   description={description}
   url={url}
-  ogImage={image ? `https://theprincetonjournal.com${image}` : "https://theprincetonjournal.com/tpj-logo.jpg"}
+  ogImage={image ? `https://collincountyjournal.com${image}` : 'https://collincountyjournal.com/ccj-logo.jpg'}
   ogType="article"
+  subscribeCity={subscribeCity?.key}
 >
   <main class="mx-auto max-w-3xl px-6 py-16">
     <p class="text-sm font-medium uppercase tracking-wide text-gray-500">
@@ -46,7 +50,18 @@ const { title, section, author, date, description, url, image, imageCaption, nex
     />
     {imageCaption && (
       <p class="mt-2 text-sm text-gray-500">
-        {imageCaption}
+        {imageSourceUrl ? (
+          <a
+            href={imageSourceUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="underline underline-offset-2 transition hover:text-gray-700"
+          >
+            {imageCaption}
+          </a>
+        ) : (
+          imageCaption
+        )}
       </p>
     )}
   </>
@@ -75,26 +90,158 @@ const { title, section, author, date, description, url, image, imageCaption, nex
           </div>
         </div>
 
-        <article id="fullArticle" class="article-content mt-10 hidden text-lg leading-8 text-gray-800">
+        <article id="fullArticle" data-article-body class="article-content mt-10 hidden text-lg leading-8 text-gray-800">
           <slot />
         </article>
-
-        <script>
-          const button = document.getElementById('readMoreButton');
-          const fullArticle = document.getElementById('fullArticle');
-
-          button?.addEventListener('click', () => {
-            const previewBlock = button.closest('.relative');
-            if (previewBlock) previewBlock.remove();
-            fullArticle?.classList.remove('hidden');
-          });
-        </script>
       </>
     ) : (
-      <article class="article-content mt-10 text-lg leading-8 text-gray-800">
+      <article data-article-body class="article-content mt-10 text-lg leading-8 text-gray-800">
         <slot />
       </article>
     )}
+
+    <template id="articleInlineSubscribeTemplate">
+      <ArticleInlineSubscribe contextCity={subscribeCity?.key || ''} />
+    </template>
+
+    <script is:inline>
+      (() => {
+        const button = document.getElementById('readMoreButton');
+        const fullArticle = document.getElementById('fullArticle');
+        const template = document.getElementById('articleInlineSubscribeTemplate');
+
+        button?.addEventListener('click', () => {
+          const previewBlock = button.closest('.relative');
+          if (previewBlock) previewBlock.remove();
+          fullArticle?.classList.remove('hidden');
+          requestAnimationFrame(installInlinePrompts);
+        });
+
+        if (!(template instanceof HTMLTemplateElement)) {
+          return;
+        }
+
+        const bindInlineForm = (card) => {
+          if (!(card instanceof HTMLElement)) {
+            return;
+          }
+
+          const form = card.querySelector('[data-inline-subscribe-form]');
+          const success = card.querySelector('[data-inline-subscribe-success]');
+
+          if (!(form instanceof HTMLFormElement) || form.dataset.bound === 'true') {
+            return;
+          }
+
+          form.dataset.bound = 'true';
+
+          form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const formData = new FormData(form);
+            const body = new URLSearchParams();
+
+            for (const [key, value] of formData.entries()) {
+              if (typeof value === 'string') {
+                body.append(key, value);
+              }
+            }
+
+            try {
+              const response = await fetch('/', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: body.toString(),
+              });
+
+              if (!response.ok) {
+                throw new Error('Subscribe request failed');
+              }
+
+              form.classList.add('hidden');
+              success?.classList.remove('hidden');
+            } catch {
+              form.submit();
+            }
+          });
+        };
+
+        const createCard = () => {
+          const wrapper = document.createElement('div');
+          wrapper.appendChild(template.content.cloneNode(true));
+          const card = wrapper.firstElementChild;
+          bindInlineForm(card);
+          return card instanceof HTMLElement ? card : null;
+        };
+
+        const injectInto = (container) => {
+          if (!(container instanceof HTMLElement) || container.dataset.inlineSubscribeInjected === 'true') {
+            return;
+          }
+
+          const quickReadHeading = Array.from(
+            container.querySelectorAll(':scope > h2, :scope > h3')
+          ).find((element) =>
+            element instanceof HTMLElement &&
+            element.textContent?.trim().toLowerCase() === 'quick read'
+          );
+
+          if (quickReadHeading instanceof HTMLElement) {
+            const card = createCard();
+
+            if (!card) {
+              return;
+            }
+
+            quickReadHeading.insertAdjacentElement('beforebegin', card);
+            container.dataset.inlineSubscribeInjected = 'true';
+            return;
+          }
+
+          const targets = Array.from(
+            container.querySelectorAll(':scope > p, :scope > ul, :scope > ol')
+          ).filter(
+            (element) =>
+              element instanceof HTMLElement &&
+              !element.classList.contains('article-hero-caption')
+          );
+
+          if (targets.length < 2) {
+            return;
+          }
+
+          const insertionIndex = Math.min(
+            targets.length - 1,
+            Math.max(1, Math.floor(targets.length * 0.28))
+          );
+          const anchor = targets[insertionIndex];
+          const card = createCard();
+
+          if (!card || !(anchor instanceof HTMLElement)) {
+            return;
+          }
+
+          anchor.insertAdjacentElement('afterend', card);
+          container.dataset.inlineSubscribeInjected = 'true';
+        };
+
+        function installInlinePrompts() {
+          document
+            .querySelectorAll('[data-article-body]')
+            .forEach((container) => injectInto(container));
+        }
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', installInlinePrompts, {
+            once: true,
+          });
+        } else {
+          installInlinePrompts();
+        }
+      })();
+    </script>
 
     {nextPost && (
       <section class="mt-14 border-t border-gray-200 pt-8">

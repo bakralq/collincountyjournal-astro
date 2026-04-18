@@ -3,7 +3,7 @@ title: "Deadly Shooting South of Princeton; 3 Charged With Capital Murder"
 description: "A July 2025 homicide south of Princeton returned to public attention after three people were arrested in January 2026 and charged with capital murder with remuneration."
 date: "2026-01-20"
 section: "Princeton Governance"
-author: "Bakr Al Qaraghuli, Editor"
+author: "Christian J. Remington, Editor in Chief"
 image: /images/fig-circle-capital-murder-arrests.jpg
 draft: false
 ---

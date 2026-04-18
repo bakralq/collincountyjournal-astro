@@ -18,7 +18,7 @@ export async function GET() {
           xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
     ${recentPosts
       .map((post) => {
-        const url = `https://theprincetonjournal.com/posts/${post.id.replace(/\\.md$/, '')}`;
+        const url = `https://collincountyjournal.com/posts/${post.id.replace(/\\.md$/, '')}`;
         const pubDate = new Date(post.data.date).toISOString();
 
         return `
@@ -26,7 +26,7 @@ export async function GET() {
           <loc>${url}</loc>
           <news:news>
             <news:publication>
-              <news:name>The Princeton Journal</news:name>
+              <news:name>Collin County Journal</news:name>
               <news:language>en</news:language>
             </news:publication>
             <news:publication_date>${pubDate}</news:publication_date>

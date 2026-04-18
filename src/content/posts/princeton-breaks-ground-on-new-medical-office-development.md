@@ -3,7 +3,7 @@ title: "Princeton Breaks Ground on New Medical Office Development"
 description: "Princeton breaks ground on a new medical office development aimed at expanding local healthcare access as the city continues rapid growth."
 date: "2026-03-26"
 section: "Princeton Governance"
-author: "Bakr Al Qaraghuli, Editor"
+author: "Christian J. Remington, Editor in Chief"
 image: "/images/princeton-medical-office-groundbreaking.jpg"
 ---
 

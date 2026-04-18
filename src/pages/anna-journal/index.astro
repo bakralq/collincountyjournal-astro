@@ -1,0 +1,18 @@
+---
+import { getCollection } from 'astro:content';
+import CityJournalLanding from '../../components/CityJournalLanding.astro';
+import {
+  getCityConfigByKey,
+  sortPostsByDate,
+  toLocalStoryCard,
+} from '../../lib/cityJournalData';
+
+const city = getCityConfigByKey('anna');
+const posts = sortPostsByDate(
+  await getCollection('posts', ({ data }) => !data.draft && data.section === city?.section)
+);
+const stories = posts.map((post) => toLocalStoryCard(post));
+const [topStory, ...remainingStories] = stories;
+---
+
+<CityJournalLanding city={city} topStory={topStory} remainingStories={remainingStories} />

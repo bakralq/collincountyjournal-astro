@@ -1,20 +1,43 @@
 ---
 import '../styles/global.css';
+import SubscribeModal from '../components/SubscribeModal.astro';
+
 const {
-  title = "The Princeton Journal",
-  description = "The Princeton Journal is Princeton Texas’s leading independent source for local news, city government coverage, and community reporting.",
-  url = "https://theprincetonjournal.com",
-  ogImage = "https://theprincetonjournal.com/tpj-logo.jpg",
-  ogType = "website"
+  title = 'Collin County Journal',
+  description = 'Collin County Journal is an independent news publication covering local government, public safety, development, schools, elections, and community news across Collin County, Texas.',
+  url,
+  ogImage = 'https://collincountyjournal.com/ccj-logo.jpg',
+  ogType = 'website',
+  subscribeCity = '',
 } = Astro.props;
 
+const pathname = Astro.url.pathname;
+const siteOrigin = Astro.site?.toString() || 'https://collincountyjournal.com';
+const showSubscribeModal = ![
+  '/subscribe',
+  '/subscribe-thank-you',
+  '/thank-you',
+].includes(pathname);
+
+const normalizeCanonicalUrl = (value) => {
+  const normalized = new URL(value, siteOrigin);
+
+  if (normalized.pathname !== '/' && !normalized.pathname.endsWith('/')) {
+    normalized.pathname = `${normalized.pathname}/`;
+  }
+
+  return normalized.toString();
+};
+
+const canonicalUrl = normalizeCanonicalUrl(url || pathname);
+
 const websiteSchema =
-  ogType === "website" && url === "https://theprincetonjournal.com"
+  ogType === 'website' && canonicalUrl === 'https://collincountyjournal.com/'
     ? {
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        "name": "The Princeton Journal",
-        "url": "https://theprincetonjournal.com/"
+        '@context': 'https://schema.org',
+        '@type': 'WebSite',
+        name: 'Collin County Journal',
+        url: 'https://collincountyjournal.com/',
       }
     : null;
 ---
@@ -22,7 +45,6 @@ const websiteSchema =
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-R726F2LG18"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -32,123 +54,188 @@ const websiteSchema =
   </script>
 
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="google-site-verification" content="q2FhOIt2RvOTMfmnH1qgdFheMFXS6RNchAsDJliiDWY" />
 
-<link rel="icon" type="image/png" href="/favicon.png" />
-<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" href="/favicon.png?v=6" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=6" />
+  <link rel="shortcut icon" href="/favicon-32.png?v=6" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=6" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png?v=6" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=6" />
+  <link rel="apple-touch-icon-precomposed" href="/apple-touch-icon-precomposed.png?v=6" />
 
-<link rel="shortcut icon" href="/favicon-32.png?v=4" />
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=4" />
-<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png?v=4" />
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=4" />
-<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon-precomposed.png?v=4" />
-<meta name="application-name" content="The Princeton Journal" />
-<meta name="apple-mobile-web-app-title" content="The Princeton Journal" />
-<meta property="og:site_name" content="The Princeton Journal" />
+  <meta name="application-name" content="Collin County Journal" />
+  <meta name="apple-mobile-web-app-title" content="Collin County Journal" />
+  <meta property="og:site_name" content="Collin County Journal" />
 
-<title>{title}</title>
-<meta name="description" content={description} />
-<link rel="canonical" href={url} />
-<link rel="alternate" type="application/rss+xml" title="The Princeton Journal RSS Feed" href="https://theprincetonjournal.com/rss.xml" />
-<meta property="og:title" content={title} />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonicalUrl} />
+  <link rel="alternate" type="application/rss+xml" title="Collin County Journal RSS Feed" href="https://collincountyjournal.com/rss.xml" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:type" content={ogType} />
+  <meta property="og:url" content={canonicalUrl} />
+  <meta property="og:image" content={ogImage} />
+  <meta property="fb:app_id" content="1600725191074059" />
 
-<meta property="og:description" content={description} />
-<meta property="og:type" content={ogType} />
-<meta property="og:url" content={url} />
-<meta property="og:image" content={ogImage} />
-<meta property="fb:app_id" content="1600725191074059" />
+  {websiteSchema && (
+    <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+  )}
 
-{websiteSchema && (
-  <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
-)}
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={ogImage} />
 
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content={title} />
-<meta name="twitter:description" content={description} />
-<meta name="twitter:image" content={ogImage} />
-
-<script type="application/ld+json" set:html={JSON.stringify({
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "The Princeton Journal",
-  "url": "https://theprincetonjournal.com",
-  "logo": "https://theprincetonjournal.com/tpj-logo.jpg",
-  "sameAs": [
-    "https://www.facebook.com/profile.php?id=61581999665231"
-  ]
-})} />
-
+  <script type="application/ld+json" set:html={JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'Collin County Journal',
+    url: 'https://collincountyjournal.com',
+    logo: 'https://collincountyjournal.com/ccj-logo.jpg',
+    sameAs: [
+      'https://www.facebook.com/profile.php?id=61581999665231'
+    ]
+  })} />
 </head>
 
 <body class="bg-white text-black">
+  <header class="site-header border-b border-gray-200">
+    <div class="site-header-inner mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+      <a href="/" class="logo text-xl">
+        Collin County Journal
+      </a>
 
-<header class="site-header border-b border-gray-200">
-  <div class="site-header-inner mx-auto max-w-6xl px-6 py-4 flex items-center justify-between">
-    <a href="/" class="logo text-xl">
-      The Princeton Journal
-    </a>
+      <button
+        class="menu-toggle text-2xl"
+        aria-label="Open navigation"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        type="button"
+      >
+        ☰
+      </button>
 
-    <button
-      class="menu-toggle text-2xl"
-      aria-label="Open navigation"
-      aria-expanded="false"
-      aria-controls="mobile-menu"
-      type="button"
-    >
-      ☰
-    </button>
+      <nav class="desktop-nav flex items-center gap-6 text-sm font-medium">
+        <a href="/">Home</a>
 
-    <nav class="desktop-nav flex gap-6 text-sm font-medium">
-      <a href="/">Home</a>
-      <a href="/princeton-governance">Princeton Governance</a>
-      <a href="/us-news">US News</a>
-      <a href="/about">About</a>
-      <a href="/contact">Contact</a>
-    </nav>
-  </div>
+        <div class="relative">
+          <button
+            class="cities-toggle flex items-center gap-1"
+            aria-label="Open cities navigation"
+            aria-expanded="false"
+            aria-controls="cities-menu"
+            type="button"
+          >
+            Cities
+            <span aria-hidden="true">▾</span>
+          </button>
 
-  <div id="mobile-menu" class="mobile-menu border-t border-gray-200">
-    <nav class="mobile-nav mx-auto max-w-6xl px-6 py-4 flex flex-col gap-4 text-sm font-medium">
-      <a href="/">Home</a>
-      <a href="/princeton-governance">Princeton Governance</a>
-      <a href="/us-news">US News</a>
-      <a href="/about">About</a>
-      <a href="/contact">Contact</a>
-    </nav>
-  </div>
-</header>
+          <div
+            id="cities-menu"
+            class="cities-menu absolute right-0 top-full z-50 mt-3 hidden min-w-[220px] rounded-xl border border-gray-200 bg-white p-2 shadow-lg"
+          >
+            <a class="block rounded-lg px-3 py-2 hover:bg-gray-100" href="/anna-journal">Anna Journal</a>
+            <a class="block rounded-lg px-3 py-2 hover:bg-gray-100" href="/celina-journal">Celina Journal</a>
+            <a class="block rounded-lg px-3 py-2 hover:bg-gray-100" href="/melissa-journal">Melissa Journal</a>
+            <a class="block rounded-lg px-3 py-2 hover:bg-gray-100" href="https://theprincetonjournal.com" target="_blank" rel="noopener noreferrer">Princeton Journal</a>
+            <a class="block rounded-lg px-3 py-2 hover:bg-gray-100" href="/prosper-journal">Prosper Journal</a>
+          </div>
+        </div>
 
-<slot />
-
-<footer class="border-t border-gray-200 mt-20">
-  <div class="mx-auto max-w-6xl px-6 py-10">
-    <div class="flex flex-wrap gap-6 text-sm font-medium text-gray-700">
-      <a href="/about">About</a>
-<a href="/staff">Staff</a>
-      <a href="/privacy">Privacy Policy</a>
-<a href="/terms">Terms of Service</a>
-      <a href="/contact">Contact</a>
-      <a href="/subscribe">Subscribe</a>
+        <a href="/us-news">US News</a>
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+      </nav>
     </div>
 
-    <div class="mt-6 text-sm text-gray-500">
-      © {new Date().getFullYear()} The Princeton Journal
+    <div id="mobile-menu" class="mobile-menu border-t border-gray-200">
+      <nav class="mobile-nav mx-auto flex max-w-6xl flex-col gap-4 px-6 py-4 text-sm font-medium">
+        <a href="/">Home</a>
+        <a href="/anna-journal">Anna Journal</a>
+        <a href="/celina-journal">Celina Journal</a>
+        <a href="/melissa-journal">Melissa Journal</a>
+        <a href="https://theprincetonjournal.com" target="_blank" rel="noopener noreferrer">Princeton Journal</a>
+        <a href="/prosper-journal">Prosper Journal</a>
+        <a href="/us-news">US News</a>
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+      </nav>
     </div>
-  </div>
-</footer>
+  </header>
 
+  <a href="/subscribe" class="support-ticker" aria-label="Subscribe to Collin County Journal">
+    <div class="support-ticker-track">
+      <span>Subscribe to CCJ</span>
+      <span>Countywide reporting across Anna, Celina, Melissa, Princeton, and Prosper</span>
+      <span>Support independent reporting across Collin County</span>
+      <span>Subscribe to CCJ</span>
+      <span>Countywide reporting across Anna, Celina, Melissa, Princeton, and Prosper</span>
+      <span>Support independent reporting across Collin County</span>
+      <span>Subscribe to CCJ</span>
+      <span>Countywide reporting across Anna, Celina, Melissa, Princeton, and Prosper</span>
+      <span>Support independent reporting across Collin County</span>
+    </div>
+  </a>
+
+  <slot />
+
+  <SubscribeModal
+    enabled={showSubscribeModal}
+    contextCity={subscribeCity}
+    pagePath={pathname}
+  />
+
+  <footer class="mt-20 border-t border-gray-200">
+    <div class="mx-auto max-w-6xl px-6 py-10">
+      <div class="flex flex-wrap gap-6 text-sm font-medium text-gray-700">
+        <a href="/about">About</a>
+        <a href="/staff">Staff</a>
+        <a href="/privacy">Privacy Policy</a>
+        <a href="/terms">Terms of Service</a>
+        <a href="/contact">Contact</a>
+        <a href="/subscribe">Subscribe</a>
+      </div>
+
+      <div class="mt-6 text-sm text-gray-500">
+        © {new Date().getFullYear()} Collin County Journal
+      </div>
+    </div>
+  </footer>
 </body>
+
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     const toggle = document.querySelector('.menu-toggle');
     const mobileMenu = document.querySelector('.mobile-menu');
+    const citiesToggle = document.querySelector('.cities-toggle');
+    const citiesMenu = document.querySelector('.cities-menu');
 
     if (toggle && mobileMenu) {
       toggle.addEventListener('click', () => {
         mobileMenu.classList.toggle('open');
         const expanded = toggle.getAttribute('aria-expanded') === 'true';
         toggle.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+      });
+    }
+
+    if (citiesToggle && citiesMenu) {
+      citiesToggle.addEventListener('click', (event) => {
+        event.stopPropagation();
+        citiesMenu.classList.toggle('hidden');
+        const expanded = citiesToggle.getAttribute('aria-expanded') === 'true';
+        citiesToggle.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+      });
+
+      citiesMenu.addEventListener('click', (event) => {
+        event.stopPropagation();
+      });
+
+      document.addEventListener('click', () => {
+        citiesMenu.classList.add('hidden');
+        citiesToggle.setAttribute('aria-expanded', 'false');
       });
     }
   });

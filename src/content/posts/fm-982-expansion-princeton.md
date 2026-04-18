@@ -3,7 +3,7 @@ title: "New Four-Lane Corridor Coming to Princeton: FM 982 Expansion Could Trans
 description: "TxDOT plans to widen FM 982 from US 380 to FM 546, adding four lanes, shared-use paths, and new right-of-way that could reshape mobility and development across Princeton."
 date: "2025-11-22"
 section: "Princeton Governance"
-author: "Bakr Al Qaraghuli, Editor"
+author: "Christian J. Remington, Editor in Chief"
 image: /images/fm-982-expansion-princeton.jpg
 draft: false
 ---

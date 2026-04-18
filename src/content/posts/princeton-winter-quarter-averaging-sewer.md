@@ -3,7 +3,7 @@ title: "Princeton May Change How Your Sewer Bill Works: Winter Quarter Averaging
 description: "Princeton City Council is considering an ordinance that would change sewer billing by using winter water usage to calculate yearly wastewater charges."
 date: "2025-12-07"
 section: "Princeton Governance"
-author: "Bakr Al Qaraghuli, Editor"
+author: "Christian J. Remington, Editor in Chief"
 image: /images/princeton-winter-quarter-averaging-sewer.jpg
 draft: false
 ---

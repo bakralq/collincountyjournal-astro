@@ -3,7 +3,7 @@ title: "Princeton Water Investigation: Why Rates Rose, Why Refunds Began, and Wh
 description: "A full investigation into Princeton’s water and sewer billing, including the $124 typical 5,000-gallon bill, the repeal of winter averaging, the city’s refund process, and the next rate changes."
 date: "2025-11-01"
 section: "Princeton Governance"
-author: "Bakr Al Qaraghuli, Editor"
+author: "Christian J. Remington, Editor in Chief"
 image: /images/princeton-water-investigation.jpg
 draft: false
 ---

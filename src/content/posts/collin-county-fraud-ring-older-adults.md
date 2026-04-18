@@ -3,7 +3,7 @@ title: "Collin County–Led Fraud Ring Targeting Older Adults"
 description: "Investigators say a North Texas fraud and money laundering scheme targeted older adults, using fake federal-agent tactics, gold transfers, and jewelry stores in Frisco and Irving."
 date: "2026-02-14"
 section: "US News"
-author: "Bakr Al Qaraghuli, Editor"
+author: "Christian J. Remington, Editor in Chief"
 image: /images/collin-county-scam.jpg
 draft: false
 ---

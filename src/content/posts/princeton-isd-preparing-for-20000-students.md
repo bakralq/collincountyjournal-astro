@@ -3,7 +3,7 @@ title: "Princeton ISD Is Preparing for Nearly 20,000 Students"
 description: "Princeton ISD is planning for 19,574 students by 2034, with eight new campuses and a $797 million bond driving long-term expansion."
 date: "2026-03-26"
 section: "Princeton Governance"
-author: "Bakr Al Qaraghuli, Editor"
+author: "Christian J. Remington, Editor in Chief"
 image: "/images/princeton-isd-growth.jpg"
 ---
 

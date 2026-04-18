@@ -3,7 +3,7 @@ title: "Collin County’s ESD & Princeton’s Fire Coverage: What Voters Should 
 description: "A breakdown of Princeton’s rural fire coverage transition, the ESD-1 ballot measure, and what the change means for city residents, unincorporated areas, and regional planning."
 date: "2025-10-12"
 section: "Princeton Governance"
-author: "Bakr Al Qaraghuli, Editor"
+author: "Christian J. Remington, Editor in Chief"
 image: /images/collin-county-esd-fire-coverage.jpg
 draft: false
 ---

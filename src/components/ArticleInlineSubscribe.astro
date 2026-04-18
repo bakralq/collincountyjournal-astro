@@ -1,0 +1,114 @@
+---
+import {
+  getCityConfigByKey,
+  subscribeAudienceOptions,
+} from '../lib/cityJournalData';
+
+const {
+  contextCity = '',
+} = Astro.props;
+
+const contextConfig = contextCity ? getCityConfigByKey(contextCity) : null;
+---
+
+<aside class="article-inline-subscribe" data-inline-subscribe-card>
+  <div class="article-inline-subscribe-copy">
+    <p class="article-inline-subscribe-kicker">
+      {contextConfig ? `Get ${contextConfig.shortName} by email` : 'Get CCJ by email'}
+    </p>
+    <p class="article-inline-subscribe-title">
+      {contextConfig
+        ? `Choose all-city alerts or just ${contextConfig.shortName}.`
+        : 'Choose all city journals or just one inbox lane.'}
+    </p>
+    <p class="article-inline-subscribe-text">
+      Growth, public safety, city hall, schools, and the local stories people in Collin County actually need to see.
+    </p>
+  </div>
+
+  <form
+    name="newsletter-subscribe"
+    method="POST"
+    action="/subscribe-thank-you"
+    data-netlify="true"
+    netlify-honeypot="bot-field"
+    class="article-inline-subscribe-form"
+    data-inline-subscribe-form
+  >
+    <input type="hidden" name="form-name" value="newsletter-subscribe" />
+    <input type="hidden" name="signup_source" value="article-inline" />
+
+    <p class="hidden">
+      <label>
+        Don’t fill this out if you’re human:
+        <input name="bot-field" />
+      </label>
+    </p>
+
+    {contextConfig ? (
+      <div class="article-inline-subscribe-preferences">
+        <label class="group relative block cursor-pointer">
+          <input
+            class="peer sr-only"
+            type="radio"
+            name="subscription_preference"
+            value="all"
+            checked
+          />
+          <span class="block rounded-2xl border border-gray-300 px-3 py-2 text-sm font-medium text-gray-700 transition peer-checked:border-black peer-checked:bg-gray-100 peer-checked:text-black">
+            All city journals
+          </span>
+        </label>
+
+        <label class="group relative block cursor-pointer">
+          <input
+            class="peer sr-only"
+            type="radio"
+            name="subscription_preference"
+            value={contextConfig.key}
+          />
+          <span class="block rounded-2xl border border-gray-300 px-3 py-2 text-sm font-medium text-gray-700 transition peer-checked:border-black peer-checked:bg-gray-100 peer-checked:text-black">
+            Just {contextConfig.shortName}
+          </span>
+        </label>
+      </div>
+    ) : (
+      <select
+        name="subscription_preference"
+        class="article-inline-subscribe-select"
+        aria-label="Select newsletter preference"
+      >
+        {subscribeAudienceOptions.map((option) => (
+          <option value={option.value}>{option.label}</option>
+        ))}
+      </select>
+    )}
+
+    <input
+      type="email"
+      name="email"
+      required
+      placeholder="you@example.com"
+      class="article-inline-subscribe-input"
+      aria-label="Email address"
+    />
+
+    <button
+      type="submit"
+      class="article-inline-subscribe-button"
+    >
+      Subscribe
+    </button>
+  </form>
+
+  <p class="article-inline-subscribe-note">
+    Email updates only. Unsubscribe anytime.
+  </p>
+
+  <p
+    class="article-inline-subscribe-success hidden"
+    data-inline-subscribe-success
+  >
+    You’re on the list.
+  </p>
+</aside>

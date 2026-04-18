@@ -3,7 +3,7 @@ title: "The Meeting That Decides Princeton’s Property Tax Rate"
 description: "What is happening, what it means for your wallet, and how to speak up before the vote."
 date: "2025-09-07"
 section: "Princeton Governance"
-author: "Bakr Al Qaraghuli, Editor"
+author: "Christian J. Remington, Editor in Chief"
 draft: false
 ---
 

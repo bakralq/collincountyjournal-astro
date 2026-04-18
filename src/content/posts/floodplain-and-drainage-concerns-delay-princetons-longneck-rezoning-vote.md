@@ -3,7 +3,7 @@ title: "Floodplain and Drainage Concerns Delay Princeton’s Longneck Rezoning V
 description: "Princeton Planning and Zoning considered a request Monday to rezone 1503 Longneck Road for a small office building, but key floodplain, drainage, traffic, and site condition questions kept the item from moving forward. Instead of recommending approval, the commission chose to hold the case until additional studies are completed."
 date: "2026-03-17"
 section: "Princeton Governance"
-author: "Bakr Al Qaraghuli, Editor"
+author: "Christian J. Remington, Editor in Chief"
 image: /images/floodplain-longneck-main.jpg
 draft: false
 ---

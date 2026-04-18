@@ -3,7 +3,7 @@ title: "Princeton May Get Its Own 911 Dispatch Center"
 description: "City Council will vote on funding a feasibility study examining whether Princeton should continue using Collin County dispatch or build its own local 911 center."
 date: "2026-03-03"
 section: "Princeton Governance"
-author: "Bakr Al Qaraghuli, Editor"
+author: "Christian J. Remington, Editor in Chief"
 image: /images/princeton-911-dispatch-feasibility-study.jpg
 draft: false
 ---

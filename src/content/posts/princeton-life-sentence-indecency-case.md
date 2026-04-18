@@ -3,7 +3,7 @@ title: "A Princeton man received a life sentence for indecency with a child. Wha
 description: "A Collin County jury sentenced a Princeton resident to life in prison for indecency with a child. Here is what happened in the case and what the data shows about scale and context."
 date: "2025-10-18"
 section: "Princeton Governance"
-author: "Bakr Al Qaraghuli, Editor"
+author: "Christian J. Remington, Editor in Chief"
 image: /images/princeton-life-sentence-indecency-case.jpg
 draft: false
 ---

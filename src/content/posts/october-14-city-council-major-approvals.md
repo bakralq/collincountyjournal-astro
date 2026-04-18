@@ -3,7 +3,7 @@ title: "October 14 at City Hall: Major Approvals and a Strategic Delay on Utilit
 description: "City Council approved multiple development and governance items on October 14, including the Princeton Pediatrics plat and Whitewing Trails PID hearing, while delaying action on Winter Quarter Averaging for utilities."
 date: "2025-10-17"
 section: "Princeton Governance"
-author: "Bakr Al Qaraghuli, Editor"
+author: "Christian J. Remington, Editor in Chief"
 image: /images/october-14-city-council-major-approvals.jpg
 draft: false
 ---

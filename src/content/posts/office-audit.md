@@ -3,7 +3,7 @@ title: "Princeton Finds $40,000 for an Office, but Not for an Audit"
 description: "Residents were told the budget was too tight for a forensic audit. Days later, a $39,642.12 office renovation quote raised new questions about the city’s priorities."
 date: "2025-09-15"
 section: "Princeton Governance"
-author: "Bakr Al Qaraghuli, Editor"
+author: "Christian J. Remington, Editor in Chief"
 image: /images/office-audit.jpg
 draft: false
 ---

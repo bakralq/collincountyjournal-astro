@@ -3,7 +3,7 @@ title: "The Quiet Redirection of Princeton Independent School District"
 description: "Public board records show Princeton ISD gradually restructuring legal representation and exploring external partnership models between 2023 and 2025."
 date: "2025-10-17"
 section: "Princeton Governance"
-author: "Bakr Al Qaraghuli, Editor"
+author: "Christian J. Remington, Editor in Chief"
 image: /images/princeton-isd-quiet-redirection.jpg
 draft: false
 ---

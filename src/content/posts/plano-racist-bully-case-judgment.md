@@ -3,7 +3,7 @@ title: "Collin County Jury Hits Plano 'Racist Bully' Case With $3.2 Million Judg
 description: "A Collin County civil jury awarded $3.2 million in damages after online accusations involving a Plano middle school incident went viral."
 date: "2026-02-16"
 section: "US News"
-author: "Bakr Al Qaraghuli, Editor"
+author: "Christian J. Remington, Editor in Chief"
 image: /images/plano-racist-bully-case-judgment.jpg
 draft: false
 ---

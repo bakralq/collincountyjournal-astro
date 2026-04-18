@@ -3,7 +3,7 @@ title: "Why Princeton’s Growth Brings Houses First, Services Later"
 description: "A breakdown of how PIDs and TIRZ divert new-growth revenue into special funds before the general fund can expand city services."
 date: "2025-08-23"
 section: "Princeton Governance"
-author: "Bakr Al Qaraghuli, Editor"
+author: "Christian J. Remington, Editor in Chief"
 draft: false
 ---
 

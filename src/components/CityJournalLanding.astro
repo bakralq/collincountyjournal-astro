@@ -1,0 +1,139 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CitySignalStrip from './CitySignalStrip.astro';
+import ScrollableArticleRail from './ScrollableArticleRail.astro';
+import {
+  createPlaceholderRailItems,
+  createPlaceholderStory,
+  formatDisplayDate,
+} from '../lib/cityJournalData';
+
+const {
+  city,
+  topStory = null,
+  remainingStories = [],
+} = Astro.props;
+
+const featuredStory = topStory || createPlaceholderStory(city);
+const railItems =
+  remainingStories.length > 0 ? remainingStories : createPlaceholderRailItems(city);
+const hasTopStory = Boolean(topStory);
+---
+
+<Layout
+  title={`${city.title} | Collin County Journal`}
+  description={city.pageDescription}
+  url={`https://collincountyjournal.com/${city.slug}`}
+  subscribeCity={city.key}
+>
+  <main class="mx-auto max-w-6xl px-6 py-16">
+    <section class="grid items-start gap-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(320px,0.95fr)]">
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-[0.22em] text-gray-500">
+          Collin County Journal
+        </p>
+        <h1 class="journal-wordmark mt-3 text-4xl tracking-tight sm:text-5xl lg:text-6xl">
+          {city.title}
+        </h1>
+        <p class="mt-5 max-w-3xl text-lg leading-8 text-gray-700">
+          {city.pageDescription}
+        </p>
+      </div>
+
+      <CitySignalStrip city={city} />
+    </section>
+
+    <section class="mt-10">
+      <div class="mb-5 flex flex-wrap items-end justify-between gap-3">
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-[0.22em] text-gray-500">
+            Top Story
+          </p>
+          <h2 class="mt-2 text-3xl font-bold tracking-tight text-black">
+            Start here first
+          </h2>
+        </div>
+
+        <a
+          href="/subscribe"
+          class="inline-flex items-center rounded-full border border-gray-300 px-4 py-2 text-sm font-semibold text-gray-700 transition hover:border-black hover:text-black"
+        >
+          Subscribe to {city.shortName}
+        </a>
+      </div>
+
+      <a
+        href={featuredStory.href}
+        target={featuredStory.external ? '_blank' : undefined}
+        rel={featuredStory.external ? 'noopener noreferrer' : undefined}
+        class={`grid overflow-hidden rounded-[2rem] border border-gray-200 bg-gradient-to-br ${city.panelClass} shadow-[0_24px_70px_rgba(17,24,39,0.08)] transition hover:-translate-y-0.5 hover:shadow-[0_30px_80px_rgba(17,24,39,0.12)] lg:grid-cols-[minmax(320px,0.9fr)_minmax(0,1.1fr)]`}
+      >
+        <div class="relative">
+          {featuredStory.image ? (
+            <img
+              src={featuredStory.image}
+              alt={featuredStory.title}
+              class="h-[260px] w-full object-cover sm:h-[320px] lg:h-full"
+            />
+          ) : (
+            <div class="flex h-[260px] items-end bg-gradient-to-br from-white via-gray-50 to-gray-100 p-6 sm:h-[320px] lg:h-full">
+              <div>
+                <p class="text-xs font-semibold uppercase tracking-[0.22em] text-gray-500">
+                  {city.title}
+                </p>
+                <p class="mt-3 max-w-sm text-2xl font-semibold tracking-tight text-black">
+                  {featuredStory.title}
+                </p>
+              </div>
+            </div>
+          )}
+        </div>
+
+        <div class="flex flex-col justify-center p-6 sm:p-8 lg:p-10">
+          <div class="flex flex-wrap items-center gap-2">
+            <span class={`inline-flex rounded-full border px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] ${city.badgeClass}`}>
+              {hasTopStory ? 'Live story' : 'Journal update'}
+            </span>
+            {featuredStory.date && (
+              <span class="text-sm text-gray-600">
+                {formatDisplayDate(featuredStory.date)}
+              </span>
+            )}
+            {featuredStory.readingTime && (
+              <span class="text-sm text-gray-600">
+                {featuredStory.readingTime} min read
+              </span>
+            )}
+          </div>
+
+          <h3 class="mt-4 text-3xl font-bold tracking-tight text-black sm:text-4xl">
+            {featuredStory.title}
+          </h3>
+
+          <p class="mt-4 max-w-2xl text-base leading-7 text-gray-700 sm:text-lg sm:leading-8">
+            {featuredStory.description}
+          </p>
+
+          <div class="mt-7 inline-flex items-center rounded-full border border-black bg-black px-5 py-3 text-sm font-semibold text-white">
+            {featuredStory.ctaLabel || 'Read full story'}
+          </div>
+        </div>
+      </a>
+    </section>
+
+    <section class="mt-12">
+      <div class="mb-5 flex flex-wrap items-end justify-between gap-3">
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-[0.22em] text-gray-500">
+            More From {city.shortName}
+          </p>
+          <h2 class="mt-2 text-3xl font-bold tracking-tight text-black">
+            Latest coverage
+          </h2>
+        </div>
+      </div>
+
+      <ScrollableArticleRail items={railItems} />
+    </section>
+  </main>
+</Layout>

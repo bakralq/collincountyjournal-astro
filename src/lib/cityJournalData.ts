@@ -1,0 +1,330 @@
+export const cityJournalConfigs = [
+  {
+    key: 'anna',
+    slug: 'anna-journal',
+    title: 'Anna Journal',
+    shortName: 'Anna',
+    section: 'Anna Journal',
+    href: '/anna-journal',
+    external: false,
+    pageDescription:
+      'Anna is one of the fastest-rising communities in Collin County, with major growth, new infrastructure, and a family-focused identity that keeps drawing attention across North Texas. We cover the city hall decisions, school changes, development moves, public-safety issues, and community stories shaping Anna as it grows into its next chapter.',
+    homeDescription:
+      'Growth pressure, schools, public safety, and city hall in one of Collin County’s fastest-rising communities.',
+    panelClass: 'from-orange-50 via-white to-amber-100',
+    badgeClass: 'border-orange-200 bg-orange-100 text-orange-900',
+    iconClass: 'bg-orange-100 text-orange-800',
+    stats: [
+      {
+        key: 'weather',
+        label: '74°',
+        detail: 'Sunny demo',
+        icon: 'weather',
+      },
+      {
+        key: 'population',
+        label: '31K est.',
+        detail: 'Still climbing',
+        icon: 'population',
+      },
+      {
+        key: 'traffic',
+        label: 'Moderate',
+        detail: 'Peak-hour watch',
+        icon: 'traffic',
+      },
+      {
+        key: 'safety',
+        label: 'Normal',
+        detail: 'Live feed soon',
+        icon: 'safety',
+      },
+    ],
+  },
+  {
+    key: 'celina',
+    slug: 'celina-journal',
+    title: 'Celina Journal',
+    shortName: 'Celina',
+    section: 'Celina Journal',
+    href: '/celina-journal',
+    external: false,
+    pageDescription:
+      'Celina is one of the biggest growth stories in North Texas, pairing explosive expansion with hometown pride and an ambitious civic buildout. We cover the government, schools, development, infrastructure, and public-safety decisions shaping one of the most talked-about cities in Collin County.',
+    homeDescription:
+      'Infrastructure strain, downtown change, land use, and civic buildout inside one of North Texas’s biggest growth stories.',
+    panelClass: 'from-sky-50 via-white to-blue-100',
+    badgeClass: 'border-blue-200 bg-blue-100 text-blue-900',
+    iconClass: 'bg-blue-100 text-blue-800',
+    stats: [
+      {
+        key: 'weather',
+        label: '72°',
+        detail: 'Clear demo',
+        icon: 'weather',
+      },
+      {
+        key: 'population',
+        label: '46K est.',
+        detail: 'Growth pressure',
+        icon: 'population',
+      },
+      {
+        key: 'traffic',
+        label: 'Busy',
+        detail: 'Corridor friction',
+        icon: 'traffic',
+      },
+      {
+        key: 'safety',
+        label: 'Normal',
+        detail: 'Live feed soon',
+        icon: 'safety',
+      },
+    ],
+  },
+  {
+    key: 'melissa',
+    slug: 'melissa-journal',
+    title: 'Melissa Journal',
+    shortName: 'Melissa',
+    section: 'Melissa Journal',
+    href: '/melissa-journal',
+    external: false,
+    pageDescription:
+      'Melissa is building a reputation as one of the most desirable rising communities in Collin County, with strong schools, steady growth, and a quality of life families notice fast. We cover the local decisions, development plans, public-safety issues, and community changes shaping Melissa as it keeps moving forward.',
+    homeDescription:
+      'Melissa coverage is being built out around growth, schools, development, and public-safety changes.',
+    panelClass: 'from-emerald-50 via-white to-lime-100',
+    badgeClass: 'border-emerald-200 bg-emerald-100 text-emerald-900',
+    iconClass: 'bg-emerald-100 text-emerald-800',
+    stats: [
+      {
+        key: 'weather',
+        label: '73°',
+        detail: 'Breezy demo',
+        icon: 'weather',
+      },
+      {
+        key: 'population',
+        label: '24K est.',
+        detail: 'Steady rise',
+        icon: 'population',
+      },
+      {
+        key: 'traffic',
+        label: 'Light',
+        detail: 'Live feed soon',
+        icon: 'traffic',
+      },
+      {
+        key: 'safety',
+        label: 'Quiet',
+        detail: 'Live feed soon',
+        icon: 'safety',
+      },
+    ],
+  },
+  {
+    key: 'princeton',
+    slug: 'princeton-journal',
+    title: 'Princeton Journal',
+    shortName: 'Princeton',
+    section: 'Princeton Journal',
+    href: '/princeton-journal',
+    external: true,
+    pageDescription:
+      'Independent Princeton reporting lives at The Princeton Journal, where city council, growth, development, schools, and public-safety coverage run deeper every week.',
+    homeDescription:
+      'Independent Princeton reporting from The Princeton Journal, including city council, growth, schools, and public safety.',
+    panelClass: 'from-stone-50 via-white to-rose-100',
+    badgeClass: 'border-rose-200 bg-rose-100 text-rose-900',
+    iconClass: 'bg-rose-100 text-rose-800',
+    stats: [
+      {
+        key: 'weather',
+        label: '75°',
+        detail: 'Sunny demo',
+        icon: 'weather',
+      },
+      {
+        key: 'population',
+        label: '38K est.',
+        detail: 'Fast-growing',
+        icon: 'population',
+      },
+      {
+        key: 'traffic',
+        label: 'Busy',
+        detail: '380 pressure',
+        icon: 'traffic',
+      },
+      {
+        key: 'safety',
+        label: 'Active',
+        detail: 'Live feed soon',
+        icon: 'safety',
+      },
+    ],
+  },
+  {
+    key: 'prosper',
+    slug: 'prosper-journal',
+    title: 'Prosper Journal',
+    shortName: 'Prosper',
+    section: 'Prosper Journal',
+    href: '/prosper-journal',
+    external: false,
+    pageDescription:
+      'Prosper has become one of the most recognizable growth success stories in North Texas, with rapid development, high expectations, and a reputation for excellence that continues to attract families and investment. We cover the roads, schools, development, government, and public-safety decisions shaping Prosper as it enters its next phase.',
+    homeDescription:
+      'Roads, schools, development, and public-safety decisions inside one of Collin County’s most closely watched growth stories.',
+    panelClass: 'from-cyan-50 via-white to-emerald-100',
+    badgeClass: 'border-cyan-200 bg-cyan-100 text-cyan-900',
+    iconClass: 'bg-cyan-100 text-cyan-800',
+    stats: [
+      {
+        key: 'weather',
+        label: '71°',
+        detail: 'Clear demo',
+        icon: 'weather',
+      },
+      {
+        key: 'population',
+        label: '41K est.',
+        detail: 'Still expanding',
+        icon: 'population',
+      },
+      {
+        key: 'traffic',
+        label: 'Moderate',
+        detail: 'Commute watch',
+        icon: 'traffic',
+      },
+      {
+        key: 'safety',
+        label: 'Normal',
+        detail: 'Live feed soon',
+        icon: 'safety',
+      },
+    ],
+  },
+];
+
+export const subscribeAudienceOptions = [
+  {
+    value: 'all',
+    label: 'All city journals',
+  },
+  ...cityJournalConfigs.map((city) => ({
+    value: city.key,
+    label: `${city.shortName} only`,
+  })),
+];
+
+export const internalCityJournalConfigs = cityJournalConfigs.filter(
+  (city) => !city.external
+);
+
+export const getCityConfigByKey = (key: string) =>
+  cityJournalConfigs.find((city) => city.key === key);
+
+export const getCityConfigBySlug = (slug: string) =>
+  cityJournalConfigs.find((city) => city.slug === slug);
+
+export const getCityConfigBySection = (section: string) =>
+  cityJournalConfigs.find((city) => city.section === section);
+
+export const getReadingTime = (content = '') => {
+  const wordCount = content.trim().split(/\s+/).filter(Boolean).length;
+  return Math.max(1, Math.ceil(wordCount / 200));
+};
+
+export const formatDisplayDate = (date?: string) => {
+  if (!date) return '';
+
+  return new Date(`${date}T12:00:00`).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+};
+
+export const sortPostsByDate = <T extends { data: { date: string } }>(posts: T[]) =>
+  [...posts].sort(
+    (a, b) =>
+      new Date(`${b.data.date}T12:00:00`).getTime() -
+      new Date(`${a.data.date}T12:00:00`).getTime()
+  );
+
+export const toLocalStoryCard = (post: any) => ({
+  title: post.data.title,
+  description: post.data.description,
+  date: post.data.date,
+  image: post.data.image || '',
+  href: `/posts/${post.id.replace(/\.md$/, '')}`,
+  readingTime: getReadingTime(post.body || ''),
+  external: false,
+});
+
+export const toExternalStoryCard = (item: any) => ({
+  title: item.title,
+  description: item.description,
+  date: item.pubDate
+    ? new Date(item.pubDate).toISOString().slice(0, 10)
+    : '',
+  image: item.image || '',
+  href: item.link,
+  readingTime: null,
+  external: true,
+});
+
+export const createPlaceholderStory = (city: any) => ({
+  title: `More ${city.shortName} coverage is on the way.`,
+  description:
+    city.key === 'melissa'
+      ? `Melissa Journal is ready to grow, and this page will keep filling in as more local coverage goes live.`
+      : `${city.title} already has its home in CCJ. If there is not a live top story at the moment, this space will update as soon as the next story lands.`,
+  href: city.href,
+  date: '',
+  image: '',
+  readingTime: null,
+  external: city.external,
+  ctaLabel: city.key === 'melissa' ? 'See what’s coming' : 'Open journal',
+});
+
+export const createPlaceholderRailItems = (city: any) => [
+  {
+    title: `More ${city.shortName} stories are on the way`,
+    description:
+      `More ${city.shortName} stories will appear here as coverage expands.`,
+    href: city.href,
+    image: '',
+    date: '',
+    readingTime: null,
+    external: city.external,
+    ctaLabel: 'Open journal',
+  },
+  {
+    title: `Subscribe for ${city.shortName} updates`,
+    description:
+      'Choose all city journals or just one city and get the next major story in your inbox.',
+    href: '/subscribe',
+    image: '',
+    date: '',
+    readingTime: null,
+    external: false,
+    ctaLabel: 'Subscribe',
+  },
+  {
+    title: `${city.shortName} will keep building here`,
+    description:
+      'As coverage grows, this journal will keep filling in with more reporting, context, and local updates.',
+    href: city.href,
+    image: '',
+    date: '',
+    readingTime: null,
+    external: city.external,
+    ctaLabel: 'Explore page',
+  },
+];

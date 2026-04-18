@@ -3,7 +3,7 @@ title: "Princeton Police Going Fully Digital with E-Citations"
 description: "Princeton Police are rolling out electronic citations, replacing handwritten tickets with a fully digital system connected more directly to court and county systems."
 date: "2026-03-22"
 section: "Princeton Governance"
-author: "Bakr Al Qaraghuli, Editor"
+author: "Christian J. Remington, Editor in Chief"
 image: "/images/princeton-police-e-citations.jpg"
 ---
 

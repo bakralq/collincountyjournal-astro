@@ -3,7 +3,7 @@ title: "Princeton’s Speeding Crisis Is Worse Than You Think"
 description: "Crash data from the Texas Department of Transportation show that most Princeton crashes occur in daylight, clear weather, and on higher-speed corridors."
 date: "2025-11-03"
 section: "Princeton Governance"
-author: "Bakr Al Qaraghuli, Editor"
+author: "Christian J. Remington, Editor in Chief"
 image: /images/princeton-speeding-crash-analysis.jpg
 draft: false
 ---

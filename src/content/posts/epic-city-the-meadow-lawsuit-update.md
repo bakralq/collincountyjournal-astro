@@ -3,7 +3,7 @@ title: "Update: EPIC City / The Meadow Lawsuit and Development Status"
 description: "A status update on the EPIC City, now The Meadow, lawsuit and development process, including the pending Attorney General case, securities dispute, and county review."
 date: "2026-01-16"
 section: "US News"
-author: "Bakr Al Qaraghuli, Editor"
+author: "Christian J. Remington, Editor in Chief"
 image: /images/epic-city-the-meadow-lawsuit-update.jpg
 draft: false
 ---

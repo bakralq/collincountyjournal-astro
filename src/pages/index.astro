@@ -1,128 +1,123 @@
 ---
 import { getCollection } from 'astro:content';
-import Layout from '../layouts/Layout.astro';
 import ArticleCard from '../components/ArticleCard.astro';
+import Layout from '../layouts/Layout.astro';
+import TopStoryCarousel from '../components/TopStoryCarousel.astro';
+import {
+  cityJournalConfigs,
+  createPlaceholderStory,
+  internalCityJournalConfigs,
+  sortPostsByDate,
+  toExternalStoryCard,
+  toLocalStoryCard,
+} from '../lib/cityJournalData';
+import { getPrincetonFeed } from '../lib/princetonFeed.js';
 
-const posts = await getCollection('posts', ({ data }) => !data.draft);
-
-const sortedPosts = posts.sort(
-  (a, b) =>
-    new Date(`${b.data.date}T12:00:00`).getTime() -
-    new Date(`${a.data.date}T12:00:00`).getTime()
+const allPosts = sortPostsByDate(
+  await getCollection('posts', ({ data }) => !data.draft)
 );
-const getReadingTime = (content) => {
-  const wordCount = (content || '').trim().split(/\s+/).filter(Boolean).length;
-  return Math.max(1, Math.ceil(wordCount / 200));
-};
 
-const topPost = sortedPosts[0];
-const truncateDescription = (text, limit = 140) => {
-  if (!text || text.length <= limit) return text;
-  return text.slice(0, limit).trimEnd() + '...';
-};
-const princetonGovernancePosts = sortedPosts
-  .filter(
-    (post) =>
-      post.data.section === 'Princeton Governance' &&
-      post.id !== topPost?.id
-  )
-  .slice(0, 3);
+const getSectionCards = (section) =>
+  allPosts
+    .filter((post) => post.data.section === section)
+    .map((post) => toLocalStoryCard(post));
 
-const usNewsPosts = sortedPosts
-  .filter(
-    (post) =>
-      post.data.section === 'US News' &&
-      post.id !== topPost?.id
-  )
-  .slice(0, 3);
+const localCityStories = Object.fromEntries(
+  internalCityJournalConfigs.map((city) => [city.key, getSectionCards(city.section)])
+);
+
+const princetonFeed = (await getPrincetonFeed(4)).map((item) =>
+  toExternalStoryCard(item)
+);
+
+const carouselSlides = cityJournalConfigs.map((city) => {
+  if (city.external) {
+    const top = princetonFeed[0];
+    return {
+      city,
+      ...(top || createPlaceholderStory(city)),
+      ctaLabel: top ? 'Read full story' : 'Open journal',
+    };
+  }
+
+  const top = localCityStories[city.key]?.[0];
+
+  return {
+    city,
+    ...(top || createPlaceholderStory(city)),
+    ctaLabel: top ? 'Read full story' : 'See what’s coming',
+  };
+});
+
+const countywideStories = allPosts
+  .filter((post) => post.data.section === 'US News')
+  .slice(0, 3)
+  .map((post) => ({
+    title: post.data.title,
+    description: post.data.description,
+    href: `/posts/${post.id.replace(/\.md$/, '')}`,
+    date: post.data.date,
+    image: post.data.image || null,
+    readingTime: toLocalStoryCard(post).readingTime,
+  }));
 ---
 
 <Layout
-  title="The Princeton Journal"
-  description="Princeton’s leading source for local news, city government coverage, development, public safety, and community reporting."
-  url="https://theprincetonjournal.com"
+  title="Collin County Journal"
+  description="Collin County Journal is an independent news publication covering local government, public safety, development, schools, elections, and community news across Collin County, Texas."
+  url="https://collincountyjournal.com"
 >
-  <main class="mx-auto max-w-6xl px-6 py-8">
-    {topPost && (
-      <section class="mt-0">
-        <p class="text-sm font-medium uppercase tracking-wide text-gray-500">
-          Top Story
-        </p>
+  <main class="mx-auto max-w-6xl px-6 py-10">
+    <section class="max-w-3xl">
+      <p class="text-xs font-semibold uppercase tracking-[0.22em] text-gray-500">
+        Collin County Journal
+      </p>
+      <h1 class="mt-3 text-4xl font-bold tracking-tight text-black sm:text-5xl lg:text-6xl">
+        Five city journals. One county hub.
+      </h1>
+      <p class="mt-5 text-lg leading-8 text-gray-600">
+        Start with the biggest story in each city journal, then move into the part of Collin County you care about most.
+      </p>
+    </section>
 
-        <a
-          href={`/posts/${topPost.id.replace(/\.md$/, '')}`}
-          class="mt-4 block overflow-hidden rounded-2xl border border-gray-200 transition hover:border-gray-300"
-        >
+    <section class="mt-10">
+      <TopStoryCarousel slides={carouselSlides} />
+    </section>
 
-          <div class="p-8">
-            <p class="text-sm font-medium uppercase tracking-wide text-gray-500">
-              {topPost.data.section}
+    {countywideStories.length > 0 && (
+      <section class="mt-14 border-t border-gray-200 pt-12">
+        <div class="flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-[0.22em] text-gray-500">
+              County + U.S. Context
             </p>
-
-            <h1 class="mt-3 text-3xl font-bold tracking-tight">
-              {topPost.data.title}
-            </h1>
-
-            <p class="mt-3 text-gray-600">
-  {truncateDescription(topPost.data.description, 140)}
-            </p>
+            <h2 class="mt-2 text-3xl font-bold tracking-tight text-black">
+              The wider picture
+            </h2>
           </div>
-        </a>
+
+          <a
+            href="/us-news"
+            class="text-sm font-semibold text-gray-600 transition hover:text-black"
+          >
+            Open US News
+          </a>
+        </div>
+
+        <div class="mt-6 grid gap-6 md:grid-cols-3">
+          {countywideStories.map((story) => (
+            <ArticleCard
+              title={story.title}
+              description={story.description}
+              href={story.href}
+              date={story.date}
+              image={story.image}
+              readingTime={story.readingTime}
+              variant="stacked"
+            />
+          ))}
+        </div>
       </section>
     )}
-
-    <section class="mt-16">
-<div class="flex items-center justify-between gap-2">
-  <h2 class="text-xl font-bold tracking-tight sm:text-2xl">
-    Latest Princeton Governance
-  </h2>
-  <a
-    href="/princeton-governance"
-    class="text-sm font-medium text-gray-600 hover:text-black whitespace-nowrap shrink-0"
-  >
-    View all
-  </a>
-</div>
-      <div class="mt-6 grid gap-6 md:grid-cols-3">
-        {princetonGovernancePosts.map((post) => (
-          <ArticleCard
-            title={post.data.title}
-            description={post.data.description}
-            href={`/posts/${post.id.replace(/\.md$/, '')}`}
-            date={post.data.date}
-            image={post.data.image}
-  readingTime={getReadingTime(post.body)}
-            variant="stacked"
-          />
-        ))}
-      </div>
-    </section>
-
-    <section class="mt-16">
-<div class="flex items-center justify-between gap-2">
-  <h2 class="text-xl font-bold tracking-tight sm:text-2xl">
-    Latest U.S. News
-  </h2>
-  <a
-    href="/us-news"
-    class="text-sm font-medium text-gray-600 hover:text-black whitespace-nowrap shrink-0"
-  >
-    View all
-  </a>
-</div>
-      <div class="mt-6 grid gap-6 md:grid-cols-3">
-        {usNewsPosts.map((post) => (
-          <ArticleCard
-            title={post.data.title}
-            description={post.data.description}
-            href={`/posts/${post.id.replace(/\.md$/, '')}`}
-            date={post.data.date}
-            image={post.data.image}
-  readingTime={getReadingTime(post.body)}
-            variant="stacked"
-          />
-        ))}
-      </div>
-    </section>
   </main>
 </Layout>

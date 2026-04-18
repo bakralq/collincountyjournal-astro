@@ -3,7 +3,7 @@ title: "Winter Storm Update: Princeton and Collin County"
 description: "A winter storm warning and extreme cold warning are in effect for Princeton and Collin County, with ice, freezing rain, and dangerous cold creating hazardous conditions."
 date: "2026-01-24"
 section: "Princeton Governance"
-author: "Bakr Al Qaraghuli, Editor"
+author: "Christian J. Remington, Editor in Chief"
 image: /images/princeton-winter-storm-update-jan24.jpeg
 draft: false
 ---

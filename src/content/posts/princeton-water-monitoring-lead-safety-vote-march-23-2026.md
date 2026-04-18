@@ -3,7 +3,7 @@ title: "$96K Water Monitoring Contract Up for Vote in Princeton—What It Means 
 description: "Princeton City Council is set to consider a $96,300 contract renewal for water monitoring and compliance services at its March 23 meeting."
 date: "2026-03-19"
 section: "Princeton Governance"
-author: "Bakr Al Qaraghuli, Editor"
+author: "Christian J. Remington, Editor in Chief"
 image: /images/princeton-water-monitoring-facebook-v2.jpg
 draft: false
 ---

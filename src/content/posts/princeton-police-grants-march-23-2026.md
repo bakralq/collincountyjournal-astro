@@ -3,7 +3,7 @@ title: "$179K in Police Funding Up for Vote in Princeton—Training, Mental Heal
 description: "Princeton City Council is set to consider three police-related grants totaling $179,620 at its March 23 meeting, focused on training, crisis response, and officer wellness."
 date: "2026-03-18"
 section: "Princeton Governance"
-author: "Bakr Al Qaraghuli, Editor"
+author: "Christian J. Remington, Editor in Chief"
 image: "/images/princeton-police-grants.jpg"
 ---
 

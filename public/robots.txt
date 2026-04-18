@@ -1,8 +1,8 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://theprincetonjournal.com/sitemap.xml
-Sitemap: https://theprincetonjournal.com/news-sitemap.xml
+Sitemap: https://collincountyjournal.com/sitemap.xml
+Sitemap: https://collincountyjournal.com/news-sitemap.xml
 
 User-agent: facebookexternalhit
 Allow: /

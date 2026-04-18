@@ -3,7 +3,7 @@ title: "Princeton Advances New Public Safety Complex for Police and Fire"
 description: "Princeton City Council approved site selection, land control, and design funding for a new Public Safety Complex intended to support long-term police and fire operations."
 date: "2025-12-12"
 section: "Princeton Governance"
-author: "Bakr Al Qaraghuli, Editor"
+author: "Christian J. Remington, Editor in Chief"
 image: /images/princeton-public-safety-complex-update.jpg
 draft: false
 ---

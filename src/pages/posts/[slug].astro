@@ -2,7 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
 
-const SITE_URL = 'https://theprincetonjournal.com';
+const SITE_URL = 'https://collincountyjournal.com';
 
 export async function getStaticPaths() {
   const posts = await getCollection('posts', ({ data }) => !data.draft);
@@ -26,22 +26,24 @@ const articleUrl = `${SITE_URL}/posts/${slug}`;
 
 const allPosts = await getCollection('posts', ({ data }) => !data.draft);
 
-const sortedPosts = allPosts.sort(
+const sectionPosts = allPosts
+  .filter((p) => p.data.section === post.data.section)
+  .sort(
   (a, b) =>
     new Date(`${b.data.date}T12:00:00`).getTime() -
     new Date(`${a.data.date}T12:00:00`).getTime()
 );
 
-const currentIndex = sortedPosts.findIndex(
+const currentIndex = sectionPosts.findIndex(
   (p) => p.id.replace(/\.md$/, '') === slug
 );
 
 let nextPost = null;
 
 if (currentIndex === 0) {
-  nextPost = sortedPosts[1] ?? null;
+  nextPost = sectionPosts[1] ?? null;
 } else {
-  nextPost = sortedPosts[0] ?? null;
+  nextPost = sectionPosts[0] ?? null;
 }
 
 const getReadingTime = (content) => {
@@ -72,7 +74,7 @@ const articleSchema = {
   },
   "publisher": {
     "@type": "Organization",
-    "name": "The Princeton Journal",
+    "name": "Collin County Journal",
     "url": SITE_URL
   },
   "mainEntityOfPage": {
@@ -96,6 +98,7 @@ const articleSchema = {
   url={articleUrl}
   image={post.data.image}
 imageCaption={post.data.imageCaption}
+  imageSourceUrl={post.data.imageSourceUrl}
   preview={post.data.preview}
   readingTime={readingTime}
   nextPost={nextPostData}

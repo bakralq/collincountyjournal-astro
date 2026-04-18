@@ -3,7 +3,7 @@ title: "Upcoming PID Actions Could Support Over 2,000 New Homes in Windmore, Sou
 description: "Three Public Improvement District actions tied to Windmore, Southridge, and Eastridge developments could support more than 2,000 homes once completed."
 date: "2025-10-27"
 section: "Princeton Governance"
-author: "Bakr Al Qaraghuli, Editor"
+author: "Christian J. Remington, Editor in Chief"
 image: /images/princeton-pid-developments-windmore-southridge-eastridge.jpg
 draft: false
 ---

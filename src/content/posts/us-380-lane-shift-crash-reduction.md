@@ -3,7 +3,7 @@ title: "Princeton’s US-380 Work Zone Sees 56% Fewer Crashes After Lane Shift"
 description: "TxDOT crash data show reported crashes along US-380 through Princeton fell after the October 5 lane shift at Beauchamp."
 date: "2025-11-02"
 section: "Princeton Governance"
-author: "Bakr Al Qaraghuli, Editor"
+author: "Christian J. Remington, Editor in Chief"
 image: /images/us-380-lane-shift-crash-reduction.jpg
 draft: false
 ---

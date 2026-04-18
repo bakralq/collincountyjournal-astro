@@ -3,7 +3,7 @@ title: "Princeton ISD Has a Bullying Problem. The Data Is Missing."
 description: "Princeton ISD has anti-bullying policies and reporting tools, but key public data on bullying reports, investigations, and outcomes is not publicly available."
 date: "2026-01-13"
 section: "Princeton Governance"
-author: "Bakr Al Qaraghuli, Editor"
+author: "Christian J. Remington, Editor in Chief"
 image: /images/princeton-isd-bullying-data-missing.webp
 draft: false
 ---

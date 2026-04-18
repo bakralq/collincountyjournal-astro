@@ -3,7 +3,7 @@ title: "Ironwood at Princeton: Council to Decide Updated Plan for Stalled 380 Ap
 description: "Princeton City Council is set to consider a zoning amendment for the stalled Ironwood at Princeton multifamily site near US 380, including changes to building materials, parking, amenities, and unit count."
 date: "2026-01-07"
 section: "Princeton Governance"
-author: "Bakr Al Qaraghuli, Editor"
+author: "Christian J. Remington, Editor in Chief"
 image: /images/ironwood-at-princeton-zoning-amendment.webp
 draft: false
 ---

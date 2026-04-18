@@ -3,7 +3,7 @@ title: "Tomorrow Night’s City Council Meeting: What’s Happening and What It 
 description: "A full breakdown of the October 14 Princeton City Council meeting, including the recreation center funding decision, sewer billing changes, development votes, and key financial items."
 date: "2025-10-13"
 section: "Princeton Governance"
-author: "Bakr Al Qaraghuli, Editor"
+author: "Christian J. Remington, Editor in Chief"
 draft: false
 ---
 

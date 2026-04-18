@@ -3,7 +3,7 @@ title: "$4.35M Turf Field Project Proposed for J.M. Caldwell Sr. Community Park"
 description: "A proposed $4.35 million project would replace three grass fields with synthetic turf at J.M. Caldwell Sr. Community Park using funds from the 2023 voter-approved parks bond."
 date: "2025-10-27"
 section: "Princeton Governance"
-author: "Bakr Al Qaraghuli, Editor"
+author: "Christian J. Remington, Editor in Chief"
 image: /images/caldwell-park-turf-field-proposal.jpg
 draft: false
 ---

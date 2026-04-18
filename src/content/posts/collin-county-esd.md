@@ -3,7 +3,7 @@ title: "Collin County Emergency Services District No. 1 heads to the November ba
 description: "Voters will decide whether to create Collin County Emergency Services District No. 1 and establish a permanent funding stream for fire and EMS services in rural areas."
 date: "2025-07-29"
 section: "Princeton Governance"
-author: "Bakr Al Qaraghuli, Editor"
+author: "Christian J. Remington, Editor in Chief"
 draft: false
 ---
 

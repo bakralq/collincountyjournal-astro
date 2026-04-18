@@ -3,7 +3,7 @@ title: "Princeton Tried to Slow Growth. Now It’s Speeding Back Up."
 description: "Princeton tried to slow its growth. Now development is accelerating again, and the effects are showing up in traffic, schools, and public safety."
 date: "2026-03-28"
 section: "Princeton Governance"
-author: "Bakr Al Qaraghuli, Editor"
+author: "Christian J. Remington, Editor in Chief"
 image: "/images/princeton-growth-town-center.jpg"
 ---
 

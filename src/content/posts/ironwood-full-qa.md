@@ -3,7 +3,7 @@ title: "Ironwood: The Full Q&A"
 description: "A full meeting-based breakdown of questions and answers about the Ironwood at Princeton project, including funding, permits, safety, drainage, traffic, and management."
 date: "2026-02-22"
 section: "Princeton Governance"
-author: "Bakr Al Qaraghuli, Editor"
+author: "Christian J. Remington, Editor in Chief"
 image: /images/ironwood-full-qa.jpeg
 draft: false
 ---

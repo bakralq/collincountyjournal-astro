@@ -3,7 +3,7 @@ title: "Lake Parks Under Princeton’s Control: Upgrades, Costs, and Questions A
 description: "A breakdown of Princeton’s planned local management of Twin Groves, Tickey Creek Park, and Clear Lake Park, including funding, timelines, and what residents should watch."
 date: "2025-09-06"
 section: "Princeton Governance"
-author: "Bakr Al Qaraghuli, Editor"
+author: "Christian J. Remington, Editor in Chief"
 draft: false
 ---
 

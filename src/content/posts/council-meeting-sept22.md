@@ -3,7 +3,7 @@ title: "What Residents Need to Know About Monday’s Council Meeting"
 description: "A breakdown of the September 22 Princeton City Council meeting, the complaints against Councilmember Cristina Todd, and why the outcome matters for transparency and accountability."
 date: "2025-09-20"
 section: "Princeton Governance"
-author: "Bakr Al Qaraghuli, Editor"
+author: "Christian J. Remington, Editor in Chief"
 draft: false
 ---
 

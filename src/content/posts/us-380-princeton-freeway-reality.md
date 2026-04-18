@@ -3,7 +3,7 @@ title: "US 380 in Princeton Is About to Change Completely. Here’s the Reality"
 description: "TxDOT is advancing a major US 380 project through Princeton and Collin County that would create a new controlled-access freeway alignment north of the city."
 date: "2025-12-19"
 section: "Princeton Governance"
-author: "Bakr Al Qaraghuli, Editor"
+author: "Christian J. Remington, Editor in Chief"
 image: /images/us-380-princeton-freeway-reality.jpg
 draft: false
 ---

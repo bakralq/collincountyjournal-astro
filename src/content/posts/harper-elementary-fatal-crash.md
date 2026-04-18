@@ -3,7 +3,7 @@ title: "Fatal Crash Outside Harper Elementary. One Driver Dead. No Students Inju
 description: "A single-vehicle crash involving a Tesla outside Harper Elementary in Princeton left one driver dead and damaged seven parked vehicles. No students or staff were injured."
 date: "2025-11-21"
 section: "Princeton Governance"
-author: "Bakr Al Qaraghuli, Editor"
+author: "Christian J. Remington, Editor in Chief"
 image: /images/harper-elementary-fatal-crash.avif
 draft: false
 ---

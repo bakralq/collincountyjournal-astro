@@ -3,7 +3,7 @@ title: "Major Zoning Decision Advances to City Council Amid Multiple Red Flags"
 description: "A proposed rezoning on Longneck Road would shift a one-acre site from residential estate zoning to commercial use, with concerns raised about floodplain exposure, drainage, traffic safety, and compatibility."
 date: "2025-12-16"
 section: "Princeton Governance"
-author: "Bakr Al Qaraghuli, Editor"
+author: "Christian J. Remington, Editor in Chief"
 image: /images/longneck-road-zoning-decision.JPG
 draft: false
 ---

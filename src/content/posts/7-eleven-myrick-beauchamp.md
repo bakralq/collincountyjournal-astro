@@ -3,7 +3,7 @@ title: "A 7-Eleven Is Coming to Princeton"
 description: "A 7-Eleven-branded gas station and convenience store is proposed at Myrick Lane and S. Beauchamp Boulevard, with the latest request focused on expanding the approved site boundary."
 date: "2026-01-14"
 section: "Princeton Governance"
-author: "Bakr Al Qaraghuli, Editor"
+author: "Christian J. Remington, Editor in Chief"
 image: /images/7-eleven-myrick-beauchamp.jpg
 draft: false
 ---

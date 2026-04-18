@@ -3,7 +3,7 @@ title: "Who Does the City Do Business With? A Look at Vendor Transparency in Pri
 description: "A review of Princeton’s public procurement framework, payment reporting, and vendor transparency after questions were raised about whether residents can easily see who the city pays and why."
 date: "2026-01-22"
 section: "Princeton Governance"
-author: "Bakr Al Qaraghuli, Editor"
+author: "Christian J. Remington, Editor in Chief"
 image: /images/princeton-vendor-transparency-review.jpg
 draft: false
 ---

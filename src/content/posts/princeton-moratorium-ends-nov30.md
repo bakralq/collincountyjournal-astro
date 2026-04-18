@@ -3,7 +3,7 @@ title: "Princeton’s Moratorium Ends November 30: What Happens Next"
 description: "Princeton’s residential development moratorium expires November 30, 2025. Here’s why it was created, what changed under state law, and what comes next."
 date: "2025-10-11"
 section: "Princeton Governance"
-author: "Bakr Al Qaraghuli, Editor"
+author: "Christian J. Remington, Editor in Chief"
 draft: false
 ---
 

@@ -3,7 +3,7 @@ title: "Sewer Billing Is Changing Again: Winter Averaging Returns"
 description: "Princeton City Council is set to consider an ordinance that would reimplement Winter Quarter Averaging for residential sewer billing."
 date: "2026-01-09"
 section: "Princeton Governance"
-author: "Bakr Al Qaraghuli, Editor"
+author: "Christian J. Remington, Editor in Chief"
 image: /images/winter-averaging-returns-sewer-billing.jpg
 draft: false
 ---

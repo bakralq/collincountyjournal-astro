@@ -3,7 +3,7 @@ title: "US-380 Expansion Starts Oct. 6, But the Hardest Miles Are Through Prince
 description: "Night construction begins October 6 as TxDOT launches the long-planned US-380 expansion, a project expected to last roughly two and a half years."
 date: "2025-10-03"
 section: "Princeton Governance"
-author: "Bakr Al Qaraghuli, Editor"
+author: "Christian J. Remington, Editor in Chief"
 image: /images/us-380-expansion.jpg
 draft: false
 ---
