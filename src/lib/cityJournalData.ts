@@ -18,6 +18,12 @@ export const cityJournalConfigs = [
       lat: 33.349,
       lon: -96.5486,
     },
+    traffic: {
+      lat: 33.3449,
+      lon: -96.548,
+      zoom: 12,
+      routeLabel: 'US 75',
+    },
     stats: [
       {
         key: 'weather',
@@ -63,6 +69,12 @@ export const cityJournalConfigs = [
     weather: {
       lat: 33.3246,
       lon: -96.785,
+    },
+    traffic: {
+      lat: 33.3238,
+      lon: -96.7854,
+      zoom: 12,
+      routeLabel: 'Preston Rd',
     },
     stats: [
       {
@@ -110,6 +122,12 @@ export const cityJournalConfigs = [
       lat: 33.2859,
       lon: -96.5728,
     },
+    traffic: {
+      lat: 33.2862,
+      lon: -96.5717,
+      zoom: 12,
+      routeLabel: 'US 75',
+    },
     stats: [
       {
         key: 'weather',
@@ -156,6 +174,12 @@ export const cityJournalConfigs = [
       lat: 33.1807,
       lon: -96.4989,
     },
+    traffic: {
+      lat: 33.1834,
+      lon: -96.5007,
+      zoom: 12,
+      routeLabel: 'US 380',
+    },
     stats: [
       {
         key: 'weather',
@@ -201,6 +225,12 @@ export const cityJournalConfigs = [
     weather: {
       lat: 33.2368,
       lon: -96.8011,
+    },
+    traffic: {
+      lat: 33.2365,
+      lon: -96.801,
+      zoom: 12,
+      routeLabel: 'Dallas Pkwy',
     },
     stats: [
       {

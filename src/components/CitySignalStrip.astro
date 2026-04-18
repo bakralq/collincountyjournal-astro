@@ -3,7 +3,9 @@ const { city } = Astro.props;
 const stats = city?.stats || [];
 const iconClass = city?.iconClass || 'bg-gray-100 text-gray-700';
 const weather = city?.weather || null;
+const traffic = city?.traffic || null;
 const weatherApiKey = import.meta.env.PUBLIC_OPENWEATHER_API_KEY || '';
+const trafficApiKey = import.meta.env.PUBLIC_TOMTOM_API_KEY || '';
 ---
 
 <aside
@@ -13,6 +15,11 @@ const weatherApiKey = import.meta.env.PUBLIC_OPENWEATHER_API_KEY || '';
   data-weather-lon={weather?.lon}
   data-weather-api-key={weatherApiKey}
   data-weather-city={city?.key || ''}
+  data-traffic-lat={traffic?.lat}
+  data-traffic-lon={traffic?.lon}
+  data-traffic-zoom={traffic?.zoom}
+  data-traffic-route={traffic?.routeLabel}
+  data-traffic-api-key={trafficApiKey}
 >
   <div>
     <div>
@@ -30,6 +37,7 @@ const weatherApiKey = import.meta.env.PUBLIC_OPENWEATHER_API_KEY || '';
       <article
         class="min-w-0 overflow-hidden rounded-2xl border border-gray-200 bg-gray-50 p-3 sm:p-4"
         data-weather-card={stat.icon === 'weather' ? 'true' : undefined}
+        data-traffic-card={stat.icon === 'traffic' ? 'true' : undefined}
       >
         <div class="flex flex-col items-start gap-3 sm:flex-row sm:items-start sm:gap-3.5">
           <div class={`inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl sm:h-10 sm:w-10 ${iconClass}`}>
@@ -82,12 +90,14 @@ const weatherApiKey = import.meta.env.PUBLIC_OPENWEATHER_API_KEY || '';
             <p
               class="mt-1 break-words text-sm font-semibold leading-5 text-black"
               data-weather-label={stat.icon === 'weather' ? 'true' : undefined}
+              data-traffic-label={stat.icon === 'traffic' ? 'true' : undefined}
             >
               {stat.label}
             </p>
             <p
               class="mt-1 text-[11px] leading-4 text-gray-500 sm:text-xs sm:leading-5"
               data-weather-detail={stat.icon === 'weather' ? 'true' : undefined}
+              data-traffic-detail={stat.icon === 'traffic' ? 'true' : undefined}
             >
               {stat.detail}
             </p>
@@ -101,6 +111,7 @@ const weatherApiKey = import.meta.env.PUBLIC_OPENWEATHER_API_KEY || '';
 <script is:inline>
   const CITY_SIGNAL_STRIP_SELECTOR = '[data-city-signal-strip]';
   const WEATHER_CACHE_TTL = 15 * 60 * 1000;
+  const TRAFFIC_CACHE_TTL = 10 * 60 * 1000;
 
   const toTitleCase = (value) =>
     value.replace(/\b\w/g, (match) => match.toUpperCase());
@@ -118,6 +129,59 @@ const weatherApiKey = import.meta.env.PUBLIC_OPENWEATHER_API_KEY || '';
     if (payload?.description) {
       detail.textContent = toTitleCase(payload.description);
     }
+  };
+
+  const applyTraffic = (strip, payload) => {
+    const label = strip.querySelector('[data-traffic-label]');
+    const detail = strip.querySelector('[data-traffic-detail]');
+
+    if (!label || !detail) return;
+
+    if (payload?.label) {
+      label.textContent = payload.label;
+    }
+
+    if (payload?.detail) {
+      detail.textContent = payload.detail;
+    }
+  };
+
+  const classifyTraffic = (segment, routeLabel) => {
+    const currentSpeed = Number(segment?.currentSpeed);
+    const freeFlowSpeed = Number(segment?.freeFlowSpeed);
+    const roadClosure = Boolean(segment?.roadClosure);
+
+    if (roadClosure) {
+      return {
+        label: 'Closed',
+        detail: `${routeLabel} closure flagged`,
+      };
+    }
+
+    if (!Number.isFinite(currentSpeed) || !Number.isFinite(freeFlowSpeed) || freeFlowSpeed <= 0) {
+      return {
+        label: 'Live',
+        detail: `${routeLabel} conditions loading`,
+      };
+    }
+
+    const flowRatio = currentSpeed / freeFlowSpeed;
+    let label = 'Moderate';
+
+    if (flowRatio >= 0.85) {
+      label = 'Light';
+    } else if (flowRatio >= 0.65) {
+      label = 'Moderate';
+    } else if (flowRatio >= 0.45) {
+      label = 'Heavy';
+    } else {
+      label = 'Severe';
+    }
+
+    return {
+      label,
+      detail: `${routeLabel} at ${Math.round(currentSpeed)} mph`,
+    };
   };
 
   const loadCityWeather = async (strip) => {
@@ -168,9 +232,61 @@ const weatherApiKey = import.meta.env.PUBLIC_OPENWEATHER_API_KEY || '';
     } catch {}
   };
 
+  const loadCityTraffic = async (strip) => {
+    if (strip.dataset.trafficLoaded === 'true') return;
+    strip.dataset.trafficLoaded = 'true';
+
+    const apiKey = strip.dataset.trafficApiKey;
+    const lat = strip.dataset.trafficLat;
+    const lon = strip.dataset.trafficLon;
+    const zoom = strip.dataset.trafficZoom || '12';
+    const routeLabel = strip.dataset.trafficRoute || 'Main corridor';
+    const cityKey = strip.dataset.weatherCity || 'city';
+
+    if (!apiKey || !lat || !lon) return;
+
+    const cacheKey = `ccj-traffic-${cityKey}`;
+
+    try {
+      const cachedValue = window.localStorage.getItem(cacheKey);
+
+      if (cachedValue) {
+        const cached = JSON.parse(cachedValue);
+
+        if (cached?.timestamp && Date.now() - cached.timestamp < TRAFFIC_CACHE_TTL) {
+          applyTraffic(strip, cached);
+          return;
+        }
+      }
+    } catch {}
+
+    try {
+      const response = await fetch(
+        `https://api.tomtom.com/traffic/services/4/flowSegmentData/absolute/${encodeURIComponent(zoom)}/json?key=${encodeURIComponent(apiKey)}&point=${encodeURIComponent(`${lat},${lon}`)}&unit=mph`
+      );
+
+      if (!response.ok) return;
+
+      const json = await response.json();
+      const segment = json?.flowSegmentData;
+      const trafficState = classifyTraffic(segment, routeLabel);
+      const payload = {
+        ...trafficState,
+        timestamp: Date.now(),
+      };
+
+      applyTraffic(strip, payload);
+
+      try {
+        window.localStorage.setItem(cacheKey, JSON.stringify(payload));
+      } catch {}
+    } catch {}
+  };
+
   const initCitySignalStrips = () => {
     document.querySelectorAll(CITY_SIGNAL_STRIP_SELECTOR).forEach((strip) => {
       loadCityWeather(strip);
+      loadCityTraffic(strip);
     });
   };
 
