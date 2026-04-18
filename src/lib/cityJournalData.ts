@@ -11,14 +11,18 @@ export const cityJournalConfigs = [
       'Anna is one of the fastest-rising communities in Collin County, with major growth, new infrastructure, and a family-focused identity that keeps drawing attention across North Texas. We cover the city hall decisions, school changes, development moves, public-safety issues, and community stories shaping Anna as it grows into its next chapter.',
     homeDescription:
       'Growth pressure, schools, public safety, and city hall in one of Collin County’s fastest-rising communities.',
-    panelClass: 'from-orange-50 via-white to-amber-100',
-    badgeClass: 'border-orange-200 bg-orange-100 text-orange-900',
-    iconClass: 'bg-orange-100 text-orange-800',
+    panelClass: 'from-violet-50 via-white to-purple-100',
+    badgeClass: 'border-violet-200 bg-violet-100 text-violet-900',
+    iconClass: 'bg-violet-100 text-violet-800',
+    weather: {
+      lat: 33.349,
+      lon: -96.5486,
+    },
     stats: [
       {
         key: 'weather',
         label: '74°',
-        detail: 'Sunny demo',
+        detail: 'Live conditions',
         icon: 'weather',
       },
       {
@@ -53,14 +57,18 @@ export const cityJournalConfigs = [
       'Celina is one of the biggest growth stories in North Texas, pairing explosive expansion with hometown pride and an ambitious civic buildout. We cover the government, schools, development, infrastructure, and public-safety decisions shaping one of the most talked-about cities in Collin County.',
     homeDescription:
       'Infrastructure strain, downtown change, land use, and civic buildout inside one of North Texas’s biggest growth stories.',
-    panelClass: 'from-sky-50 via-white to-blue-100',
-    badgeClass: 'border-blue-200 bg-blue-100 text-blue-900',
-    iconClass: 'bg-blue-100 text-blue-800',
+    panelClass: 'from-orange-50 via-white to-amber-100',
+    badgeClass: 'border-orange-200 bg-orange-100 text-orange-900',
+    iconClass: 'bg-orange-100 text-orange-800',
+    weather: {
+      lat: 33.3246,
+      lon: -96.785,
+    },
     stats: [
       {
         key: 'weather',
         label: '72°',
-        detail: 'Clear demo',
+        detail: 'Live conditions',
         icon: 'weather',
       },
       {
@@ -95,14 +103,18 @@ export const cityJournalConfigs = [
       'Melissa is building a reputation as one of the most desirable rising communities in Collin County, with strong schools, steady growth, and a quality of life families notice fast. We cover the local decisions, development plans, public-safety issues, and community changes shaping Melissa as it keeps moving forward.',
     homeDescription:
       'Melissa coverage is being built out around growth, schools, development, and public-safety changes.',
-    panelClass: 'from-emerald-50 via-white to-lime-100',
-    badgeClass: 'border-emerald-200 bg-emerald-100 text-emerald-900',
-    iconClass: 'bg-emerald-100 text-emerald-800',
+    panelClass: 'from-red-50 via-white to-rose-100',
+    badgeClass: 'border-red-200 bg-red-100 text-red-900',
+    iconClass: 'bg-red-100 text-red-800',
+    weather: {
+      lat: 33.2859,
+      lon: -96.5728,
+    },
     stats: [
       {
         key: 'weather',
         label: '73°',
-        detail: 'Breezy demo',
+        detail: 'Live conditions',
         icon: 'weather',
       },
       {
@@ -137,14 +149,18 @@ export const cityJournalConfigs = [
       'Independent Princeton reporting lives at The Princeton Journal, where city council, growth, development, schools, and public-safety coverage run deeper every week.',
     homeDescription:
       'Independent Princeton reporting from The Princeton Journal, including city council, growth, schools, and public safety.',
-    panelClass: 'from-stone-50 via-white to-rose-100',
-    badgeClass: 'border-rose-200 bg-rose-100 text-rose-900',
-    iconClass: 'bg-rose-100 text-rose-800',
+    panelClass: 'from-rose-100 via-white to-red-100',
+    badgeClass: 'border-rose-300 bg-rose-100 text-rose-950',
+    iconClass: 'bg-rose-100 text-rose-900',
+    weather: {
+      lat: 33.1807,
+      lon: -96.4989,
+    },
     stats: [
       {
         key: 'weather',
         label: '75°',
-        detail: 'Sunny demo',
+        detail: 'Live conditions',
         icon: 'weather',
       },
       {
@@ -179,14 +195,18 @@ export const cityJournalConfigs = [
       'Prosper has become one of the most recognizable growth success stories in North Texas, with rapid development, high expectations, and a reputation for excellence that continues to attract families and investment. We cover the roads, schools, development, government, and public-safety decisions shaping Prosper as it enters its next phase.',
     homeDescription:
       'Roads, schools, development, and public-safety decisions inside one of Collin County’s most closely watched growth stories.',
-    panelClass: 'from-cyan-50 via-white to-emerald-100',
-    badgeClass: 'border-cyan-200 bg-cyan-100 text-cyan-900',
-    iconClass: 'bg-cyan-100 text-cyan-800',
+    panelClass: 'from-emerald-50 via-white to-green-100',
+    badgeClass: 'border-emerald-200 bg-emerald-100 text-emerald-900',
+    iconClass: 'bg-emerald-100 text-emerald-800',
+    weather: {
+      lat: 33.2368,
+      lon: -96.8011,
+    },
     stats: [
       {
         key: 'weather',
         label: '71°',
-        detail: 'Clear demo',
+        detail: 'Live conditions',
         icon: 'weather',
       },
       {
