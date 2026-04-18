@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import SubscribeModal from '../components/SubscribeModal.astro';
+import { PUBLISHER, SITE_URL } from '../lib/seo';
 
 const {
   title = 'Collin County Journal',
@@ -12,7 +13,7 @@ const {
 } = Astro.props;
 
 const pathname = Astro.url.pathname;
-const siteOrigin = Astro.site?.toString() || 'https://collincountyjournal.com';
+const siteOrigin = Astro.site?.toString() || SITE_URL;
 const showSubscribeModal = ![
   '/subscribe',
   '/subscribe-thank-you',
@@ -37,9 +38,15 @@ const websiteSchema =
         '@context': 'https://schema.org',
         '@type': 'WebSite',
         name: 'Collin County Journal',
-        url: 'https://collincountyjournal.com/',
+        url: `${SITE_URL}/`,
+        publisher: PUBLISHER,
       }
     : null;
+
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  ...PUBLISHER,
+};
 ---
 
 <!DOCTYPE html>
@@ -89,16 +96,7 @@ const websiteSchema =
   <meta name="twitter:description" content={description} />
   <meta name="twitter:image" content={ogImage} />
 
-  <script type="application/ld+json" set:html={JSON.stringify({
-    '@context': 'https://schema.org',
-    '@type': 'Organization',
-    name: 'Collin County Journal',
-    url: 'https://collincountyjournal.com',
-    logo: 'https://collincountyjournal.com/ccj-logo.jpg',
-    sameAs: [
-      'https://www.facebook.com/profile.php?id=61581999665231'
-    ]
-  })} />
+  <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
 </head>
 
 <body class="bg-white text-black">

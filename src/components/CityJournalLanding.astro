@@ -3,6 +3,10 @@ import Layout from '../layouts/Layout.astro';
 import CitySignalStrip from './CitySignalStrip.astro';
 import ScrollableArticleRail from './ScrollableArticleRail.astro';
 import {
+  buildBreadcrumbSchema,
+  buildCollectionPageSchema,
+} from '../lib/seo';
+import {
   createPlaceholderRailItems,
   createPlaceholderStory,
   formatDisplayDate,
@@ -18,14 +22,36 @@ const featuredStory = topStory || createPlaceholderStory(city);
 const railItems =
   remainingStories.length > 0 ? remainingStories : createPlaceholderRailItems(city);
 const hasTopStory = Boolean(topStory);
+const pageUrl = `https://collincountyjournal.com/${city.slug}`;
+const schemaItems = [featuredStory, ...railItems]
+  .filter((story) => story?.href && !story.external)
+  .slice(0, 8)
+  .map((story) => ({
+    name: story.title,
+    url: story.href,
+  }));
+const pageSchemas = [
+  buildBreadcrumbSchema([
+    { name: 'Home', item: '/' },
+    { name: city.title, item: `/${city.slug}` },
+  ]),
+  buildCollectionPageSchema({
+    name: city.title,
+    description: city.pageDescription,
+    url: `/${city.slug}`,
+    items: schemaItems,
+  }),
+];
 ---
 
 <Layout
   title={`${city.title} | Collin County Journal`}
   description={city.pageDescription}
-  url={`https://collincountyjournal.com/${city.slug}`}
+  url={pageUrl}
   subscribeCity={city.key}
 >
+  <script type="application/ld+json" set:html={JSON.stringify(pageSchemas)} />
+
   <main class="mx-auto max-w-6xl px-6 py-16">
     <section class="grid items-start gap-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(320px,0.95fr)]">
       <div>
@@ -35,9 +61,17 @@ const hasTopStory = Boolean(topStory);
         <h1 class="journal-wordmark mt-3 text-4xl tracking-tight sm:text-5xl lg:text-6xl">
           {city.title}
         </h1>
-        <p class="mt-5 max-w-3xl text-lg leading-8 text-gray-700">
+        <p class="mt-5 hidden max-w-3xl text-lg leading-8 text-gray-700 sm:block">
           {city.pageDescription}
         </p>
+        <details class="mt-5 rounded-2xl border border-gray-200 bg-white/80 p-4 shadow-sm sm:hidden">
+          <summary class="cursor-pointer list-none text-sm font-semibold text-gray-900">
+            About this journal
+          </summary>
+          <p class="mt-3 text-[15px] leading-7 text-gray-700">
+            {city.pageDescription}
+          </p>
+        </details>
       </div>
 
       <CitySignalStrip city={city} />
@@ -73,10 +107,10 @@ const hasTopStory = Boolean(topStory);
             <img
               src={featuredStory.image}
               alt={featuredStory.title}
-              class="h-[260px] w-full object-cover sm:h-[320px] lg:h-full"
+              class="h-[200px] w-full object-cover sm:h-[320px] lg:h-full"
             />
           ) : (
-            <div class="flex h-[260px] items-end bg-gradient-to-br from-white via-gray-50 to-gray-100 p-6 sm:h-[320px] lg:h-full">
+            <div class="flex h-[200px] items-end bg-gradient-to-br from-white via-gray-50 to-gray-100 p-5 sm:h-[320px] sm:p-6 lg:h-full">
               <div>
                 <p class="text-xs font-semibold uppercase tracking-[0.22em] text-gray-500">
                   {city.title}
@@ -89,32 +123,32 @@ const hasTopStory = Boolean(topStory);
           )}
         </div>
 
-        <div class="flex flex-col justify-center p-6 sm:p-8 lg:p-10">
+        <div class="flex flex-col justify-center p-5 sm:p-8 lg:p-10">
           <div class="flex flex-wrap items-center gap-2">
             <span class={`inline-flex rounded-full border px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] ${city.badgeClass}`}>
               {hasTopStory ? 'Live story' : 'Journal update'}
             </span>
             {featuredStory.date && (
-              <span class="text-sm text-gray-600">
+              <span class="text-xs text-gray-600 sm:text-sm">
                 {formatDisplayDate(featuredStory.date)}
               </span>
             )}
             {featuredStory.readingTime && (
-              <span class="text-sm text-gray-600">
+              <span class="text-xs text-gray-600 sm:text-sm">
                 {featuredStory.readingTime} min read
               </span>
             )}
           </div>
 
-          <h3 class="mt-4 text-3xl font-bold tracking-tight text-black sm:text-4xl">
+          <h3 class="mt-3 text-[1.9rem] leading-[1.04] font-bold tracking-tight text-black sm:mt-4 sm:text-4xl">
             {featuredStory.title}
           </h3>
 
-          <p class="mt-4 max-w-2xl text-base leading-7 text-gray-700 sm:text-lg sm:leading-8">
+          <p class="mt-3 max-w-2xl text-[15px] leading-6 text-gray-700 sm:mt-4 sm:text-lg sm:leading-8">
             {featuredStory.description}
           </p>
 
-          <div class="mt-7 inline-flex items-center rounded-full border border-black bg-black px-5 py-3 text-sm font-semibold text-white">
+          <div class="mt-5 inline-flex items-center rounded-full border border-black bg-black px-4 py-2.5 text-sm font-semibold text-white sm:mt-7 sm:px-5 sm:py-3">
             {featuredStory.ctaLabel || 'Read full story'}
           </div>
         </div>

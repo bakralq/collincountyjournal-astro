@@ -1,7 +1,7 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://collincountyjournal.com/sitemap.xml
+Sitemap: https://collincountyjournal.com/sitemap-index.xml
 Sitemap: https://collincountyjournal.com/news-sitemap.xml
 
 User-agent: facebookexternalhit

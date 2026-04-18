@@ -1,5 +1,55 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import {
+  buildBreadcrumbSchema,
+  buildCollectionPageSchema,
+} from '../lib/seo';
+
+const peopleSchema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    '@id': 'https://collincountyjournal.com/staff#christian-j-remington',
+    name: 'Christian J. Remington',
+    jobTitle: 'Editor in Chief',
+    worksFor: {
+      '@type': 'Organization',
+      name: 'Collin County Journal',
+      url: 'https://collincountyjournal.com',
+    },
+    url: 'https://collincountyjournal.com/staff#christian-j-remington',
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    '@id': 'https://collincountyjournal.com/staff#zay-norvell',
+    name: 'Zay Norvell',
+    jobTitle: 'Research Contributor',
+    worksFor: {
+      '@type': 'Organization',
+      name: 'Collin County Journal',
+      url: 'https://collincountyjournal.com',
+    },
+    url: 'https://collincountyjournal.com/staff#zay-norvell',
+  },
+];
+
+const pageSchemas = [
+  buildBreadcrumbSchema([
+    { name: 'Home', item: '/' },
+    { name: 'Staff', item: '/staff' },
+  ]),
+  buildCollectionPageSchema({
+    name: 'Collin County Journal Staff',
+    description: 'Meet the staff of Collin County Journal.',
+    url: '/staff',
+    items: [
+      { name: 'Christian J. Remington', url: '/staff#christian-j-remington' },
+      { name: 'Zay Norvell', url: '/staff#zay-norvell' },
+    ],
+  }),
+  ...peopleSchema,
+];
 ---
 
 <Layout
@@ -7,6 +57,8 @@ import Layout from '../layouts/Layout.astro';
   description="Meet the staff of Collin County Journal."
   url="https://collincountyjournal.com/staff"
 >
+  <script type="application/ld+json" set:html={JSON.stringify(pageSchemas)} />
+
   <main class="mx-auto max-w-4xl px-6 py-16">
     <p class="text-sm font-medium uppercase tracking-wide text-gray-500">
       Collin County Journal
@@ -20,7 +72,7 @@ import Layout from '../layouts/Layout.astro';
       Collin County Journal is an independent local news publication focused on clear, serious reporting across Princeton, Celina, Prosper, Anna, and Melissa.
     </p>
 
-    <section class="mt-12 overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
+    <section id="christian-j-remington" class="mt-12 overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
       <details class="group">
         <summary class="flex cursor-pointer list-none items-center justify-between gap-6 p-8 sm:p-10">
           <div>
@@ -92,7 +144,7 @@ import Layout from '../layouts/Layout.astro';
       </details>
     </section>
 
-    <section class="mt-6 overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
+    <section id="zay-norvell" class="mt-6 overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
       <details class="group">
         <summary class="flex cursor-pointer list-none items-center justify-between gap-6 p-8 sm:p-10">
           <div>
@@ -101,7 +153,7 @@ import Layout from '../layouts/Layout.astro';
             </p>
 
             <h2 class="mt-3 text-3xl font-bold tracking-tight">
-              Xzaveon Norvell
+              Zay Norvell
             </h2>
 
             <p class="mt-3 max-w-2xl text-base leading-7 text-gray-600">
@@ -117,11 +169,11 @@ import Layout from '../layouts/Layout.astro';
         <div class="border-t border-gray-200 px-8 pb-8 pt-8 sm:px-10 sm:pb-10">
           <div class="space-y-6 text-lg leading-8 text-gray-800">
             <p>
-              Xzaveon Norvell serves as a research contributor for Collin County Journal. He is a Christian, a North Texas native, and an undergraduate political science student at Texas A&amp;M with a long-term goal of building a career in public service and politics.
+              Zay Norvell serves as a research contributor for Collin County Journal. He is a Christian, a North Texas native, and an undergraduate political science student at Texas A&amp;M with a long-term goal of building a career in public service and politics.
             </p>
 
             <p>
-              Raised by a single mother in a large family, Xzaveon says those experiences shaped the way he thinks about responsibility, service, and the need to look out for people. That background continues to inform his interest in civic life, policy, and community-focused work.
+              Raised by a single mother in a large family, Zay says those experiences shaped the way he thinks about responsibility, service, and the need to look out for people. That background continues to inform his interest in civic life, policy, and community-focused work.
             </p>
 
             <p>

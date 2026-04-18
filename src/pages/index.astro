@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import ArticleCard from '../components/ArticleCard.astro';
 import Layout from '../layouts/Layout.astro';
 import TopStoryCarousel from '../components/TopStoryCarousel.astro';
+import { buildCollectionPageSchema } from '../lib/seo';
 import {
   cityJournalConfigs,
   createPlaceholderStory,
@@ -60,6 +61,23 @@ const countywideStories = allPosts
     image: post.data.image || null,
     readingTime: toLocalStoryCard(post).readingTime,
   }));
+
+const homeSchema = buildCollectionPageSchema({
+  name: 'Collin County Journal',
+  description:
+    'Independent reporting across Anna, Celina, Melissa, Princeton, and Prosper, plus countywide and U.S. coverage.',
+  url: '/',
+  items: [
+    ...cityJournalConfigs.map((city) => ({
+      name: city.title,
+      url: city.external ? 'https://theprincetonjournal.com' : city.href,
+    })),
+    ...countywideStories.map((story) => ({
+      name: story.title,
+      url: story.href,
+    })),
+  ],
+});
 ---
 
 <Layout
@@ -67,6 +85,8 @@ const countywideStories = allPosts
   description="Collin County Journal is an independent news publication covering local government, public safety, development, schools, elections, and community news across Collin County, Texas."
   url="https://collincountyjournal.com"
 >
+  <script type="application/ld+json" set:html={JSON.stringify(homeSchema)} />
+
   <main class="mx-auto max-w-6xl px-6 py-10">
     <section class="max-w-3xl">
       <p class="text-xs font-semibold uppercase tracking-[0.22em] text-gray-500">

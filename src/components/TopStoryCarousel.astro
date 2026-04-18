@@ -17,42 +17,42 @@ const { slides = [] } = Astro.props;
           data-ccj-carousel-slide
           aria-hidden={index === 0 ? 'false' : 'true'}
         >
-          <div class="grid items-center gap-6 p-5 sm:p-7 lg:grid-cols-[minmax(0,1.02fr)_minmax(320px,0.98fr)] lg:p-10">
+          <div class="grid items-center gap-4 p-4 sm:gap-6 sm:p-7 lg:grid-cols-[minmax(0,1.02fr)_minmax(320px,0.98fr)] lg:p-10">
             <div class="order-2 lg:order-1">
               <div class="flex flex-wrap items-center gap-2">
                 <span class={`inline-flex rounded-full border px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] ${slide.city.badgeClass}`}>
                   {slide.city.title}
                 </span>
                 {slide.date && (
-                  <span class="text-sm text-gray-600">
+                  <span class="text-xs text-gray-600 sm:text-sm">
                     {formatDisplayDate(slide.date)}
                   </span>
                 )}
                 {slide.readingTime && (
-                  <span class="text-sm text-gray-600">
+                  <span class="text-xs text-gray-600 sm:text-sm">
                     {slide.readingTime} min read
                   </span>
                 )}
               </div>
 
-              <p class="mt-5 text-xs font-semibold uppercase tracking-[0.22em] text-gray-500">
+              <p class="mt-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-gray-500 sm:mt-5 sm:text-xs sm:tracking-[0.22em]">
                 Top Story
               </p>
 
-              <h2 class="mt-3 text-3xl font-bold tracking-tight text-black sm:text-4xl lg:text-[3.15rem] lg:leading-[1.03]">
+              <h2 class="mt-2 text-[1.9rem] font-bold tracking-tight text-black leading-[1.02] sm:mt-3 sm:text-4xl lg:text-[3.15rem] lg:leading-[1.03]">
                 {slide.title}
               </h2>
 
-              <p class="mt-4 max-w-2xl text-base leading-7 text-gray-700 sm:text-lg sm:leading-8">
+              <p class="mt-3 max-w-2xl text-[15px] leading-6 text-gray-700 sm:mt-4 sm:text-lg sm:leading-8">
                 {slide.description}
               </p>
 
-              <div class="mt-7 flex flex-wrap gap-3">
+              <div class="mt-5 flex flex-wrap gap-2.5 sm:mt-7 sm:gap-3">
                 <a
                   href={slide.href}
                   target={slide.external ? '_blank' : undefined}
                   rel={slide.external ? 'noopener noreferrer' : undefined}
-                  class="inline-flex items-center rounded-full border border-black bg-black px-5 py-3 text-sm font-semibold text-white transition hover:bg-white hover:text-black"
+                  class="inline-flex items-center rounded-full border border-black bg-black px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-white hover:text-black sm:px-5 sm:py-3"
                 >
                   {slide.ctaLabel || 'Read full story'}
                 </a>
@@ -61,7 +61,7 @@ const { slides = [] } = Astro.props;
                   href={slide.city.href}
                   target={slide.city.external ? '_blank' : undefined}
                   rel={slide.city.external ? 'noopener noreferrer' : undefined}
-                  class="inline-flex items-center rounded-full border border-gray-300 bg-white px-5 py-3 text-sm font-semibold text-gray-700 transition hover:border-black hover:text-black"
+                  class="inline-flex items-center rounded-full border border-gray-300 bg-white px-4 py-2.5 text-sm font-semibold text-gray-700 transition hover:border-black hover:text-black sm:px-5 sm:py-3"
                 >
                   Open {slide.city.shortName} Journal
                 </a>
@@ -79,10 +79,10 @@ const { slides = [] } = Astro.props;
                   <img
                     src={slide.image}
                     alt={slide.title}
-                    class="h-[260px] w-full object-cover sm:h-[320px] lg:h-[380px]"
+                    class="h-[200px] w-full object-cover sm:h-[320px] lg:h-[380px]"
                   />
                 ) : (
-                  <div class="flex h-[260px] items-end bg-gradient-to-br from-white via-gray-50 to-gray-100 p-6 sm:h-[320px] lg:h-[380px]">
+                  <div class="flex h-[200px] items-end bg-gradient-to-br from-white via-gray-50 to-gray-100 p-5 sm:h-[320px] sm:p-6 lg:h-[380px]">
                     <div>
                       <p class="text-xs font-semibold uppercase tracking-[0.22em] text-gray-500">
                         {slide.city.title}

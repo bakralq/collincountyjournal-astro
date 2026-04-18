@@ -1,9 +1,27 @@
 ---
 import Layout from './Layout.astro';
 import ArticleInlineSubscribe from '../components/ArticleInlineSubscribe.astro';
+import ArticleCard from '../components/ArticleCard.astro';
 import { getCityConfigBySection } from '../lib/cityJournalData';
 
-const { title, section, author, date, description, url, image, imageCaption, imageSourceUrl, nextPost, readingTime, preview } = Astro.props;
+const {
+  title,
+  section,
+  sectionHref = null,
+  author,
+  authorHref = '/staff',
+  date,
+  updated = '',
+  description,
+  url,
+  image,
+  imageCaption,
+  imageSourceUrl,
+  nextPost,
+  relatedPosts = [],
+  readingTime,
+  preview,
+} = Astro.props;
 const subscribeCity = getCityConfigBySection(section);
 ---
 
@@ -16,8 +34,32 @@ const subscribeCity = getCityConfigBySection(section);
   subscribeCity={subscribeCity?.key}
 >
   <main class="mx-auto max-w-3xl px-6 py-16">
-    <p class="text-sm font-medium uppercase tracking-wide text-gray-500">
-      {section}
+    <nav aria-label="Breadcrumb" class="text-sm text-gray-500">
+      <ol class="flex flex-wrap items-center gap-2">
+        <li>
+          <a href="/" class="transition hover:text-black">Home</a>
+        </li>
+        <li aria-hidden="true">/</li>
+        <li>
+          {sectionHref ? (
+            <a href={sectionHref} class="transition hover:text-black">
+              {section}
+            </a>
+          ) : (
+            <span>{section}</span>
+          )}
+        </li>
+      </ol>
+    </nav>
+
+    <p class="mt-6 text-sm font-medium uppercase tracking-wide text-gray-500">
+      {sectionHref ? (
+        <a href={sectionHref} class="transition hover:text-black">
+          {section}
+        </a>
+      ) : (
+        section
+      )}
     </p>
 
     <h1 class="mt-3 text-4xl font-bold tracking-tight">
@@ -26,7 +68,7 @@ const subscribeCity = getCityConfigBySection(section);
 
     {author && (
       <p class="mt-4 text-sm text-gray-600">
-        By <a href="/staff" class="no-underline hover:underline">{author}</a>
+        By <a href={authorHref} class="no-underline hover:underline">{author}</a>
       </p>
     )}
 
@@ -38,6 +80,16 @@ const subscribeCity = getCityConfigBySection(section);
           day: 'numeric',
         })}
         {readingTime && ` • ${readingTime} min read`}
+        {updated && updated !== date && (
+          <>
+            {' • Updated '}
+            {new Date(`${updated}T12:00:00`).toLocaleDateString('en-US', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+            })}
+          </>
+        )}
       </p>
     )}
 
@@ -242,6 +294,28 @@ const subscribeCity = getCityConfigBySection(section);
         }
       })();
     </script>
+
+    {relatedPosts.length > 0 && (
+      <section class="mt-14 border-t border-gray-200 pt-8">
+        <p class="text-sm font-medium uppercase tracking-wide text-gray-500">
+          More in {section}
+        </p>
+
+        <div class="mt-4 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {relatedPosts.map((story) => (
+            <ArticleCard
+              title={story.title}
+              description={story.description}
+              href={story.href}
+              date={story.date}
+              image={story.image}
+              readingTime={story.readingTime}
+              variant="stacked"
+            />
+          ))}
+        </div>
+      </section>
+    )}
 
     {nextPost && (
       <section class="mt-14 border-t border-gray-200 pt-8">

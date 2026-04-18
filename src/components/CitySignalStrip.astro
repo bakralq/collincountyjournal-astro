@@ -27,7 +27,7 @@ const trafficApiKey = import.meta.env.PUBLIC_TOMTOM_API_KEY || '';
         City Snapshot
       </p>
       <p class="mt-2 text-sm leading-6 text-gray-600">
-        Weather, population, traffic, and public safety at a glance.
+        Weather, population, traffic, and housing at a glance.
       </p>
     </div>
   </div>
@@ -75,10 +75,11 @@ const trafficApiKey = import.meta.env.PUBLIC_TOMTOM_API_KEY || '';
                 <circle cx="15.5" cy="16.5" r="1"></circle>
               </svg>
             )}
-            {stat.icon === 'safety' && (
+            {stat.icon === 'housing' && (
               <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M12 2.5 19 5v6.3c0 4.4-2.6 8.4-7 10.2-4.4-1.8-7-5.8-7-10.2V5Z"></path>
-                <path d="m9.2 12.2 1.9 1.9 3.9-4.3"></path>
+                <path d="M3.5 10.3 12 3.5l8.5 6.8"></path>
+                <path d="M5.5 9.6v10.9h13V9.6"></path>
+                <path d="M9.5 20.5v-5.4h5v5.4"></path>
               </svg>
             )}
           </div>

@@ -1,6 +1,10 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
+import {
+  buildBreadcrumbSchema,
+  buildCollectionPageSchema,
+} from '../lib/seo';
 
 const posts = await getCollection('posts', ({ data }) =>
   !data.draft && data.section === 'US News'
@@ -35,6 +39,23 @@ const formatDate = (date) =>
     month: 'long',
     day: 'numeric',
   });
+
+const pageSchemas = [
+  buildBreadcrumbSchema([
+    { name: 'Home', item: '/' },
+    { name: 'US News', item: '/us-news' },
+  ]),
+  buildCollectionPageSchema({
+    name: 'US News',
+    description:
+      'National policy, federal decisions, and stories that impact Collin County readers and the wider United States.',
+    url: '/us-news',
+    items: postsData.slice(0, 10).map((post) => ({
+      name: post.title,
+      url: post.href,
+    })),
+  }),
+];
 ---
 
 <Layout
@@ -42,6 +63,8 @@ const formatDate = (date) =>
   description="National policy, federal decisions, and stories that impact Collin County readers and the wider United States."
   url="https://collincountyjournal.com/us-news"
 >
+  <script type="application/ld+json" set:html={JSON.stringify(pageSchemas)} />
+
   <main class="mx-auto max-w-5xl px-6 py-16">
     <h1 class="text-4xl font-bold tracking-tight">US News</h1>
 

@@ -1,8 +1,13 @@
 ---
 import { getCollection, render } from 'astro:content';
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
-
-const SITE_URL = 'https://collincountyjournal.com';
+import {
+  PUBLISHER,
+  buildBreadcrumbSchema,
+  getAuthorProfile,
+  getSectionHref,
+  toAbsoluteUrl,
+} from '../../lib/seo';
 
 export async function getStaticPaths() {
   const posts = await getCollection('posts', ({ data }) => !data.draft);
@@ -16,23 +21,25 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 const { Content } = await render(post);
 
-// --- Reading Time Calculation ---
 const rawContent = post.body || '';
 const wordCount = rawContent.split(/\s+/).filter(Boolean).length;
 const readingTime = Math.max(1, Math.ceil(wordCount / 200));
 
 const slug = post.id.replace(/\.md$/, '');
-const articleUrl = `${SITE_URL}/posts/${slug}`;
+const articlePath = `/posts/${slug}`;
+const articleUrl = toAbsoluteUrl(articlePath);
+const sectionHref = getSectionHref(post.data.section);
+const authorProfile = getAuthorProfile(post.data.author);
 
 const allPosts = await getCollection('posts', ({ data }) => !data.draft);
 
 const sectionPosts = allPosts
   .filter((p) => p.data.section === post.data.section)
   .sort(
-  (a, b) =>
-    new Date(`${b.data.date}T12:00:00`).getTime() -
-    new Date(`${a.data.date}T12:00:00`).getTime()
-);
+    (a, b) =>
+      new Date(`${b.data.date}T12:00:00`).getTime() -
+      new Date(`${a.data.date}T12:00:00`).getTime()
+  );
 
 const currentIndex = sectionPosts.findIndex(
   (p) => p.id.replace(/\.md$/, '') === slug
@@ -46,9 +53,9 @@ if (currentIndex === 0) {
   nextPost = sectionPosts[0] ?? null;
 }
 
-const getReadingTime = (content) => {
-  const wc = (content || '').trim().split(/\s+/).filter(Boolean).length;
-  return Math.max(1, Math.ceil(wc / 200));
+const getReadingTime = (content = '') => {
+  const sectionWordCount = content.trim().split(/\s+/).filter(Boolean).length;
+  return Math.max(1, Math.ceil(sectionWordCount / 200));
 };
 
 const nextPostData = nextPost
@@ -57,50 +64,89 @@ const nextPostData = nextPost
       href: `/posts/${nextPost.id.replace(/\.md$/, '')}`,
       date: nextPost.data.date,
       image: nextPost.data.image || null,
-      readingTime: getReadingTime(nextPost.body || '')
+      readingTime: getReadingTime(nextPost.body || ''),
     }
   : null;
 
+const relatedPosts = sectionPosts
+  .filter((candidate) => candidate.id !== post.id && candidate.id !== nextPost?.id)
+  .slice(0, 3)
+  .map((candidate) => ({
+    title: candidate.data.title,
+    description: candidate.data.description,
+    href: `/posts/${candidate.id.replace(/\.md$/, '')}`,
+    date: candidate.data.date,
+    image: candidate.data.image || null,
+    readingTime: getReadingTime(candidate.body || ''),
+  }));
+
+const imageUrl = post.data.image ? toAbsoluteUrl(post.data.image) : null;
+const dateModified = post.data.updated || post.data.date;
+const keywords = Array.from(
+  new Set(
+    [post.data.section, 'Collin County Journal', ...(post.data.keywords || [])].filter(Boolean)
+  )
+);
+
 const articleSchema = {
-  "@context": "https://schema.org",
-  "@type": "NewsArticle",
-  "headline": post.data.title,
-  "description": post.data.description,
-  "datePublished": post.data.date,
-  "dateModified": post.data.date,
-  "author": {
-    "@type": "Person",
-    "name": post.data.author
+  '@context': 'https://schema.org',
+  '@type': 'NewsArticle',
+  headline: post.data.title,
+  description: post.data.description,
+  datePublished: post.data.date,
+  dateModified,
+  author: authorProfile,
+  publisher: PUBLISHER,
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': articleUrl,
   },
-  "publisher": {
-    "@type": "Organization",
-    "name": "Collin County Journal",
-    "url": SITE_URL
-  },
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": articleUrl
-  },
-  "url": articleUrl,
-  "articleSection": post.data.section
+  url: articleUrl,
+  articleSection: post.data.section,
+  inLanguage: 'en-US',
+  isAccessibleForFree: true,
+  wordCount,
+  ...(imageUrl
+    ? {
+        image: [
+          {
+            '@type': 'ImageObject',
+            url: imageUrl,
+          },
+        ],
+        thumbnailUrl: imageUrl,
+      }
+    : {}),
+  ...(keywords.length > 0 ? { keywords } : {}),
 };
+
+const breadcrumbSchema = buildBreadcrumbSchema([
+  { name: 'Home', item: '/' },
+  ...(sectionHref ? [{ name: post.data.section, item: sectionHref }] : []),
+  { name: post.data.title, item: articlePath },
+]);
+
+const pageSchemas = [breadcrumbSchema, articleSchema];
 ---
 
-<script type="application/ld+json" set:html={JSON.stringify(articleSchema)}>
-</script>
+<script type="application/ld+json" set:html={JSON.stringify(pageSchemas)} />
 
 <ArticleLayout
   title={post.data.title}
   section={post.data.section}
+  sectionHref={sectionHref}
   author={post.data.author}
+  authorHref={authorProfile.url}
   date={post.data.date}
+  updated={post.data.updated}
   description={post.data.description}
   url={articleUrl}
   image={post.data.image}
-imageCaption={post.data.imageCaption}
+  imageCaption={post.data.imageCaption}
   imageSourceUrl={post.data.imageSourceUrl}
   preview={post.data.preview}
   readingTime={readingTime}
+  relatedPosts={relatedPosts}
   nextPost={nextPostData}
 >
   <Content />
