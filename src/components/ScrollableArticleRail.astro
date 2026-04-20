@@ -1,7 +1,8 @@
 ---
 import { formatDisplayDate } from '../lib/cityJournalData';
 
-const { items = [] } = Astro.props;
+const { items = [], variant = 'default' } = Astro.props;
+const isPatriotic = variant === 'patriotic';
 ---
 
 <div class="-mx-6 overflow-x-auto px-6 pb-4">
@@ -11,40 +12,58 @@ const { items = [] } = Astro.props;
         href={item.href}
         target={item.external ? '_blank' : undefined}
         rel={item.external ? 'noopener noreferrer' : undefined}
-        class="group flex min-w-[286px] max-w-[320px] shrink-0 snap-start flex-col overflow-hidden rounded-[1.6rem] border border-gray-200 bg-white shadow-[0_12px_32px_rgba(17,24,39,0.05)] transition hover:-translate-y-0.5 hover:shadow-[0_20px_40px_rgba(17,24,39,0.08)]"
+        class:list={[
+          'group flex min-w-[286px] max-w-[320px] shrink-0 snap-start flex-col overflow-hidden rounded-[1.6rem] transition hover:-translate-y-0.5',
+          isPatriotic
+            ? 'relative border border-slate-200 bg-[linear-gradient(160deg,rgba(254,242,242,0.92)_0%,rgba(255,255,255,0.98)_34%,rgba(239,246,255,0.96)_100%)] shadow-[0_14px_36px_rgba(15,23,42,0.08)] hover:shadow-[0_24px_46px_rgba(15,23,42,0.12)]'
+            : 'border border-gray-200 bg-white shadow-[0_12px_32px_rgba(17,24,39,0.05)] hover:shadow-[0_20px_40px_rgba(17,24,39,0.08)]'
+        ]}
       >
+        {isPatriotic && (
+          <div class="pointer-events-none absolute inset-x-0 top-0 h-1.5 bg-[linear-gradient(90deg,#b91c1c_0%,#ffffff_48%,#1d4ed8_100%)]"></div>
+        )}
         {item.image ? (
           <img
             src={item.image}
             alt={item.title}
-            class="h-44 w-full object-cover"
+            class:list={[
+              'w-full object-cover',
+              isPatriotic ? 'h-40' : 'h-44'
+            ]}
           />
         ) : (
-          <div class="flex h-44 items-end bg-gradient-to-br from-gray-100 via-white to-gray-200 p-5">
+          <div
+            class:list={[
+              'flex items-end p-5',
+              isPatriotic
+                ? 'h-40 bg-[linear-gradient(145deg,rgba(185,28,28,0.16)_0%,rgba(255,255,255,0.98)_48%,rgba(29,78,216,0.18)_100%)]'
+                : 'h-44 bg-gradient-to-br from-gray-100 via-white to-gray-200'
+            ]}
+          >
             <p class="max-w-[12rem] text-lg font-semibold leading-6 tracking-tight text-black">
               {item.title}
             </p>
           </div>
         )}
 
-        <div class="flex flex-1 flex-col p-5">
+        <div class:list={['flex flex-1 flex-col p-5', isPatriotic && 'relative']}>
           {(item.date || item.readingTime || item.external) && (
-            <p class="text-sm text-gray-500">
-              {item.date ? formatDisplayDate(item.date) : item.external ? 'External journal' : ''}
+            <p class:list={['text-sm', isPatriotic ? 'text-slate-600' : 'text-gray-500']}>
+              {item.date ? formatDisplayDate(item.date, item.publishedAt) : item.external ? 'External journal' : ''}
               {item.date && item.readingTime ? ' • ' : item.date && item.external ? ' • ' : ''}
               {item.readingTime ? `${item.readingTime} min read` : item.external && !item.date ? 'Open story' : ''}
             </p>
           )}
 
-          <h3 class="mt-2 text-xl font-semibold tracking-tight text-black">
+          <h3 class:list={['mt-2 text-xl font-semibold tracking-tight text-black', isPatriotic && 'leading-7']}>
             {item.title}
           </h3>
 
-          <p class="mt-3 text-sm leading-6 text-gray-600">
+          <p class:list={['mt-3 text-sm leading-6', isPatriotic ? 'text-slate-700' : 'text-gray-600']}>
             {item.description}
           </p>
 
-          <div class="mt-5 text-sm font-semibold text-black">
+          <div class:list={['mt-5 text-sm font-semibold', isPatriotic ? 'text-slate-900' : 'text-black']}>
             {item.ctaLabel || 'Open story →'}
           </div>
         </div>

@@ -19,16 +19,10 @@ export const AUTHOR_PROFILES = {
     name: 'Christian J. Remington',
     url: `${SITE_URL}/staff#christian-j-remington`,
   },
-  'Zay Norvell': {
-    '@type': 'Person',
-    name: 'Zay Norvell',
-    url: `${SITE_URL}/staff#zay-norvell`,
-  },
 };
 
 const AUTHOR_ALIASES = {
   'Christian J. Remington, Editor in Chief': 'Christian J. Remington',
-  'Zay Norvell, Research Contributor': 'Zay Norvell',
 };
 
 export const toAbsoluteUrl = (value = '') => {

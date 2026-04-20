@@ -19,19 +19,6 @@ const peopleSchema = [
     },
     url: 'https://collincountyjournal.com/staff#christian-j-remington',
   },
-  {
-    '@context': 'https://schema.org',
-    '@type': 'Person',
-    '@id': 'https://collincountyjournal.com/staff#zay-norvell',
-    name: 'Zay Norvell',
-    jobTitle: 'Research Contributor',
-    worksFor: {
-      '@type': 'Organization',
-      name: 'Collin County Journal',
-      url: 'https://collincountyjournal.com',
-    },
-    url: 'https://collincountyjournal.com/staff#zay-norvell',
-  },
 ];
 
 const pageSchemas = [
@@ -45,7 +32,6 @@ const pageSchemas = [
     url: '/staff',
     items: [
       { name: 'Christian J. Remington', url: '/staff#christian-j-remington' },
-      { name: 'Zay Norvell', url: '/staff#zay-norvell' },
     ],
   }),
   ...peopleSchema,
@@ -144,48 +130,5 @@ const pageSchemas = [
       </details>
     </section>
 
-    <section id="zay-norvell" class="mt-6 overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
-      <details class="group">
-        <summary class="flex cursor-pointer list-none items-center justify-between gap-6 p-8 sm:p-10">
-          <div>
-            <p class="text-sm font-medium uppercase tracking-wide text-gray-500">
-              Research Contributor
-            </p>
-
-            <h2 class="mt-3 text-3xl font-bold tracking-tight">
-              Zay Norvell
-            </h2>
-
-            <p class="mt-3 max-w-2xl text-base leading-7 text-gray-600">
-              Political science student focused on public service, civic research, and community-minded work across Collin County.
-            </p>
-          </div>
-
-          <span class="shrink-0 text-2xl text-gray-500 transition group-open:rotate-180">
-            ▾
-          </span>
-        </summary>
-
-        <div class="border-t border-gray-200 px-8 pb-8 pt-8 sm:px-10 sm:pb-10">
-          <div class="space-y-6 text-lg leading-8 text-gray-800">
-            <p>
-              Zay Norvell serves as a research contributor for Collin County Journal. He is a Christian, a North Texas native, and an undergraduate political science student at Texas A&amp;M with a long-term goal of building a career in public service and politics.
-            </p>
-
-            <p>
-              Raised by a single mother in a large family, Zay says those experiences shaped the way he thinks about responsibility, service, and the need to look out for people. That background continues to inform his interest in civic life, policy, and community-focused work.
-            </p>
-
-            <p>
-              His interest in public life started early and has stayed consistent as he has grown. He has volunteered in Republican organizing in Collin County and hopes to continue building a future in politics with a focus on helping people and strengthening the communities around him.
-            </p>
-
-            <p>
-              At Collin County Journal, he contributes research support and policy-minded background work as the publication expands its countywide reporting. His role helps strengthen the publication’s ability to track public issues, understand civic context, and serve readers with more depth and clarity.
-            </p>
-          </div>
-        </div>
-      </details>
-    </section>
   </main>
 </Layout>

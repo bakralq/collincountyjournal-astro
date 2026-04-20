@@ -17,7 +17,7 @@ export async function GET() {
   twoDaysAgo.setDate(now.getDate() - 2);
 
   const recentPosts = posts.filter((post) => {
-    const postDate = new Date(`${post.data.date}T12:00:00`);
+    const postDate = new Date(post.data.publishedAt || `${post.data.date}T12:00:00`);
     return postDate >= twoDaysAgo;
   });
 
@@ -28,7 +28,7 @@ export async function GET() {
       .map((post) => {
         const slug = post.id.replace(/\.md$/, '');
         const url = `https://collincountyjournal.com/posts/${slug}/`;
-        const pubDate = new Date(`${post.data.date}T12:00:00`).toISOString();
+        const pubDate = new Date(post.data.publishedAt || `${post.data.date}T12:00:00`).toISOString();
 
         return `
         <url>

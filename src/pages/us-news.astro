@@ -1,29 +1,43 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
+import ScrollableArticleRail from '../components/ScrollableArticleRail.astro';
 import {
   buildBreadcrumbSchema,
   buildCollectionPageSchema,
 } from '../lib/seo';
+import {
+  getReadingTime,
+  formatDisplayDate,
+  getPostTimestamp,
+  isPostPublished,
+} from '../lib/cityJournalData';
 
 const posts = await getCollection('posts', ({ data }) =>
-  !data.draft && data.section === 'US News'
+  !data.draft &&
+  data.section === 'US News' &&
+  isPostPublished(data.date, data.publishedAt)
 );
 
 const sortedPosts = posts.sort(
   (a, b) =>
-    new Date(`${b.data.date}T12:00:00`).getTime() -
-    new Date(`${a.data.date}T12:00:00`).getTime()
+    getPostTimestamp(b.data.date, b.data.publishedAt) -
+    getPostTimestamp(a.data.date, a.data.publishedAt)
 );
 
 const postsData = sortedPosts.map((post) => ({
   title: post.data.title,
   description: post.data.description,
   date: post.data.date,
+  publishedAt: post.data.publishedAt || '',
   image: post.data.image || null,
   href: `/posts/${post.id.replace(/\.md$/, '')}`,
-  content: post.body || ''
+  content: post.body || '',
+  readingTime: getReadingTime(post.body || ''),
+  ctaLabel: 'Read full story',
 }));
+
+const [topStory, ...remainingStories] = postsData;
 
 const uniqueDates = [
   ...new Set(sortedPosts.map((post) => post.data.date))
@@ -65,51 +79,168 @@ const pageSchemas = [
 >
   <script type="application/ld+json" set:html={JSON.stringify(pageSchemas)} />
 
-  <main class="mx-auto max-w-5xl px-6 py-16">
-    <h1 class="text-4xl font-bold tracking-tight">US News</h1>
+  <main class="mx-auto max-w-6xl px-6 py-16">
+    <section class="max-w-3xl">
+      <p class="text-xs font-semibold uppercase tracking-[0.22em] text-gray-500">
+        Collin County Journal
+      </p>
+      <h1 class="journal-wordmark mt-3 text-4xl tracking-tight text-black sm:text-5xl lg:text-6xl">
+        US News
+      </h1>
 
-    <p class="mt-4 text-lg text-gray-700">
-      National policy, federal decisions, and stories that impact Collin County readers and the wider United States.
-    </p>
+      <p class="mt-5 max-w-3xl text-lg leading-8 text-gray-700">
+        National policy, federal decisions, and big national stories that still land locally in Collin County. This is where the wider American picture meets the daily lives of readers here.
+      </p>
+    </section>
 
-    <div class="mt-8 grid gap-4 md:grid-cols-2">
-      <div>
-        <label class="mb-2 block text-sm font-medium text-gray-700">
-          Search articles
-        </label>
-        <input
-          id="searchInput"
-          type="text"
-          placeholder="Search by title or description"
-          class="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm outline-none focus:border-black"
-        />
-      </div>
+    {topStory && (
+      <section class="mt-10">
+        <div class="mb-5 flex flex-wrap items-end justify-between gap-3">
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-[0.22em] text-gray-500">
+              Top Story
+            </p>
+            <h2 class="mt-2 text-3xl font-bold tracking-tight text-black">
+              Start here first
+            </h2>
+          </div>
 
-      <div>
-        <label class="mb-2 block text-sm font-medium text-gray-700">
-          Filter by date
-        </label>
-        <select
-          id="dateFilter"
-          class="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm outline-none focus:border-black"
+          <a
+            href="/subscribe"
+            class="inline-flex items-center rounded-full border border-gray-300 px-4 py-2 text-sm font-semibold text-gray-700 transition hover:border-black hover:text-black"
+          >
+            Subscribe to CCJ
+          </a>
+        </div>
+
+        <a
+          href={topStory.href}
+          class="grid overflow-hidden rounded-[2rem] border border-slate-200 bg-[linear-gradient(115deg,rgba(185,28,28,0.13)_0%,rgba(239,68,68,0.11)_16%,rgba(255,255,255,0.98)_34%,rgba(255,255,255,0.98)_56%,rgba(37,99,235,0.13)_76%,rgba(29,78,216,0.18)_100%)] shadow-[0_24px_70px_rgba(17,24,39,0.08)] transition hover:-translate-y-0.5 hover:shadow-[0_30px_80px_rgba(17,24,39,0.12)] lg:grid-cols-[minmax(320px,0.9fr)_minmax(0,1.1fr)]"
         >
-          <option value="">All dates</option>
-          {uniqueDates.map((date) => (
-            <option value={date}>{formatDate(date)}</option>
-          ))}
-        </select>
+          <div class="relative">
+            {topStory.image ? (
+              <img
+                src={topStory.image}
+                alt={topStory.title}
+                class="h-[200px] w-full object-cover sm:h-[320px] lg:h-full"
+              />
+            ) : (
+              <div class="flex h-[200px] items-end bg-[linear-gradient(135deg,rgba(185,28,28,0.2)_0%,rgba(255,255,255,0.96)_42%,rgba(29,78,216,0.22)_100%)] p-5 sm:h-[320px] sm:p-6 lg:h-full">
+                <div>
+                  <p class="text-xs font-semibold uppercase tracking-[0.22em] text-gray-500">
+                    US News
+                  </p>
+                  <p class="mt-3 max-w-sm text-2xl font-semibold tracking-tight text-black">
+                    {topStory.title}
+                  </p>
+                </div>
+              </div>
+            )}
+            <div class="pointer-events-none absolute inset-x-0 top-0 h-2 bg-[linear-gradient(90deg,#b91c1c_0%,#ffffff_48%,#1d4ed8_100%)]"></div>
+            <div class="pointer-events-none absolute inset-y-0 left-0 hidden w-10 bg-[linear-gradient(180deg,rgba(185,28,28,0.2),rgba(255,255,255,0))] lg:block"></div>
+          </div>
+
+          <div class="flex flex-col justify-center p-5 sm:p-8 lg:p-10">
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="inline-flex rounded-full border border-red-300 bg-[linear-gradient(90deg,rgba(254,226,226,0.96),rgba(255,255,255,0.95),rgba(219,234,254,0.95))] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-900 shadow-sm">
+                National lens
+              </span>
+              {topStory.date && (
+                <span class="text-xs text-gray-600 sm:text-sm">
+                  {formatDisplayDate(topStory.date, topStory.publishedAt)}
+                </span>
+              )}
+              {topStory.readingTime && (
+                <span class="text-xs text-gray-600 sm:text-sm">
+                  {topStory.readingTime} min read
+                </span>
+              )}
+            </div>
+
+            <h3 class="mt-3 text-[1.9rem] leading-[1.04] font-bold tracking-tight text-black sm:mt-4 sm:text-4xl">
+              {topStory.title}
+            </h3>
+
+            <p class="mt-3 max-w-2xl text-[15px] leading-6 text-gray-700 sm:mt-4 sm:text-lg sm:leading-8">
+              {topStory.description}
+            </p>
+
+            <div class="mt-5 inline-flex items-center rounded-full border border-black bg-black px-4 py-2.5 text-sm font-semibold text-white sm:mt-7 sm:px-5 sm:py-3">
+              Read full story
+            </div>
+          </div>
+        </a>
+      </section>
+    )}
+
+    {remainingStories.length > 0 && (
+      <section class="mt-12">
+        <div class="mb-5 flex flex-wrap items-end justify-between gap-3">
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-[0.22em] text-gray-500">
+              More From US News
+            </p>
+            <h2 class="mt-2 text-3xl font-bold tracking-tight text-black">
+              Wider coverage
+            </h2>
+          </div>
+        </div>
+
+        <ScrollableArticleRail items={remainingStories} variant="patriotic" />
+      </section>
+    )}
+
+    <section class="mt-14 border-t border-gray-200 pt-12">
+      <div class="flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-[0.22em] text-gray-500">
+            Full Archive
+          </p>
+          <h2 class="mt-2 text-3xl font-bold tracking-tight text-black">
+            Browse every US News story
+          </h2>
+        </div>
       </div>
-    </div>
 
-    <p id="resultsCount" class="mt-6 text-sm text-gray-500"></p>
+      <div class="mt-8 grid gap-4 md:grid-cols-2">
+        <div>
+          <label class="mb-2 block text-sm font-medium text-gray-700">
+            Search articles
+          </label>
+          <input
+            id="searchInput"
+            type="text"
+            placeholder="Search by title or description"
+            class="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm outline-none focus:border-black"
+          />
+        </div>
 
-    <div id="articlesList" class="mt-6 grid gap-6"></div>
+        <div>
+          <label class="mb-2 block text-sm font-medium text-gray-700">
+            Filter by date
+          </label>
+          <select
+            id="dateFilter"
+            class="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm outline-none focus:border-black"
+          >
+            <option value="">All dates</option>
+            {uniqueDates.map((date) => (
+              <option value={date}>{formatDate(date)}</option>
+            ))}
+          </select>
+        </div>
+      </div>
 
-    <div id="pagination" class="mt-10 flex justify-center gap-2 text-sm"></div>
+      <p id="resultsCount" class="mt-6 text-sm text-gray-500"></p>
 
-    <p id="noResultsMessage" class="mt-8 hidden text-gray-500">
-      No articles found.
-    </p>
+      <div id="articlesList" class="mt-6 grid gap-6"></div>
+
+      <div id="pagination" class="mt-10 flex justify-center gap-2 text-sm"></div>
+
+      <p id="noResultsMessage" class="mt-8 hidden text-gray-500">
+        No articles found.
+      </p>
+    </section>
   </main>
 </Layout>
 
@@ -137,11 +268,13 @@ const pageSchemas = [
   const resultsCount = document.getElementById('resultsCount');
   const noResultsMessage = document.getElementById('noResultsMessage');
 
-  function formatPrettyDate(date) {
-    return new Date(`${date}T12:00:00`).toLocaleDateString('en-US', {
+  function formatPrettyDate(date, publishedAt) {
+    return new Date(publishedAt || `${date}T12:00:00`).toLocaleString('en-US', {
+      timeZone: 'America/Chicago',
       year: 'numeric',
       month: 'long',
       day: 'numeric',
+      ...(publishedAt ? { hour: 'numeric', minute: '2-digit' } : {}),
     });
   }
 
@@ -168,7 +301,7 @@ const pageSchemas = [
             ` : ''}
 
             <div class="p-6 ${post.image ? 'sm:w-3/4' : 'w-full'}">
-              <p class="text-sm text-gray-500">${formatPrettyDate(post.date)} • ${getReadingTime(post.content)} min read</p>
+              <p class="text-sm text-gray-500">${formatPrettyDate(post.date, post.publishedAt)} • ${getReadingTime(post.content)} min read</p>
               <h2 class="mt-1 text-xl font-semibold">${post.title}</h2>
               <p class="mt-2 text-gray-600 text-sm">${truncateDescription(post.description, 140)}</p>
             </div>

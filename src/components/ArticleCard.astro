@@ -4,16 +4,22 @@ const {
   description,
   href,
   date,
+  publishedAt,
   image,
   readingTime,
   variant = 'stacked'
 } = Astro.props;
 
+const isHorizontal = variant === 'horizontal';
+const isPatriotic = variant === 'patriotic';
+
 const formattedDate = date
-  ? new Date(`${date}T12:00:00`).toLocaleDateString('en-US', {
+  ? new Date(publishedAt || `${date}T12:00:00`).toLocaleString('en-US', {
+      timeZone: 'America/Chicago',
       year: 'numeric',
       month: 'long',
       day: 'numeric',
+      ...(publishedAt ? { hour: 'numeric', minute: '2-digit' } : {}),
     })
   : null;
 
@@ -25,7 +31,7 @@ const truncateDescription = (text, limit = 140) => {
 const shortDescription = truncateDescription(description, 140);
 ---
 
-{variant === 'horizontal' ? (
+{isHorizontal ? (
   <a
     href={href}
     class="block overflow-hidden rounded-xl border border-gray-200 hover:shadow-lg transition"
@@ -61,28 +67,46 @@ const shortDescription = truncateDescription(description, 140);
 ) : (
   <a
     href={href}
-    class="block overflow-hidden rounded-xl border border-gray-200 hover:shadow-lg transition"
+    class:list={[
+      'block overflow-hidden rounded-xl transition',
+      isPatriotic
+        ? 'relative border border-slate-200 bg-[linear-gradient(160deg,rgba(254,242,242,0.92)_0%,rgba(255,255,255,0.98)_34%,rgba(239,246,255,0.96)_100%)] shadow-[0_14px_36px_rgba(15,23,42,0.08)] hover:shadow-[0_24px_46px_rgba(15,23,42,0.12)]'
+        : 'border border-gray-200 hover:shadow-lg'
+    ]}
   >
-    {image && (
+    {isPatriotic && (
+      <div class="pointer-events-none absolute inset-x-0 top-0 h-1.5 bg-[linear-gradient(90deg,#b91c1c_0%,#ffffff_48%,#1d4ed8_100%)]"></div>
+    )}
+
+    {image ? (
       <img
         src={image}
         alt={title}
-        class="h-48 w-full object-cover"
+        class:list={[
+          'w-full object-cover',
+          isPatriotic ? 'h-44' : 'h-48'
+        ]}
       />
+    ) : (
+      isPatriotic && (
+        <div class="h-44 bg-[linear-gradient(145deg,rgba(185,28,28,0.16)_0%,rgba(255,255,255,0.98)_48%,rgba(29,78,216,0.18)_100%)]" />
+      )
     )}
 
     <div class="p-6">
       {(formattedDate || readingTime) && (
-        <p class="text-sm text-gray-500">
+        <p class:list={['text-sm', isPatriotic ? 'text-slate-600' : 'text-gray-500']}>
           {formattedDate}
           {formattedDate && readingTime ? ' • ' : ''}
           {readingTime ? `${readingTime} min read` : ''}
         </p>
       )}
 
-      <h2 class="mt-1 text-xl font-semibold">{title}</h2>
+      <h2 class:list={['mt-1 text-xl font-semibold', isPatriotic ? 'leading-7 text-slate-950' : 'text-black']}>
+        {title}
+      </h2>
 
-      <p class="mt-2 text-sm text-gray-600">
+      <p class:list={['mt-2 text-sm', isPatriotic ? 'text-slate-700' : 'text-gray-600']}>
         {shortDescription}
       </p>
     </div>

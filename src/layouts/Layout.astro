@@ -15,6 +15,7 @@ const {
 const pathname = Astro.url.pathname;
 const siteOrigin = Astro.site?.toString() || SITE_URL;
 const showSubscribeModal = ![
+  '/support',
   '/subscribe',
   '/subscribe-thank-you',
   '/thank-you',
@@ -164,17 +165,17 @@ const organizationSchema = {
     </div>
   </header>
 
-  <a href="/subscribe" class="support-ticker" aria-label="Subscribe to Collin County Journal">
+  <a href="/support" class="support-ticker" aria-label="Support Collin County Journal">
     <div class="support-ticker-track">
-      <span>Subscribe to CCJ</span>
-      <span>Countywide reporting across Anna, Celina, Melissa, Princeton, and Prosper</span>
-      <span>Support independent reporting across Collin County</span>
-      <span>Subscribe to CCJ</span>
-      <span>Countywide reporting across Anna, Celina, Melissa, Princeton, and Prosper</span>
-      <span>Support independent reporting across Collin County</span>
-      <span>Subscribe to CCJ</span>
-      <span>Countywide reporting across Anna, Celina, Melissa, Princeton, and Prosper</span>
-      <span>Support independent reporting across Collin County</span>
+      <span>Support CCJ</span>
+      <span>Keep independent reporting going across Anna, Celina, Melissa, Princeton, and Prosper</span>
+      <span>Back the reporting system behind Collin County Journal</span>
+      <span>Support CCJ</span>
+      <span>Keep independent reporting going across Anna, Celina, Melissa, Princeton, and Prosper</span>
+      <span>Back the reporting system behind Collin County Journal</span>
+      <span>Support CCJ</span>
+      <span>Keep independent reporting going across Anna, Celina, Melissa, Princeton, and Prosper</span>
+      <span>Back the reporting system behind Collin County Journal</span>
     </div>
   </a>
 
@@ -194,6 +195,7 @@ const organizationSchema = {
         <a href="/privacy">Privacy Policy</a>
         <a href="/terms">Terms of Service</a>
         <a href="/contact">Contact</a>
+        <a href="/support">Support</a>
         <a href="/subscribe">Subscribe</a>
       </div>
 

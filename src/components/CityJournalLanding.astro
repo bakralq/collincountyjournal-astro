@@ -130,7 +130,7 @@ const pageSchemas = [
             </span>
             {featuredStory.date && (
               <span class="text-xs text-gray-600 sm:text-sm">
-                {formatDisplayDate(featuredStory.date)}
+                {formatDisplayDate(featuredStory.date, featuredStory.publishedAt)}
               </span>
             )}
             {featuredStory.readingTime && (

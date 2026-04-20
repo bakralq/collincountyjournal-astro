@@ -8,6 +8,7 @@ import {
   getSectionHref,
   toAbsoluteUrl,
 } from '../../lib/seo';
+import { getPostDateObject, getPostTimestamp } from '../../lib/cityJournalData';
 
 export async function getStaticPaths() {
   const posts = await getCollection('posts', ({ data }) => !data.draft);
@@ -37,8 +38,8 @@ const sectionPosts = allPosts
   .filter((p) => p.data.section === post.data.section)
   .sort(
     (a, b) =>
-      new Date(`${b.data.date}T12:00:00`).getTime() -
-      new Date(`${a.data.date}T12:00:00`).getTime()
+      getPostTimestamp(b.data.date, b.data.publishedAt) -
+      getPostTimestamp(a.data.date, a.data.publishedAt)
   );
 
 const currentIndex = sectionPosts.findIndex(
@@ -63,6 +64,7 @@ const nextPostData = nextPost
       title: nextPost.data.title,
       href: `/posts/${nextPost.id.replace(/\.md$/, '')}`,
       date: nextPost.data.date,
+      publishedAt: nextPost.data.publishedAt || '',
       image: nextPost.data.image || null,
       readingTime: getReadingTime(nextPost.body || ''),
     }
@@ -76,12 +78,18 @@ const relatedPosts = sectionPosts
     description: candidate.data.description,
     href: `/posts/${candidate.id.replace(/\.md$/, '')}`,
     date: candidate.data.date,
+    publishedAt: candidate.data.publishedAt || '',
     image: candidate.data.image || null,
     readingTime: getReadingTime(candidate.body || ''),
   }));
 
 const imageUrl = post.data.image ? toAbsoluteUrl(post.data.image) : null;
-const dateModified = post.data.updated || post.data.date;
+const datePublished = getPostDateObject(post.data.date, post.data.publishedAt)?.toISOString() || post.data.date;
+const dateModified =
+  getPostDateObject(
+    post.data.updated || post.data.date,
+    post.data.updated ? undefined : post.data.publishedAt
+  )?.toISOString() || post.data.updated || post.data.date;
 const keywords = Array.from(
   new Set(
     [post.data.section, 'Collin County Journal', ...(post.data.keywords || [])].filter(Boolean)
@@ -93,7 +101,7 @@ const articleSchema = {
   '@type': 'NewsArticle',
   headline: post.data.title,
   description: post.data.description,
-  datePublished: post.data.date,
+  datePublished,
   dateModified,
   author: authorProfile,
   publisher: PUBLISHER,
@@ -138,6 +146,7 @@ const pageSchemas = [breadcrumbSchema, articleSchema];
   author={post.data.author}
   authorHref={authorProfile.url}
   date={post.data.date}
+  publishedAt={post.data.publishedAt}
   updated={post.data.updated}
   description={post.data.description}
   url={articleUrl}

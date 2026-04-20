@@ -264,7 +264,7 @@ export const cityJournalConfigs = [
 export const subscribeAudienceOptions = [
   {
     value: 'all',
-    label: 'All city journals',
+    label: 'All City Journals',
   },
   ...cityJournalConfigs.map((city) => ({
     value: city.key,
@@ -290,27 +290,73 @@ export const getReadingTime = (content = '') => {
   return Math.max(1, Math.ceil(wordCount / 200));
 };
 
-export const formatDisplayDate = (date?: string) => {
+export const getPostDateObject = (date?: string, publishedAt?: string) => {
+  if (!date && !publishedAt) return null;
+  return new Date(publishedAt || `${date}T12:00:00`);
+};
+
+export const getPostTimestamp = (date?: string, publishedAt?: string) => {
+  const value = getPostDateObject(date, publishedAt);
+  return value ? value.getTime() : 0;
+};
+
+const getChicagoDateKey = (value: Date) =>
+  new Intl.DateTimeFormat('sv-SE', {
+    timeZone: 'America/Chicago',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  }).format(value);
+
+export const isPostPublished = (
+  date?: string,
+  publishedAt?: string,
+  referenceDate = new Date()
+) => {
+  if (!date && !publishedAt) return false;
+  if (publishedAt) {
+    return getPostTimestamp(date, publishedAt) <= referenceDate.getTime();
+  }
+
+  return Boolean(date) && date <= getChicagoDateKey(referenceDate);
+};
+
+export const formatDisplayDate = (date?: string, publishedAt?: string) => {
   if (!date) return '';
 
-  return new Date(`${date}T12:00:00`).toLocaleDateString('en-US', {
+  const value = getPostDateObject(date, publishedAt);
+  if (!value) return '';
+
+  const dateLabel = value.toLocaleDateString('en-US', {
+    timeZone: 'America/Chicago',
     year: 'numeric',
     month: 'long',
     day: 'numeric',
   });
+
+  if (!publishedAt) return dateLabel;
+
+  const timeLabel = value.toLocaleTimeString('en-US', {
+    timeZone: 'America/Chicago',
+    hour: 'numeric',
+    minute: '2-digit',
+  });
+
+  return `${dateLabel} at ${timeLabel}`;
 };
 
-export const sortPostsByDate = <T extends { data: { date: string } }>(posts: T[]) =>
+export const sortPostsByDate = <T extends { data: { date: string; publishedAt?: string } }>(posts: T[]) =>
   [...posts].sort(
     (a, b) =>
-      new Date(`${b.data.date}T12:00:00`).getTime() -
-      new Date(`${a.data.date}T12:00:00`).getTime()
+      getPostTimestamp(b.data.date, b.data.publishedAt) -
+      getPostTimestamp(a.data.date, a.data.publishedAt)
   );
 
 export const toLocalStoryCard = (post: any) => ({
   title: post.data.title,
   description: post.data.description,
   date: post.data.date,
+  publishedAt: post.data.publishedAt || '',
   image: post.data.image || '',
   href: `/posts/${post.id.replace(/\.md$/, '')}`,
   readingTime: getReadingTime(post.body || ''),
@@ -358,7 +404,7 @@ export const createPlaceholderRailItems = (city: any) => [
   {
     title: `Subscribe for ${city.shortName} updates`,
     description:
-      'Choose all city journals or just one city and get the next major story in your inbox.',
+      'Choose all City Journals or just one City Journal and get the next major story in your inbox.',
     href: '/subscribe',
     image: '',
     date: '',

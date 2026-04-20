@@ -1,0 +1,131 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const defaultLinks = {
+  monthly: 'https://buy.stripe.com/cNibJ2d2B76OcmYbm99MY02',
+  annual: 'https://buy.stripe.com/3cI7sM1jT76ObiU61P9MY03',
+  onetime: 'https://buy.stripe.com/4gMfZi5A9dvc0Egduh9MY05',
+  founding: 'https://buy.stripe.com/8x200k4w5aj00Eg3TH9MY04',
+};
+
+const supportOptions = [
+  {
+    title: 'Monthly supporter',
+    description:
+      'For readers who want to keep the reporting system running every month.',
+    detail:
+      'This helps sustain countywide coverage, Princeton reporting, civic explainers, and the tools readers now rely on across both publications.',
+    perks: ['Early access', 'Supporter recognition'],
+    href: import.meta.env.PUBLIC_SUPPORT_MONTHLY_URL || defaultLinks.monthly,
+    cta: 'Become a supporter',
+    kicker: 'Supporter (Monthly)',
+  },
+  {
+    title: 'Annual member',
+    description:
+      'For people backing the longer newsroom buildout, not just the next story.',
+    detail:
+      'This is a stronger commitment to keeping local reporting stable, independent, and expanding across Collin County.',
+    perks: ['Everything above', 'Monthly briefing', 'Priority responses', 'Higher recognition'],
+    href: import.meta.env.PUBLIC_SUPPORT_YEARLY_URL || defaultLinks.annual,
+    cta: 'Join annually',
+    kicker: 'Insider (Annual)',
+  },
+  {
+    title: 'One-time contribution',
+    description:
+      'For readers who want to back a story, a project, or the work overall.',
+    detail:
+      'A single contribution still helps move the newsroom forward.',
+    perks: ['Public acknowledgment', 'Contribution recognition'],
+    href: import.meta.env.PUBLIC_SUPPORT_ONE_TIME_URL || defaultLinks.onetime,
+    cta: 'Contribute once',
+    kicker: 'Backer (One-time)',
+  },
+  {
+    title: 'Founding member',
+    description:
+      'For readers who want to help shape the strongest version of this newsroom system.',
+    detail:
+      'This is the highest-tier way to back the long-term reporting, product, and public-interest buildout behind Collin County Journal and The Princeton Journal.',
+    perks: ['Direct access', 'Story input', 'Behind-the-scenes access'],
+    href: import.meta.env.PUBLIC_SUPPORT_FOUNDING_URL || defaultLinks.founding,
+    cta: 'Become a founding member',
+    kicker: 'High-tier support',
+  },
+];
+---
+
+<Layout
+  title="Support | Collin County Journal"
+  description="Support independent reporting from Collin County Journal and The Princeton Journal with a monthly membership, annual backing, or a one-time contribution."
+  url="https://collincountyjournal.com/support"
+>
+  <main class="mx-auto max-w-6xl px-6 py-10">
+    <p class="text-sm font-medium uppercase tracking-wide text-gray-500">
+      Support
+    </p>
+
+    <h1 class="mt-3 text-4xl font-bold tracking-tight">
+      Help build the reporting system readers rely on across Collin County
+    </h1>
+
+    <p class="mt-4 max-w-3xl text-base leading-7 text-gray-700">
+      Support keeps the reporting independent and helps fund the broader newsroom structure behind Collin County Journal and The Princeton Journal. That includes city coverage, explainers, council tracking, alerts, and the public-interest tools we are building around them.
+    </p>
+
+    <div class="mt-6 grid gap-5 xl:grid-cols-2">
+      {supportOptions.map((option) => (
+        <article class="rounded-[2rem] border border-gray-200 bg-white p-6 shadow-sm">
+          <p class="text-xs font-semibold uppercase tracking-[0.2em] text-gray-500">
+            {option.kicker}
+          </p>
+          <h2 class="mt-3 text-2xl font-bold tracking-tight">
+            {option.title}
+          </h2>
+          <p class="mt-4 text-sm leading-7 text-gray-700">
+            {option.description}
+          </p>
+          <p class="mt-3 text-sm leading-7 text-gray-700">
+            {option.detail}
+          </p>
+
+          <ul class="mt-5 list-disc space-y-2 pl-5 text-sm leading-7 text-gray-700">
+            {option.perks.map((perk) => (
+              <li>{perk}</li>
+            ))}
+          </ul>
+
+          {option.href ? (
+            <a
+              href={option.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="mt-6 inline-flex items-center rounded-2xl border border-black bg-black px-5 py-3 text-sm font-semibold text-white transition hover:bg-white hover:text-black"
+            >
+              {option.cta}
+            </a>
+          ) : (
+            <div class="mt-6 rounded-2xl border border-dashed border-gray-300 bg-gray-50 px-4 py-3 text-sm leading-6 text-gray-600">
+              Add a payment link in the environment config to activate this option.
+            </div>
+          )}
+        </article>
+      ))}
+    </div>
+
+    <section class="mt-10 rounded-[2rem] border border-gray-200 bg-stone-50 p-6 sm:p-8">
+      <p class="text-xs font-semibold uppercase tracking-[0.22em] text-gray-500">
+        Independence notice
+      </p>
+      <div class="mt-5 space-y-4 text-sm leading-7 text-gray-700">
+        <p>
+          Support helps fund reporting, alerts, explainers, products, and affiliated publication tools, but it does not buy editorial influence, guaranteed coverage, or control over newsroom decisions.
+        </p>
+        <p>
+          Checkout is handled through external payment links. Payment processing, receipts, and billing details are handled by the payment provider you use at checkout.
+        </p>
+      </div>
+    </section>
+  </main>
+</Layout>

@@ -8,6 +8,7 @@ import {
   cityJournalConfigs,
   createPlaceholderStory,
   internalCityJournalConfigs,
+  isPostPublished,
   sortPostsByDate,
   toExternalStoryCard,
   toLocalStoryCard,
@@ -51,13 +52,18 @@ const carouselSlides = cityJournalConfigs.map((city) => {
 });
 
 const countywideStories = allPosts
-  .filter((post) => post.data.section === 'US News')
+  .filter(
+    (post) =>
+      post.data.section === 'US News' &&
+      isPostPublished(post.data.date, post.data.publishedAt)
+  )
   .slice(0, 3)
   .map((post) => ({
     title: post.data.title,
     description: post.data.description,
     href: `/posts/${post.id.replace(/\.md$/, '')}`,
     date: post.data.date,
+    publishedAt: post.data.publishedAt || '',
     image: post.data.image || null,
     readingTime: toLocalStoryCard(post).readingTime,
   }));
@@ -131,9 +137,10 @@ const homeSchema = buildCollectionPageSchema({
               description={story.description}
               href={story.href}
               date={story.date}
+              publishedAt={story.publishedAt}
               image={story.image}
               readingTime={story.readingTime}
-              variant="stacked"
+              variant="patriotic"
             />
           ))}
         </div>

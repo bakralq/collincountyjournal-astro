@@ -1,7 +1,8 @@
 ---
 title: "Public Safety Is Being Rebuilt in Real Time"
 description: "Melissa is expanding police, fire, EMS, equipment, and station coverage at the same time because growth is already increasing calls, inspections, and roadway pressure."
-date: "2026-04-18"
+date: "2026-04-20"
+publishedAt: "2026-04-20T17:15:00-05:00"
 section: "Melissa Journal"
 author: "Christian J. Remington, Editor in Chief"
 keywords:

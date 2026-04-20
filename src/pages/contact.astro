@@ -4,7 +4,7 @@ import Layout from '../layouts/Layout.astro';
 
 <Layout
   title="Contact | Collin County Journal"
-  description="Contact Collin County Journal for tips, corrections, documents, interview requests, and general inquiries."
+  description="Contact Collin County Journal for tips, corrections, documents, interview requests, general inquiries, and affiliated Princeton Journal matters."
   url="https://collincountyjournal.com/contact"
 >
   <main class="mx-auto max-w-4xl px-6 py-10">
@@ -25,14 +25,26 @@ import Layout from '../layouts/Layout.astro';
         We review submissions with care, but submission of a message, tip, or document does not guarantee publication, response, or follow-up.
       </p>
 
+      <p>
+        For Princeton-specific matters, registry concerns, or issues tied to pages published under The Princeton Journal, you may also contact <strong>theprincetonjournal@gmail.com</strong>.
+      </p>
+
       <form
         name="contact"
         method="POST"
         action="/thank-you"
         data-netlify="true"
+        netlify-honeypot="bot-field"
         class="mt-8 space-y-6 rounded-2xl border border-gray-200 p-6 shadow-sm"
       >
         <input type="hidden" name="form-name" value="contact" />
+
+        <p class="hidden">
+          <label>
+            Don’t fill this out if you’re human:
+            <input name="bot-field" />
+          </label>
+        </p>
 
         <div>
           <label class="mb-2 block text-sm font-medium text-gray-700">
@@ -61,6 +73,7 @@ import Layout from '../layouts/Layout.astro';
             <option value="Correction Request">Correction Request</option>
             <option value="Clarification Request">Clarification Request</option>
             <option value="Document Submission">Document Submission</option>
+            <option value="Princeton Journal / Registry Concern">Princeton Journal / Registry Concern</option>
             <option value="Story Idea">Story Idea</option>
             <option value="Interview / Comment Request">Interview / Comment Request</option>
             <option value="Advertising / Sponsorship">Advertising / Sponsorship</option>
@@ -101,6 +114,10 @@ import Layout from '../layouts/Layout.astro';
       </p>
 
       <p>
+        If your issue involves how a public registry record appears on a Princeton Journal page, include the SID, listed name, and a short description of the issue so it can be reviewed more efficiently.
+      </p>
+
+      <p>
         We review submitted materials using editorial judgment and verification standards. Submission alone does not guarantee publication.
       </p>
 
@@ -116,6 +133,10 @@ import Layout from '../layouts/Layout.astro';
         When a material correction or clarification is made, it may be noted in the relevant article so readers can understand what changed.
       </p>
 
+      <p>
+        If a concern involves Princeton Journal registry presentation, displayed photos, or related public-record display issues, we can review how the material appears on the site even when the underlying official record is maintained by a government source.
+      </p>
+
       <hr class="border-gray-200" />
 
       <p class="text-base text-gray-600">
@@ -124,4 +145,3 @@ import Layout from '../layouts/Layout.astro';
     </div>
   </main>
 </Layout>
-

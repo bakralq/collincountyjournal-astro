@@ -1,7 +1,8 @@
 ---
 title: "Prosper Building Permits in 2026: What Housing Throughput Says About the City's Growth Load"
 description: "Prosper issued 196 single-family and townhome permits from October through February, a sign that housing growth remains strong and that service pressure is already moving from planning into delivery."
-date: "2026-04-14"
+date: "2026-04-20"
+publishedAt: "2026-04-20T17:18:00-05:00"
 section: "Prosper Journal"
 author: "Christian J. Remington, Editor in Chief"
 image: "/images/prosper/prosper-building-permits-growth-pressure-2026.jpg"

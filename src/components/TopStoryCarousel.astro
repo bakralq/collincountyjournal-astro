@@ -25,7 +25,7 @@ const { slides = [] } = Astro.props;
                 </span>
                 {slide.date && (
                   <span class="text-xs text-gray-600 sm:text-sm">
-                    {formatDisplayDate(slide.date)}
+                    {formatDisplayDate(slide.date, slide.publishedAt)}
                   </span>
                 )}
                 {slide.readingTime && (

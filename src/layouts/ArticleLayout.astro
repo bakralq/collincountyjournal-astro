@@ -2,7 +2,7 @@
 import Layout from './Layout.astro';
 import ArticleInlineSubscribe from '../components/ArticleInlineSubscribe.astro';
 import ArticleCard from '../components/ArticleCard.astro';
-import { getCityConfigBySection } from '../lib/cityJournalData';
+import { formatDisplayDate, getCityConfigBySection } from '../lib/cityJournalData';
 
 const {
   title,
@@ -11,6 +11,7 @@ const {
   author,
   authorHref = '/staff',
   date,
+  publishedAt = '',
   updated = '',
   description,
   url,
@@ -74,20 +75,12 @@ const subscribeCity = getCityConfigBySection(section);
 
     {date && (
       <p class="mt-1 text-sm text-gray-500">
-        {new Date(`${date}T12:00:00`).toLocaleDateString('en-US', {
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric',
-        })}
+        {formatDisplayDate(date, publishedAt)}
         {readingTime && ` • ${readingTime} min read`}
         {updated && updated !== date && (
           <>
             {' • Updated '}
-            {new Date(`${updated}T12:00:00`).toLocaleDateString('en-US', {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
-            })}
+            {formatDisplayDate(updated)}
           </>
         )}
       </p>
@@ -308,6 +301,7 @@ const subscribeCity = getCityConfigBySection(section);
               description={story.description}
               href={story.href}
               date={story.date}
+              publishedAt={story.publishedAt}
               image={story.image}
               readingTime={story.readingTime}
               variant="stacked"
@@ -341,12 +335,7 @@ const subscribeCity = getCityConfigBySection(section);
             <div class={`p-6 ${nextPost.image ? 'sm:w-3/4' : 'w-full'}`}>
               {(nextPost.date || nextPost.readingTime) && (
                 <p class="text-sm text-gray-500">
-                  {nextPost.date &&
-                    new Date(`${nextPost.date}T12:00:00`).toLocaleDateString('en-US', {
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric',
-                    })}
+                  {nextPost.date && formatDisplayDate(nextPost.date, nextPost.publishedAt)}
                   {nextPost.date && nextPost.readingTime ? ' • ' : ''}
                   {nextPost.readingTime ? `${nextPost.readingTime} min read` : ''}
                 </p>
