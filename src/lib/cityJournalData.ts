@@ -5,7 +5,7 @@ export const cityJournalConfigs = [
     title: 'Anna Journal',
     shortName: 'Anna',
     section: 'Anna Journal',
-    href: '/anna-journal',
+    href: '/anna-journal/',
     external: false,
     pageDescription:
       'Anna is one of the fastest-rising communities in Collin County, with major growth, new infrastructure, and a family-focused identity that keeps drawing attention across North Texas. We cover the city hall decisions, school changes, development moves, public-safety issues, and community stories shaping Anna as it grows into its next chapter.',
@@ -57,7 +57,7 @@ export const cityJournalConfigs = [
     title: 'Celina Journal',
     shortName: 'Celina',
     section: 'Celina Journal',
-    href: '/celina-journal',
+    href: '/celina-journal/',
     external: false,
     pageDescription:
       'Celina is one of the biggest growth stories in North Texas, pairing explosive expansion with hometown pride and an ambitious civic buildout. We cover the government, schools, development, infrastructure, and public-safety decisions shaping one of the most talked-about cities in Collin County.',
@@ -109,7 +109,7 @@ export const cityJournalConfigs = [
     title: 'Melissa Journal',
     shortName: 'Melissa',
     section: 'Melissa Journal',
-    href: '/melissa-journal',
+    href: '/melissa-journal/',
     external: false,
     pageDescription:
       'Melissa is building a reputation as one of the most desirable rising communities in Collin County, with strong schools, steady growth, and a quality of life families notice fast. We cover the local decisions, development plans, public-safety issues, and community changes shaping Melissa as it keeps moving forward.',
@@ -161,7 +161,7 @@ export const cityJournalConfigs = [
     title: 'Princeton Journal',
     shortName: 'Princeton',
     section: 'Princeton Journal',
-    href: '/princeton-journal',
+    href: '/princeton-journal/',
     external: true,
     pageDescription:
       'Independent Princeton reporting lives at The Princeton Journal, where city council, growth, development, schools, and public-safety coverage run deeper every week.',
@@ -213,7 +213,7 @@ export const cityJournalConfigs = [
     title: 'Prosper Journal',
     shortName: 'Prosper',
     section: 'Prosper Journal',
-    href: '/prosper-journal',
+    href: '/prosper-journal/',
     external: false,
     pageDescription:
       'Prosper has become one of the most recognizable growth success stories in North Texas, with rapid development, high expectations, and a reputation for excellence that continues to attract families and investment. We cover the roads, schools, development, government, and public-safety decisions shaping Prosper as it enters its next phase.',
@@ -358,7 +358,7 @@ export const toLocalStoryCard = (post: any) => ({
   date: post.data.date,
   publishedAt: post.data.publishedAt || '',
   image: post.data.image || '',
-  href: `/posts/${post.id.replace(/\.md$/, '')}`,
+  href: `/posts/${post.id.replace(/\.md$/, '')}/`,
   readingTime: getReadingTime(post.body || ''),
   external: false,
 });
@@ -405,7 +405,7 @@ export const createPlaceholderRailItems = (city: any) => [
     title: `Subscribe for ${city.shortName} updates`,
     description:
       'Choose all City Journals or just one City Journal and get the next major story in your inbox.',
-    href: '/subscribe',
+    href: '/subscribe/',
     image: '',
     date: '',
     readingTime: null,

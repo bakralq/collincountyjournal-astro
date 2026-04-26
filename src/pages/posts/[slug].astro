@@ -27,7 +27,7 @@ const wordCount = rawContent.split(/\s+/).filter(Boolean).length;
 const readingTime = Math.max(1, Math.ceil(wordCount / 200));
 
 const slug = post.id.replace(/\.md$/, '');
-const articlePath = `/posts/${slug}`;
+const articlePath = `/posts/${slug}/`;
 const articleUrl = toAbsoluteUrl(articlePath);
 const sectionHref = getSectionHref(post.data.section);
 const authorProfile = getAuthorProfile(post.data.author);
@@ -62,7 +62,7 @@ const getReadingTime = (content = '') => {
 const nextPostData = nextPost
   ? {
       title: nextPost.data.title,
-      href: `/posts/${nextPost.id.replace(/\.md$/, '')}`,
+      href: `/posts/${nextPost.id.replace(/\.md$/, '')}/`,
       date: nextPost.data.date,
       publishedAt: nextPost.data.publishedAt || '',
       image: nextPost.data.image || null,
@@ -76,7 +76,7 @@ const relatedPosts = sectionPosts
   .map((candidate) => ({
     title: candidate.data.title,
     description: candidate.data.description,
-    href: `/posts/${candidate.id.replace(/\.md$/, '')}`,
+    href: `/posts/${candidate.id.replace(/\.md$/, '')}/`,
     date: candidate.data.date,
     publishedAt: candidate.data.publishedAt || '',
     image: candidate.data.image || null,

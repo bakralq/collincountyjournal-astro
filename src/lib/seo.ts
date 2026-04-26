@@ -17,7 +17,7 @@ export const AUTHOR_PROFILES = {
   'Christian J. Remington': {
     '@type': 'Person',
     name: 'Christian J. Remington',
-    url: `${SITE_URL}/staff#christian-j-remington`,
+    url: `${SITE_URL}/staff/#christian-j-remington`,
   },
 };
 
@@ -27,7 +27,19 @@ const AUTHOR_ALIASES = {
 
 export const toAbsoluteUrl = (value = '') => {
   if (!value) return SITE_URL;
-  return new URL(value, SITE_URL).toString();
+
+  const normalized = new URL(value, SITE_URL);
+
+  if (
+    normalized.origin === SITE_URL &&
+    normalized.pathname !== '/' &&
+    !normalized.pathname.endsWith('/') &&
+    !normalized.pathname.includes('.')
+  ) {
+    normalized.pathname = `${normalized.pathname}/`;
+  }
+
+  return normalized.toString();
 };
 
 export const normalizeAuthorName = (name = '') => AUTHOR_ALIASES[name] || name;
@@ -38,7 +50,7 @@ export const getAuthorProfile = (name = '') => {
   return AUTHOR_PROFILES[normalizedName] || {
     '@type': 'Person',
     name: normalizedName,
-    url: `${SITE_URL}/staff`,
+    url: `${SITE_URL}/staff/`,
   };
 };
 
@@ -52,7 +64,7 @@ export const getSectionHref = (section = '') => {
   }
 
   if (section === 'US News') {
-    return '/us-news';
+    return '/us-news/';
   }
 
   return null;

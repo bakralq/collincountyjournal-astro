@@ -122,7 +122,7 @@ export async function getPrincetonFeed(limit = 4) {
     if (!response.ok) return [];
 
     const xml = await response.text();
-    const items = Array.from(xml.matchAll(/<item\b[\s\S]*?<\/item>/gi)).slice(0, limit);
+    const items = Array.from(xml.matchAll(/<item\b[\s\S]*?<\/item>/gi));
     const parsedItems = items
       .map((match) => {
         const block = match[0];
@@ -134,7 +134,9 @@ export async function getPrincetonFeed(limit = 4) {
 
         return { title, link, description, pubDate, image };
       })
-      .filter((item) => item.title && item.link);
+      .filter((item) => item.title && item.link)
+      .sort((a, b) => new Date(b.pubDate || 0).getTime() - new Date(a.pubDate || 0).getTime())
+      .slice(0, limit);
 
     const enrichedItems = await Promise.all(
       parsedItems.map(async (item) => ({

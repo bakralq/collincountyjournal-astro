@@ -61,7 +61,7 @@ const countywideStories = allPosts
   .map((post) => ({
     title: post.data.title,
     description: post.data.description,
-    href: `/posts/${post.id.replace(/\.md$/, '')}`,
+    href: `/posts/${post.id.replace(/\.md$/, '')}/`,
     date: post.data.date,
     publishedAt: post.data.publishedAt || '',
     image: post.data.image || null,
@@ -123,7 +123,7 @@ const homeSchema = buildCollectionPageSchema({
           </div>
 
           <a
-            href="/us-news"
+            href="/us-news/"
             class="text-sm font-semibold text-gray-600 transition hover:text-black"
           >
             Open US News

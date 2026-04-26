@@ -82,6 +82,6 @@ Because what Princeton is building here is part of something larger.
 
 It is one more step toward becoming a more complete city.
 
-For a city also preparing for long-term family growth and service demand, that matters. As The Princeton Journal recently reported in <a href="/posts/princeton-isd-preparing-for-20000-students" class="text-blue-600 underline hover:no-underline">Princeton ISD Is Preparing for Nearly 20,000 Students</a>, Princeton is planning around major future population pressure, not just short-term expansion.
+For a city also preparing for long-term family growth and service demand, that matters. As The Princeton Journal recently reported in <a href="/posts/princeton-isd-preparing-for-20000-students/" class="text-blue-600 underline hover:no-underline">Princeton ISD Is Preparing for Nearly 20,000 Students</a>, Princeton is planning around major future population pressure, not just short-term expansion.
 
-It also fits into the city’s broader growth story. In <a href="/posts/princeton-tried-to-slow-growth-now-its-speeding-back-up" class="text-blue-600 underline hover:no-underline">Princeton Tried to Slow Growth. Now It’s Speeding Back Up.</a>, The Princeton Journal examined how renewed development pressure is reshaping traffic, schools, public safety, and the future of Princeton.
+It also fits into the city’s broader growth story. In <a href="/posts/princeton-tried-to-slow-growth-now-its-speeding-back-up/" class="text-blue-600 underline hover:no-underline">Princeton Tried to Slow Growth. Now It’s Speeding Back Up.</a>, The Princeton Journal examined how renewed development pressure is reshaping traffic, schools, public safety, and the future of Princeton.

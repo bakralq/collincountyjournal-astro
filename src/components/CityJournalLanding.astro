@@ -22,7 +22,7 @@ const featuredStory = topStory || createPlaceholderStory(city);
 const railItems =
   remainingStories.length > 0 ? remainingStories : createPlaceholderRailItems(city);
 const hasTopStory = Boolean(topStory);
-const pageUrl = `https://collincountyjournal.com/${city.slug}`;
+const pageUrl = `https://collincountyjournal.com/${city.slug}/`;
 const schemaItems = [featuredStory, ...railItems]
   .filter((story) => story?.href && !story.external)
   .slice(0, 8)
@@ -33,12 +33,12 @@ const schemaItems = [featuredStory, ...railItems]
 const pageSchemas = [
   buildBreadcrumbSchema([
     { name: 'Home', item: '/' },
-    { name: city.title, item: `/${city.slug}` },
+    { name: city.title, item: `/${city.slug}/` },
   ]),
   buildCollectionPageSchema({
     name: city.title,
     description: city.pageDescription,
-    url: `/${city.slug}`,
+    url: `/${city.slug}/`,
     items: schemaItems,
   }),
 ];
@@ -89,7 +89,7 @@ const pageSchemas = [
         </div>
 
         <a
-          href="/subscribe"
+          href="/subscribe/"
           class="inline-flex items-center rounded-full border border-gray-300 px-4 py-2 text-sm font-semibold text-gray-700 transition hover:border-black hover:text-black"
         >
           Subscribe to {city.shortName}

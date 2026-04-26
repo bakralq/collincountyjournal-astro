@@ -15,10 +15,10 @@ const {
 const pathname = Astro.url.pathname;
 const siteOrigin = Astro.site?.toString() || SITE_URL;
 const showSubscribeModal = ![
-  '/support',
-  '/subscribe',
-  '/subscribe-thank-you',
-  '/thank-you',
+  '/support/',
+  '/subscribe/',
+  '/subscribe-thank-you/',
+  '/thank-you/',
 ].includes(pathname);
 
 const normalizeCanonicalUrl = (value) => {
@@ -136,36 +136,36 @@ const organizationSchema = {
             id="cities-menu"
             class="cities-menu absolute right-0 top-full z-50 mt-3 hidden min-w-[220px] rounded-xl border border-gray-200 bg-white p-2 shadow-lg"
           >
-            <a class="block rounded-lg px-3 py-2 hover:bg-gray-100" href="/anna-journal">Anna Journal</a>
-            <a class="block rounded-lg px-3 py-2 hover:bg-gray-100" href="/celina-journal">Celina Journal</a>
-            <a class="block rounded-lg px-3 py-2 hover:bg-gray-100" href="/melissa-journal">Melissa Journal</a>
+            <a class="block rounded-lg px-3 py-2 hover:bg-gray-100" href="/anna-journal/">Anna Journal</a>
+            <a class="block rounded-lg px-3 py-2 hover:bg-gray-100" href="/celina-journal/">Celina Journal</a>
+            <a class="block rounded-lg px-3 py-2 hover:bg-gray-100" href="/melissa-journal/">Melissa Journal</a>
             <a class="block rounded-lg px-3 py-2 hover:bg-gray-100" href="https://theprincetonjournal.com" target="_blank" rel="noopener noreferrer">Princeton Journal</a>
-            <a class="block rounded-lg px-3 py-2 hover:bg-gray-100" href="/prosper-journal">Prosper Journal</a>
+            <a class="block rounded-lg px-3 py-2 hover:bg-gray-100" href="/prosper-journal/">Prosper Journal</a>
           </div>
         </div>
 
-        <a href="/us-news">US News</a>
-        <a href="/about">About</a>
-        <a href="/contact">Contact</a>
+        <a href="/us-news/">US News</a>
+        <a href="/about/">About</a>
+        <a href="/contact/">Contact</a>
       </nav>
     </div>
 
     <div id="mobile-menu" class="mobile-menu border-t border-gray-200">
       <nav class="mobile-nav mx-auto flex max-w-6xl flex-col gap-4 px-6 py-4 text-sm font-medium">
         <a href="/">Home</a>
-        <a href="/anna-journal">Anna Journal</a>
-        <a href="/celina-journal">Celina Journal</a>
-        <a href="/melissa-journal">Melissa Journal</a>
+        <a href="/anna-journal/">Anna Journal</a>
+        <a href="/celina-journal/">Celina Journal</a>
+        <a href="/melissa-journal/">Melissa Journal</a>
         <a href="https://theprincetonjournal.com" target="_blank" rel="noopener noreferrer">Princeton Journal</a>
-        <a href="/prosper-journal">Prosper Journal</a>
-        <a href="/us-news">US News</a>
-        <a href="/about">About</a>
-        <a href="/contact">Contact</a>
+        <a href="/prosper-journal/">Prosper Journal</a>
+        <a href="/us-news/">US News</a>
+        <a href="/about/">About</a>
+        <a href="/contact/">Contact</a>
       </nav>
     </div>
   </header>
 
-  <a href="/support" class="support-ticker" aria-label="Support Collin County Journal">
+  <a href="/support/" class="support-ticker" aria-label="Support Collin County Journal">
     <div class="support-ticker-track">
       <span>Support CCJ</span>
       <span>Keep independent reporting going across Anna, Celina, Melissa, Princeton, and Prosper</span>
@@ -190,13 +190,13 @@ const organizationSchema = {
   <footer class="mt-20 border-t border-gray-200">
     <div class="mx-auto max-w-6xl px-6 py-10">
       <div class="flex flex-wrap gap-6 text-sm font-medium text-gray-700">
-        <a href="/about">About</a>
-        <a href="/staff">Staff</a>
-        <a href="/privacy">Privacy Policy</a>
-        <a href="/terms">Terms of Service</a>
-        <a href="/contact">Contact</a>
-        <a href="/support">Support</a>
-        <a href="/subscribe">Subscribe</a>
+        <a href="/about/">About</a>
+        <a href="/staff/">Staff</a>
+        <a href="/privacy/">Privacy Policy</a>
+        <a href="/terms/">Terms of Service</a>
+        <a href="/contact/">Contact</a>
+        <a href="/support/">Support</a>
+        <a href="/subscribe/">Subscribe</a>
       </div>
 
       <div class="mt-6 text-sm text-gray-500">

@@ -31,7 +31,7 @@ const postsData = sortedPosts.map((post) => ({
   date: post.data.date,
   publishedAt: post.data.publishedAt || '',
   image: post.data.image || null,
-  href: `/posts/${post.id.replace(/\.md$/, '')}`,
+  href: `/posts/${post.id.replace(/\.md$/, '')}/`,
   content: post.body || '',
   readingTime: getReadingTime(post.body || ''),
   ctaLabel: 'Read full story',
@@ -57,13 +57,13 @@ const formatDate = (date) =>
 const pageSchemas = [
   buildBreadcrumbSchema([
     { name: 'Home', item: '/' },
-    { name: 'US News', item: '/us-news' },
+    { name: 'US News', item: '/us-news/' },
   ]),
   buildCollectionPageSchema({
     name: 'US News',
     description:
       'National policy, federal decisions, and stories that impact Collin County readers and the wider United States.',
-    url: '/us-news',
+    url: '/us-news/',
     items: postsData.slice(0, 10).map((post) => ({
       name: post.title,
       url: post.href,
@@ -75,7 +75,7 @@ const pageSchemas = [
 <Layout
   title="US News | Collin County Journal"
   description="National policy, federal decisions, and stories that impact Collin County readers and the wider United States."
-  url="https://collincountyjournal.com/us-news"
+  url="https://collincountyjournal.com/us-news/"
 >
   <script type="application/ld+json" set:html={JSON.stringify(pageSchemas)} />
 
@@ -106,7 +106,7 @@ const pageSchemas = [
           </div>
 
           <a
-            href="/subscribe"
+            href="/subscribe/"
             class="inline-flex items-center rounded-full border border-gray-300 px-4 py-2 text-sm font-semibold text-gray-700 transition hover:border-black hover:text-black"
           >
             Subscribe to CCJ

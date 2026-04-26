@@ -9,29 +9,29 @@ const peopleSchema = [
   {
     '@context': 'https://schema.org',
     '@type': 'Person',
-    '@id': 'https://collincountyjournal.com/staff#christian-j-remington',
+    '@id': 'https://collincountyjournal.com/staff/#christian-j-remington',
     name: 'Christian J. Remington',
     jobTitle: 'Editor in Chief',
     worksFor: {
       '@type': 'Organization',
       name: 'Collin County Journal',
-      url: 'https://collincountyjournal.com',
+      url: 'https://collincountyjournal.com/',
     },
-    url: 'https://collincountyjournal.com/staff#christian-j-remington',
+    url: 'https://collincountyjournal.com/staff/#christian-j-remington',
   },
 ];
 
 const pageSchemas = [
   buildBreadcrumbSchema([
     { name: 'Home', item: '/' },
-    { name: 'Staff', item: '/staff' },
+    { name: 'Staff', item: '/staff/' },
   ]),
   buildCollectionPageSchema({
     name: 'Collin County Journal Staff',
     description: 'Meet the staff of Collin County Journal.',
-    url: '/staff',
+    url: '/staff/',
     items: [
-      { name: 'Christian J. Remington', url: '/staff#christian-j-remington' },
+      { name: 'Christian J. Remington', url: '/staff/#christian-j-remington' },
     ],
   }),
   ...peopleSchema,
@@ -41,7 +41,7 @@ const pageSchemas = [
 <Layout
   title="Staff | Collin County Journal"
   description="Meet the staff of Collin County Journal."
-  url="https://collincountyjournal.com/staff"
+  url="https://collincountyjournal.com/staff/"
 >
   <script type="application/ld+json" set:html={JSON.stringify(pageSchemas)} />
 
