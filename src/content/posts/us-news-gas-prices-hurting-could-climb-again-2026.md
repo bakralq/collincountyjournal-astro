@@ -1,7 +1,8 @@
 ---
 title: "Gas Prices Are Already Hurting. The Bigger Problem Is They Could Climb Again."
 description: "Gas prices eased slightly in North Texas, but the global shipping system behind them still looks fragile. For Collin County families built around driving, that matters more than one calmer headline."
-date: "2026-04-21"
+date: "2026-04-25"
+publishedAt: "2026-04-25T12:00:00-05:00"
 section: "US News"
 author: "Christian J. Remington, Editor in Chief"
 keywords:

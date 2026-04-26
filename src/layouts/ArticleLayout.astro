@@ -145,6 +145,16 @@ const subscribeCity = getCityConfigBySection(section);
       </article>
     )}
 
+    <button
+      type="button"
+      class="article-back-to-top"
+      data-article-back-to-top
+      aria-label="Back to top"
+      hidden
+    >
+      ↑
+    </button>
+
     <template id="articleInlineSubscribeTemplate">
       <ArticleInlineSubscribe contextCity={subscribeCity?.key || ''} />
     </template>
@@ -278,12 +288,82 @@ const subscribeCity = getCityConfigBySection(section);
             .forEach((container) => injectInto(container));
         }
 
+        const installJumpNavigation = () => {
+          const jumpNav = document.querySelector('[data-jump-nav]');
+          const backToTopButton = document.querySelector('[data-article-back-to-top]');
+
+          if (!(jumpNav instanceof HTMLElement) || !(backToTopButton instanceof HTMLButtonElement)) {
+            return;
+          }
+
+          const topOffset = 112;
+          let isVisible = false;
+
+          const updateVisibility = () => {
+            const threshold = jumpNav.getBoundingClientRect().bottom + window.scrollY + 24;
+            const nextVisible = window.scrollY > threshold;
+
+            if (nextVisible === isVisible) {
+              return;
+            }
+
+            isVisible = nextVisible;
+            backToTopButton.hidden = !isVisible;
+            backToTopButton.classList.toggle('is-visible', isVisible);
+          };
+
+          jumpNav.querySelectorAll('a[href^="#"]').forEach((link) => {
+            link.addEventListener('click', (event) => {
+              const href = link.getAttribute('href');
+
+              if (!href || href === '#') {
+                return;
+              }
+
+              const target = document.querySelector(href);
+
+              if (!(target instanceof HTMLElement)) {
+                return;
+              }
+
+              event.preventDefault();
+
+              const top = target.getBoundingClientRect().top + window.scrollY - topOffset;
+
+              window.scrollTo({
+                top,
+                behavior: 'smooth',
+              });
+
+              if (history.replaceState) {
+                history.replaceState(null, '', href);
+              } else {
+                window.location.hash = href;
+              }
+            });
+          });
+
+          backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+              top: 0,
+              behavior: 'smooth',
+            });
+          });
+
+          window.addEventListener('scroll', updateVisibility, { passive: true });
+          updateVisibility();
+        };
+
         if (document.readyState === 'loading') {
-          document.addEventListener('DOMContentLoaded', installInlinePrompts, {
+          document.addEventListener('DOMContentLoaded', () => {
+            installInlinePrompts();
+            installJumpNavigation();
+          }, {
             once: true,
           });
         } else {
           installInlinePrompts();
+          installJumpNavigation();
         }
       })();
     </script>
