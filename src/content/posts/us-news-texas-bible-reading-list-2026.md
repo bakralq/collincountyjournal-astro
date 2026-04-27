@@ -12,7 +12,7 @@ keywords:
   - "Bible stories public schools"
   - "Texas curriculum"
   - "US News"
-image: "/images/us-news/us-news-texas-bible-reading-list-2026.jpg"
+image: "/images/us-news/us-news-texas-bible-reading-list-2026-facebook.jpg"
 ---
 
 For most parents, this debate does not start in Austin. It starts with a much simpler question.
