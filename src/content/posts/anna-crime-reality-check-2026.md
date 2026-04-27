@@ -5,7 +5,7 @@ date: "2026-04-27"
 publishedAt: "2026-04-27T12:47:00-05:00"
 section: "Anna Journal"
 author: "Christian J. Remington, Editor in Chief"
-image: "/images/anna/anna-crime-reality-check-2026.jpg"
+image: "/images/anna/anna-crime-reality-check-2026-facebook.jpg"
 imageCaption: "Image: Anna Police Department"
 draft: false
 ---
