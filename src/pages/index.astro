@@ -8,7 +8,6 @@ import {
   cityJournalConfigs,
   createPlaceholderStory,
   internalCityJournalConfigs,
-  isPostPublished,
   sortPostsByDate,
   toExternalStoryCard,
   toLocalStoryCard,
@@ -52,11 +51,7 @@ const carouselSlides = cityJournalConfigs.map((city) => {
 });
 
 const countywideStories = allPosts
-  .filter(
-    (post) =>
-      post.data.section === 'US News' &&
-      isPostPublished(post.data.date, post.data.publishedAt)
-  )
+  .filter((post) => post.data.section === 'US News')
   .slice(0, 3)
   .map((post) => ({
     title: post.data.title,

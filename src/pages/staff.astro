@@ -19,6 +19,19 @@ const peopleSchema = [
     },
     url: 'https://collincountyjournal.com/staff/#christian-j-remington',
   },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    '@id': 'https://collincountyjournal.com/staff/#juan-esquivel',
+    name: 'Juan Esquivel',
+    jobTitle: 'Lead Developer',
+    worksFor: {
+      '@type': 'Organization',
+      name: 'Collin County Journal',
+      url: 'https://collincountyjournal.com/',
+    },
+    url: 'https://collincountyjournal.com/staff/#juan-esquivel',
+  },
 ];
 
 const pageSchemas = [
@@ -32,6 +45,7 @@ const pageSchemas = [
     url: '/staff/',
     items: [
       { name: 'Christian J. Remington', url: '/staff/#christian-j-remington' },
+      { name: 'Juan Esquivel', url: '/staff/#juan-esquivel' },
     ],
   }),
   ...peopleSchema,
@@ -124,6 +138,54 @@ const pageSchemas = [
 
             <p>
               At the center of everything he does is a simple commitment: to serve the people.
+            </p>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <section id="juan-esquivel" class="mt-8 overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
+      <details class="group">
+        <summary class="flex cursor-pointer list-none items-center justify-between gap-6 p-8 sm:p-10">
+          <div>
+            <p class="text-sm font-medium uppercase tracking-wide text-gray-500">
+              Lead Developer
+            </p>
+
+            <h2 class="mt-3 text-3xl font-bold tracking-tight">
+              Juan Esquivel
+            </h2>
+
+            <p class="mt-3 max-w-2xl text-base leading-7 text-gray-600">
+              Lead Developer for Collin County Journal.
+            </p>
+          </div>
+
+          <span class="shrink-0 text-2xl text-gray-500 transition group-open:rotate-180">
+            ▾
+          </span>
+        </summary>
+
+        <div class="border-t border-gray-200 px-8 pb-8 pt-8 sm:px-10 sm:pb-10">
+          <div class="space-y-6 text-lg leading-8 text-gray-800">
+            <p>
+              Juan Esquivel is the Lead Developer for Collin County Journal, responsible for building and maintaining the technical systems that support the platform. He works within the Astro framework to implement site architecture, configure core systems, and ensure the platform functions reliably as content and traffic continue to grow.
+            </p>
+
+            <p>
+              He has developed and maintained key components of the site’s infrastructure, including dynamic content systems, API integrations, and database-backed functionality that enable structured publishing and real-time updates. His work includes configuring routing, optimizing performance, managing deployments, and resolving technical issues to keep the platform stable and efficient under daily use.
+            </p>
+
+            <p>
+              Juan is a computer science student at the University of Texas at Dallas, currently in his final year. He has several years of experience working across full-stack and backend systems, with a focus on JavaScript, TypeScript, Node, SQL, and modern web development frameworks. His project experience includes database design, system implementation, and building applications that integrate data-driven functionality with clean user interfaces.
+            </p>
+
+            <p>
+              His approach to development prioritizes reliability, clarity, and long-term maintainability. He focuses on building systems that perform consistently under real-world conditions, ensuring that the platform remains stable, responsive, and scalable as it expands.
+            </p>
+
+            <p>
+              Juan was born in Chicago, raised in Illinois, and moved to Princeton, Texas in 2008, where he later graduated from high school. His background and experience continue to shape his focus on building practical, dependable systems that serve real communities.
             </p>
           </div>
         </div>

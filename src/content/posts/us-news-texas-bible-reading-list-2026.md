@@ -1,8 +1,9 @@
 ---
 title: "Texas Just Moved Closer to Putting Bible Stories on a Required School Reading List"
 description: "Texas gave preliminary approval to a statewide reading list that includes Bible material. The bigger question is who gets to make religious content mandatory in public classrooms."
-date: "2026-04-22"
-draft: true
+date: "2026-04-27"
+publishedAt: "2026-04-27T12:53:00-05:00"
+draft: false
 section: "US News"
 author: "Christian J. Remington, Editor in Chief"
 keywords:

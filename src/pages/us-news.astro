@@ -10,13 +10,11 @@ import {
   getReadingTime,
   formatDisplayDate,
   getPostTimestamp,
-  isPostPublished,
 } from '../lib/cityJournalData';
 
 const posts = await getCollection('posts', ({ data }) =>
   !data.draft &&
-  data.section === 'US News' &&
-  isPostPublished(data.date, data.publishedAt)
+  data.section === 'US News'
 );
 
 const sortedPosts = posts.sort(
