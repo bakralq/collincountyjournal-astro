@@ -1,8 +1,9 @@
 ---
 title: "Texas Is at the Center of Another Abortion Pill Fight. This One Is About Who Gets to Reach Across State Lines."
 description: "The abortion pill fight is no longer only about clinics. Texas is now testing how far a state can reach when prescriptions, telehealth, mail systems, and patients cross borders."
-date: "2026-04-24"
-draft: true
+date: "2026-04-29"
+publishedAt: "2026-04-29T07:29:00-05:00"
+draft: false
 section: "US News"
 author: "Christian J. Remington, Editor in Chief"
 keywords:

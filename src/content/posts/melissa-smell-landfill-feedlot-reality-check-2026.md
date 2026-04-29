@@ -1,14 +1,14 @@
 ---
 title: "The Melissa Smell Issue Is Real Enough That Buyers Are Asking Before They Close"
 description: "Public discussion about odor in Melissa keeps returning to the landfill, composting, and feedlot area, but the actual pattern depends heavily on location, wind, weather, and season."
-date: "2026-04-28"
-publishedAt: "2026-04-28T13:00:00-05:00"
+date: "2026-04-29"
+publishedAt: "2026-04-29T07:11:00-05:00"
 section: "Melissa Journal"
 author: "Christian J. Remington, Editor in Chief"
 image: "/images/melissa/melissa-smell-landfill-feedlot-reality-check-2026.jpeg"
 imageCaption: "Image: Master's Touch"
 imageSourceUrl: "https://masterstouch1.com/melissa-tx/"
-draft: true
+draft: false
 ---
 
 Some local issues are obvious only when the wind is right.

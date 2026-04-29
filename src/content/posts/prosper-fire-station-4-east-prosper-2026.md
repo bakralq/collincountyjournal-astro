@@ -1,13 +1,13 @@
 ---
 title: "East Prosper Gets A New Fire Station. The Real Test Is Response Time."
 description: "Prosper Fire Station 4 opens April 28 with a public dedication, adding emergency coverage in a part of town shaped by growth and distance."
-date: "2026-04-28"
-publishedAt: "2026-04-28T13:00:00-05:00"
+date: "2026-04-29"
+publishedAt: "2026-04-29T07:17:00-05:00"
 section: "Prosper Journal"
 author: "Christian J. Remington, Editor in Chief"
 image: "/images/prosper/prosper-fire-station-4-east-prosper-2026.jpg"
 imageCaption: "Image: Town of Prosper"
-draft: true
+draft: false
 ---
 
 If you live on the east side of Prosper, emergency response is not an abstract service.
@@ -91,4 +91,3 @@ A new station helps only if the full system keeps pace.
 Fire Station 4 is a concrete public safety gain for east Prosper.
 
 The building opens April 28. The measurement starts after that, when calls come in and residents can see whether the new location changes response coverage in the part of town it was built to serve.
-

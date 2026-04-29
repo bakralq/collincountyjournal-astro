@@ -1,13 +1,13 @@
 ---
 title: "Prosper Safety Chatter Is Not All Crime. Much Of It Is Traffic, Scams, Crashes, And Everyday Risk."
 description: "Public safety discussion in Prosper is shaped less by one crime wave and more by daily concerns: crashes, scams, traffic violations, power alerts, theft prevention, and neighborhood uncertainty."
-date: "2026-04-28"
-publishedAt: "2026-04-28T13:00:00-05:00"
+date: "2026-04-29"
+publishedAt: "2026-04-29T07:23:00-05:00"
 section: "Prosper Journal"
 author: "Christian J. Remington, Editor in Chief"
 image: "/images/prosper/prosper-safety-chatter-reality-check-2026.jpg"
 imageCaption: "Image: Town of Prosper"
-draft: true
+draft: false
 ---
 
 Residents often talk about safety before they talk about crime.

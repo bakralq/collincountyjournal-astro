@@ -1,14 +1,14 @@
 ---
 title: "Celina's Social Media Party Was A Short-Term Rental Warning Before It Becomes A Local Pattern"
 description: "A massive Celina party advertised on social media brought hundreds to a short-term rental, ended with gunfire, and raised direct questions about rental rules, parents, and police capacity."
-date: "2026-04-28"
-publishedAt: "2026-04-28T13:00:00-05:00"
+date: "2026-04-29"
+publishedAt: "2026-04-29T07:04:00-05:00"
 section: "Celina Journal"
 author: "Christian J. Remington, Editor in Chief"
 image: "/images/celina/celina-social-media-party-short-term-rentals-2026.jpg"
 imageCaption: "Illustrative image: Matthew LeJune / Unsplash"
 imageSourceUrl: "https://unsplash.com/photos/woman-in-orange-t-shirt-eTkiF5iPRGw"
-draft: true
+draft: false
 ---
 
 Most residents do not think about short-term rentals until one becomes a neighborhood problem.
