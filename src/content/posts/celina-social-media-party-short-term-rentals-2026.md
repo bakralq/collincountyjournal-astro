@@ -5,7 +5,7 @@ date: "2026-04-29"
 publishedAt: "2026-04-29T07:04:00-05:00"
 section: "Celina Journal"
 author: "Christian J. Remington, Editor in Chief"
-image: "/images/celina/celina-social-media-party-short-term-rentals-2026.jpg"
+image: "/images/celina/celina-social-media-party-short-term-rentals-2026-facebook.jpg"
 imageCaption: "Illustrative image: Matthew LeJune / Unsplash"
 imageSourceUrl: "https://unsplash.com/photos/woman-in-orange-t-shirt-eTkiF5iPRGw"
 draft: false
