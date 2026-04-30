@@ -12,7 +12,7 @@ keywords:
   - "Texas House Bill 7"
   - "interstate abortion law"
   - "US News"
-image: "/images/us-news/us-news-texas-abortion-pill-state-lines-2026.jpg"
+image: "/images/us-news/us-news-texas-abortion-pill-state-lines-2026-facebook.jpg"
 ---
 
 For many Texans, abortion policy used to feel like something tied to one place: the clinic.
