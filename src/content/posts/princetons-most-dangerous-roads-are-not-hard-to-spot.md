@@ -22,7 +22,7 @@ The number that matters most is simple:
 That is about how many of Princeton’s first 100 crashes of 2026 showed up on the US 380 / Princeton Drive corridor once the street list is counted and label variations like US0380 and US 380 are treated as the same road.
 
 <figure>
-  <img src="/images/princeton-cris-heat-map.png" alt="CRIS crash heat map showing Princeton crash concentration" />
+  <img src="/images/_optimized/princeton-cris-heat-map-1200.webp" alt="CRIS crash heat map showing Princeton crash concentration" loading="lazy" decoding="async" />
   <figcaption>
     State crash data mapped through April 3, 2026, shows the strongest crash concentration on the US 380 / Princeton Drive corridor. (Image: CRIS crash map)
   </figcaption>
@@ -35,7 +35,7 @@ W Princeton Dr with 7, Beauchamp Blvd with 6, FM 982 with 5, Monte Carlo Blvd wi
 ## Where the Trouble Is
 
 <figure>
-  <img src="/images/princeton-cfs-heat-map.png" alt="Princeton Police calls-for-service heat map" />
+  <img src="/images/_optimized/princeton-cfs-heat-map-1200.webp" alt="Princeton Police calls-for-service heat map" loading="lazy" decoding="async" />
   <figcaption>
     Princeton Police’s 2026 crime statistics map, filtered for reckless driver and traffic accident, shows hotspot concentrations along the same corridors repeatedly showing up in crash records. (Image: Princeton Police crime statistics map)
   </figcaption>

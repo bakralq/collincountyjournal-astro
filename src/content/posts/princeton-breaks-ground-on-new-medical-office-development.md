@@ -63,7 +63,7 @@ Confirmed:
 • Status: Groundbreaking completed  
 
 <figure>
-  <img src="/images/princeton-medical-office-groundbreaking-closeup.jpg" alt="Princeton city officials at the medical office groundbreaking ceremony" />
+  <img src="/images/_optimized/princeton-medical-office-groundbreaking-closeup-1200.webp" alt="Princeton city officials at the medical office groundbreaking ceremony" loading="lazy" decoding="async" />
   <figcaption>
     Princeton officials participated in the ceremonial groundbreaking Thursday evening as the city moved forward with a new medical office development.
   </figcaption>

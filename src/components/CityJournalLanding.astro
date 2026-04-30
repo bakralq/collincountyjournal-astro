@@ -2,6 +2,8 @@
 import Layout from '../layouts/Layout.astro';
 import CitySignalStrip from './CitySignalStrip.astro';
 import ScrollableArticleRail from './ScrollableArticleRail.astro';
+import OptimizedImage from './OptimizedImage.astro';
+import { imageWidths } from '../lib/images.js';
 import {
   buildBreadcrumbSchema,
   buildCollectionPageSchema,
@@ -104,10 +106,14 @@ const pageSchemas = [
       >
         <div class="relative">
           {featuredStory.image ? (
-            <img
+            <OptimizedImage
               src={featuredStory.image}
               alt={featuredStory.title}
               class="h-[200px] w-full object-cover sm:h-[320px] lg:h-full"
+              widths={imageWidths.feature}
+              sizes="(min-width: 1024px) 500px, 100vw"
+              loading="eager"
+              fetchpriority="high"
             />
           ) : (
             <div class="flex h-[200px] items-end bg-gradient-to-br from-white via-gray-50 to-gray-100 p-5 sm:h-[320px] sm:p-6 lg:h-full">

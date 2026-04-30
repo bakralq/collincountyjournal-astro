@@ -115,16 +115,16 @@ That is a major reason this case got more attention than a standard rezoning.
 The Longneck tract is not in some random stable area with no known drainage pressure. It sits in an area where creek conditions, crossings, runoff, and floodplain behavior are already part of the conversation. Staff itself places the tract west of Longneck Road, south of Monte Carlo, and near Caldwell Park.
 
 <figure>
-  <img src="/images/floodplain-longneck-caldwell-park.png" alt="Caldwell Park culvert and downstream drainage area" />
+  <img src="/images/_optimized/floodplain-longneck-caldwell-park-1200.webp" alt="Caldwell Park culvert and downstream drainage area" loading="lazy" decoding="async" />
   <figcaption>
     Caldwell Park culvert and nearby downstream drainage area in the broader corridor discussed during the case.
   </figcaption>
 </figure>
 
 <figure>
-  <img src="/images/floodplain-longneck-dry-culvert.jpg" alt="Dry culvert condition" />
+  <img src="/images/_optimized/floodplain-longneck-dry-culvert-1200.webp" alt="Dry culvert condition" loading="lazy" decoding="async" />
 
-  <img src="/images/floodplain-longneck-after-rain.jpg" alt="Culvert after rainfall" />
+  <img src="/images/_optimized/floodplain-longneck-after-rain-1200.webp" alt="Culvert after rainfall" loading="lazy" decoding="async" />
   <figcaption>
     Same culvert before rainfall (top) and several hours after approximately 1 inch of rain (bottom).
   </figcaption>
@@ -153,13 +153,13 @@ At the same time, they should be understood for what they are at this stage: att
 Still, his broader point lines up with why the commission slowed the item down Monday night. If the surrounding corridor is already under drainage stress, then site level questions become even more important, not less.
 
 <figure>
-  <img src="/images/floodplain-longneck-flow-path.jpg" alt="Observed water flow path in the Longneck and Monte Carlo corridor" />
+  <img src="/images/_optimized/floodplain-longneck-flow-path-1200.webp" alt="Observed water flow path in the Longneck and Monte Carlo corridor" loading="lazy" decoding="async" />
   <figcaption>
     Water flow observed from the Monticello Park development area, moving under Monte Carlo Boulevard into a retention pond on Public Works property and continuing south. Description and context provided by the individual who captured the footage and materials shared with The Princeton Journal.
   </figcaption>
 </figure>
 <figure>
-  <img src="/images/floodplain-longneck-annotated-map.png" alt="Annotated drainage flow map with highlighted paths and obstructions" />
+  <img src="/images/_optimized/floodplain-longneck-annotated-map-1200.webp" alt="Annotated drainage flow map with highlighted paths and obstructions" loading="lazy" decoding="async" />
   <figcaption>
     Annotated map provided to The Princeton Journal outlining alleged flow paths and potential drainage obstructions, including access roads. These claims have not been formally verified by the city.
   </figcaption>

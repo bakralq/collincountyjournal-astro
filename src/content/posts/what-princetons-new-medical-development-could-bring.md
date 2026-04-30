@@ -28,7 +28,7 @@ The clearest answer is everyday outpatient care, the kind people use regularly r
 Based on the project’s size, suite structure, and concept rendering, the most likely uses include primary care, pediatrics, dental, orthopedics, imaging, therapy, wellness services, and possibly walk in style care. The rendering itself includes labels such as dental, radiology, ortho, clinic, walk in, and wellness. Those are not confirmed tenants, but they do reveal the type of use the development is clearly being shaped to support.
 
 <figure>
-  <img src="/images/princeton-wellness-village-presentation.jpg" alt="Developer presentation for Princeton Wellness Village" />
+  <img src="/images/_optimized/princeton-wellness-village-presentation-1200.webp" alt="Developer presentation for Princeton Wellness Village" loading="lazy" decoding="async" />
   <figcaption>
     A project presentation identifies the development as Princeton Wellness Village and helps illustrate the kind of multi-suite outpatient concept being proposed. (Image: HHRE presentation at ceremony)
   </figcaption>

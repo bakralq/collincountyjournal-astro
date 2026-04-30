@@ -1,5 +1,7 @@
 ---
 import { formatDisplayDate } from '../lib/cityJournalData';
+import OptimizedImage from './OptimizedImage.astro';
+import { imageWidths } from '../lib/images.js';
 
 const { items = [], variant = 'default' } = Astro.props;
 const isPatriotic = variant === 'patriotic';
@@ -23,13 +25,12 @@ const isPatriotic = variant === 'patriotic';
           <div class="pointer-events-none absolute inset-x-0 top-0 h-1.5 bg-[linear-gradient(90deg,#b91c1c_0%,#ffffff_48%,#1d4ed8_100%)]"></div>
         )}
         {item.image ? (
-          <img
+          <OptimizedImage
             src={item.image}
             alt={item.title}
-            class:list={[
-              'w-full object-cover',
-              isPatriotic ? 'h-40' : 'h-44'
-            ]}
+            class={`w-full object-cover ${isPatriotic ? 'h-40' : 'h-44'}`}
+            widths={imageWidths.rail}
+            sizes="320px"
           />
         ) : (
           <div

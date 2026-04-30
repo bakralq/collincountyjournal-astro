@@ -2,7 +2,9 @@
 import Layout from './Layout.astro';
 import ArticleInlineSubscribe from '../components/ArticleInlineSubscribe.astro';
 import ArticleCard from '../components/ArticleCard.astro';
+import OptimizedImage from '../components/OptimizedImage.astro';
 import { formatDisplayDate, getCityConfigBySection } from '../lib/cityJournalData';
+import { imageWidths } from '../lib/images.js';
 
 const {
   title,
@@ -88,10 +90,14 @@ const subscribeCity = getCityConfigBySection(section);
 
 {image && (
   <>
-    <img
+    <OptimizedImage
       src={image}
       alt={title}
       class="mt-8 w-full rounded-xl border border-gray-200 object-cover"
+      widths={imageWidths.hero}
+      sizes="(min-width: 768px) 768px, calc(100vw - 48px)"
+      loading="eager"
+      fetchpriority="high"
     />
     {imageCaption && (
       <p class="mt-2 text-sm text-gray-500">
@@ -404,10 +410,12 @@ const subscribeCity = getCityConfigBySection(section);
           <div class="flex flex-col sm:flex-row">
             {nextPost.image && (
               <div class="sm:w-1/4 shrink-0">
-                <img
+                <OptimizedImage
                   src={nextPost.image}
                   alt={nextPost.title}
                   class="h-40 w-full object-cover"
+                  widths={imageWidths.card}
+                  sizes="(min-width: 640px) 25vw, 100vw"
                 />
               </div>
             )}

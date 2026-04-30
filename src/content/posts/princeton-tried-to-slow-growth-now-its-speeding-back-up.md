@@ -40,7 +40,7 @@ That is why this issue is so heated. People are not arguing about growth in the 
 On September 23, 2024, Princeton imposed a temporary moratorium on new residential development. KERA reported the city said the pause was needed because rapid growth was stressing infrastructure and city services. The Princeton Journal’s own October 11, 2025 reporting likewise said the moratorium was first adopted on September 23, 2024, and was meant to give staff time to reassess infrastructure capacity and development standards during a period of record growth. Already approved developments were allowed to continue.  
 
 <figure>
-  <img src="/images/princeton-growth-water-tower.jpg" alt="Princeton water tower and worker" />
+  <img src="/images/_optimized/princeton-growth-water-tower-1200.webp" alt="Princeton water tower and worker" loading="lazy" decoding="async" />
 <figcaption>
   Princeton paused new development in 2024 after officials said water, wastewater, and infrastructure systems were struggling to keep up with rapid growth. (Image: Princeton Public Works)
 </figcaption>
@@ -73,7 +73,7 @@ That is the part many people miss. Even after more than a year of moratorium per
 This is where residents feel growth every day.
 
 <figure>
-  <img src="/images/princeton-growth-traffic-police.jpg" alt="Princeton police traffic stop" />
+  <img src="/images/_optimized/princeton-growth-traffic-police-1200.webp" alt="Princeton police traffic stop" loading="lazy" decoding="async" />
 <figcaption>
   Traffic pressure and enforcement activity have increased alongside population growth, especially along corridors like U.S. 380. (Image: Princeton Police Department TX)
 </figcaption>
@@ -100,7 +100,7 @@ More rooftops mean more calls, more wrecks, more patrol pressure, and more need 
 This is where the future becomes impossible to ignore.
 
 <figure>
-  <img src="/images/princeton-growth-schools.jpg" alt="Princeton ISD school building" />
+  <img src="/images/_optimized/princeton-growth-schools-1200.webp" alt="Princeton ISD school building" loading="lazy" decoding="async" />
 <figcaption>
   Princeton ISD is planning for nearly 20,000 students and multiple new campuses as the city continues to add families at a rapid pace. (Image: Princeton ISD)
 </figcaption>

@@ -1,0 +1,47 @@
+---
+import { getOptimizedImagePath, getOptimizedSrcSet, imageWidths } from '../lib/images.js';
+
+const {
+  src,
+  alt = '',
+  class: className = '',
+  widths = imageWidths.card,
+  sizes = '100vw',
+  loading = 'lazy',
+  decoding = 'async',
+  fetchpriority = undefined,
+} = Astro.props;
+
+const canOptimize =
+  typeof src === 'string' &&
+  src.startsWith('/images/') &&
+  !src.startsWith('/images/_optimized/');
+const fallbackWidth = widths[widths.length - 1] || 640;
+const webpSrcSet = canOptimize ? getOptimizedSrcSet(src, widths, 'webp') : '';
+const fallbackSrc = canOptimize ? getOptimizedImagePath(src, fallbackWidth, 'webp') : src;
+---
+
+{src && (
+  canOptimize ? (
+    <picture class="block">
+      <source type="image/webp" srcset={webpSrcSet} sizes={sizes} />
+      <img
+        src={fallbackSrc}
+        alt={alt}
+        class={className}
+        loading={loading}
+        decoding={decoding}
+        fetchpriority={fetchpriority}
+      />
+    </picture>
+  ) : (
+    <img
+      src={src}
+      alt={alt}
+      class={className}
+      loading={loading}
+      decoding={decoding}
+      fetchpriority={fetchpriority}
+    />
+  )
+)}

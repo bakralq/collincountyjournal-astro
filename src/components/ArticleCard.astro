@@ -1,4 +1,7 @@
 ---
+import OptimizedImage from './OptimizedImage.astro';
+import { imageWidths } from '../lib/images.js';
+
 const {
   title,
   description,
@@ -39,10 +42,12 @@ const shortDescription = truncateDescription(description, 140);
     <div class="flex flex-col sm:flex-row">
       {image && (
         <div class="sm:w-1/4 shrink-0">
-          <img
+          <OptimizedImage
             src={image}
             alt={title}
             class="h-48 w-full object-cover"
+            widths={imageWidths.card}
+            sizes="(min-width: 640px) 25vw, 100vw"
           />
         </div>
       )}
@@ -79,13 +84,12 @@ const shortDescription = truncateDescription(description, 140);
     )}
 
     {image ? (
-      <img
+      <OptimizedImage
         src={image}
         alt={title}
-        class:list={[
-          'w-full object-cover',
-          isPatriotic ? 'h-44' : 'h-48'
-        ]}
+        class={`w-full object-cover ${isPatriotic ? 'h-44' : 'h-48'}`}
+        widths={imageWidths.card}
+        sizes="(min-width: 768px) 33vw, 100vw"
       />
     ) : (
       isPatriotic && (

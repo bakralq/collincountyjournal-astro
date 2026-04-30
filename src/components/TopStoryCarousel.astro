@@ -1,5 +1,7 @@
 ---
 import { formatDisplayDate } from '../lib/cityJournalData';
+import OptimizedImage from './OptimizedImage.astro';
+import { imageWidths } from '../lib/images.js';
 
 const { slides = [] } = Astro.props;
 ---
@@ -76,10 +78,14 @@ const { slides = [] } = Astro.props;
                 class="block overflow-hidden rounded-[1.75rem] border border-white/70 bg-white/70 shadow-[0_18px_50px_rgba(17,24,39,0.10)]"
               >
                 {slide.image ? (
-                  <img
+                  <OptimizedImage
                     src={slide.image}
                     alt={slide.title}
                     class="h-[200px] w-full object-cover sm:h-[320px] lg:h-[380px]"
+                    widths={imageWidths.feature}
+                    sizes="(min-width: 1024px) 520px, 100vw"
+                    loading={index === 0 ? 'eager' : 'lazy'}
+                    fetchpriority={index === 0 ? 'high' : undefined}
                   />
                 ) : (
                   <div class="flex h-[200px] items-end bg-gradient-to-br from-white via-gray-50 to-gray-100 p-5 sm:h-[320px] sm:p-6 lg:h-[380px]">

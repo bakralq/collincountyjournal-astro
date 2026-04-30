@@ -2,6 +2,8 @@
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import ScrollableArticleRail from '../components/ScrollableArticleRail.astro';
+import OptimizedImage from '../components/OptimizedImage.astro';
+import { imageWidths } from '../lib/images.js';
 import {
   buildBreadcrumbSchema,
   buildCollectionPageSchema,
@@ -117,10 +119,14 @@ const pageSchemas = [
         >
           <div class="relative">
             {topStory.image ? (
-              <img
+              <OptimizedImage
                 src={topStory.image}
                 alt={topStory.title}
                 class="h-[200px] w-full object-cover sm:h-[320px] lg:h-full"
+                widths={imageWidths.feature}
+                sizes="(min-width: 1024px) 500px, 100vw"
+                loading="eager"
+                fetchpriority="high"
               />
             ) : (
               <div class="flex h-[200px] items-end bg-[linear-gradient(135deg,rgba(185,28,28,0.2)_0%,rgba(255,255,255,0.96)_42%,rgba(29,78,216,0.22)_100%)] p-5 sm:h-[320px] sm:p-6 lg:h-full">
@@ -256,6 +262,18 @@ const pageSchemas = [
     return text.slice(0, limit).trimEnd() + '...';
   }
 
+  function getOptimizedImagePath(src, width = 640) {
+    if (!src || !src.startsWith('/images/') || src.startsWith('/images/_optimized/')) {
+      return src;
+    }
+
+    const withoutRoot = src.slice('/images/'.length);
+    const dotIndex = withoutRoot.lastIndexOf('.');
+    const base = dotIndex >= 0 ? withoutRoot.slice(0, dotIndex) : withoutRoot;
+
+    return `/images/_optimized/${base}-${width}.webp`;
+  }
+
   let filteredPosts = [...posts];
   let currentPage = 1;
 
@@ -291,9 +309,11 @@ const pageSchemas = [
             ${post.image ? `
               <div class="sm:w-1/4 shrink-0">
                 <img
-                  src="${post.image}"
+                  src="${getOptimizedImagePath(post.image, 640)}"
                   alt="${post.title}"
                   class="h-48 w-full object-cover"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
             ` : ''}

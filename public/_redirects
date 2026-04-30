@@ -1,0 +1,10 @@
+# Search Console cleanup redirects
+/posts/anna- /anna-journal/ 301
+/posts/anna-april-28- /posts/anna-april-28-agenda-growth-systems-2026/ 301
+/posts/melissa-growth /melissa-journal/ 301
+/posts/prosper- /prosper-journal/ 301
+/posts/melissa-public- /posts/melissa-public-safety-rebuilt-real-time-2026/ 301
+
+# Canonical domain
+http://www.collincountyjournal.com/* https://collincountyjournal.com/:splat 301!
+https://www.collincountyjournal.com/* https://collincountyjournal.com/:splat 301!
