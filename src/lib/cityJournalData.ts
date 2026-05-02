@@ -359,7 +359,7 @@ export const toLocalStoryCard = (post: any) => ({
   publishedAt: post.data.publishedAt || '',
   image: post.data.image || '',
   href: `/posts/${post.id.replace(/\.md$/, '')}/`,
-  readingTime: getReadingTime(post.body || ''),
+  readingTime: post.data.readingTime || getReadingTime(post.body || ''),
   external: false,
 });
 

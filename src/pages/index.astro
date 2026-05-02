@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import ArticleCard from '../components/ArticleCard.astro';
+import AdSlot from '../components/AdSlot.astro';
 import Layout from '../layouts/Layout.astro';
 import TopStoryCarousel from '../components/TopStoryCarousel.astro';
 import { buildCollectionPageSchema } from '../lib/seo';
@@ -104,6 +105,8 @@ const homeSchema = buildCollectionPageSchema({
     <section class="mt-10">
       <TopStoryCarousel slides={carouselSlides} />
     </section>
+
+    <AdSlot className="mt-12" />
 
     {countywideStories.length > 0 && (
       <section class="mt-14 border-t border-gray-200 pt-12">

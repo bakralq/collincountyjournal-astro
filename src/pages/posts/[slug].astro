@@ -24,7 +24,7 @@ const { Content } = await render(post);
 
 const rawContent = post.body || '';
 const wordCount = rawContent.split(/\s+/).filter(Boolean).length;
-const readingTime = Math.max(1, Math.ceil(wordCount / 200));
+const readingTime = post.data.readingTime || Math.max(1, Math.ceil(wordCount / 200));
 
 const slug = post.id.replace(/\.md$/, '');
 const articlePath = `/posts/${slug}/`;
@@ -66,7 +66,7 @@ const nextPostData = nextPost
       date: nextPost.data.date,
       publishedAt: nextPost.data.publishedAt || '',
       image: nextPost.data.image || null,
-      readingTime: getReadingTime(nextPost.body || ''),
+      readingTime: nextPost.data.readingTime || getReadingTime(nextPost.body || ''),
     }
   : null;
 
@@ -80,7 +80,7 @@ const relatedPosts = sectionPosts
     date: candidate.data.date,
     publishedAt: candidate.data.publishedAt || '',
     image: candidate.data.image || null,
-    readingTime: getReadingTime(candidate.body || ''),
+    readingTime: candidate.data.readingTime || getReadingTime(candidate.body || ''),
   }));
 
 const imageUrl = post.data.image ? toAbsoluteUrl(post.data.image) : null;
@@ -157,6 +157,7 @@ const pageSchemas = [breadcrumbSchema, articleSchema];
   readingTime={readingTime}
   relatedPosts={relatedPosts}
   nextPost={nextPostData}
+  slug={slug}
 >
   <Content />
 </ArticleLayout>

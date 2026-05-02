@@ -2,6 +2,8 @@
 import Layout from './Layout.astro';
 import ArticleInlineSubscribe from '../components/ArticleInlineSubscribe.astro';
 import ArticleCard from '../components/ArticleCard.astro';
+import AdSlot from '../components/AdSlot.astro';
+import ArticlePollWidget from '../components/ArticlePollWidget.astro';
 import OptimizedImage from '../components/OptimizedImage.astro';
 import { formatDisplayDate, getCityConfigBySection } from '../lib/cityJournalData';
 import { imageWidths } from '../lib/images.js';
@@ -24,8 +26,13 @@ const {
   relatedPosts = [],
   readingTime,
   preview,
+  slug = '',
 } = Astro.props;
 const subscribeCity = getCityConfigBySection(section);
+const pollQuestions = {
+  'epic-city-the-meadow-still-moving-forward-2026': 'Should The Meadow / EPIC City move forward?',
+};
+const pollQuestion = pollQuestions[slug];
 ---
 
 <Layout
@@ -165,11 +172,16 @@ const subscribeCity = getCityConfigBySection(section);
       <ArticleInlineSubscribe contextCity={subscribeCity?.key || ''} />
     </template>
 
+    <template id="articleAdSlotTemplate">
+      <AdSlot compact={true} />
+    </template>
+
     <script is:inline>
       (() => {
         const button = document.getElementById('readMoreButton');
         const fullArticle = document.getElementById('fullArticle');
         const template = document.getElementById('articleInlineSubscribeTemplate');
+        const adTemplate = document.getElementById('articleAdSlotTemplate');
 
         button?.addEventListener('click', () => {
           const previewBlock = button.closest('.relative');
@@ -237,6 +249,76 @@ const subscribeCity = getCityConfigBySection(section);
           return card instanceof HTMLElement ? card : null;
         };
 
+        const createAdSlot = () => {
+          if (!(adTemplate instanceof HTMLTemplateElement)) {
+            return null;
+          }
+
+          const wrapper = document.createElement('div');
+          wrapper.appendChild(adTemplate.content.cloneNode(true));
+          const ad = wrapper.firstElementChild;
+          return ad instanceof HTMLElement ? ad : null;
+        };
+
+        const isHeading = (element) =>
+          element instanceof HTMLElement &&
+          /^H[2-3]$/.test(element.tagName);
+
+        const headingText = (element) =>
+          element instanceof HTMLElement
+            ? element.textContent?.trim().toLowerCase() || ''
+            : '';
+
+        const findQuickReadEnd = (quickReadHeading) => {
+          let current = quickReadHeading.nextElementSibling;
+          let lastContent = quickReadHeading;
+
+          while (current) {
+            if (isHeading(current)) break;
+
+            if (
+              current instanceof HTMLElement &&
+              ['P', 'UL', 'OL', 'DIV'].includes(current.tagName)
+            ) {
+              lastContent = current;
+            }
+
+            current = current.nextElementSibling;
+          }
+
+          return lastContent;
+        };
+
+        const installArticleAd = (container) => {
+          if (!(container instanceof HTMLElement) || container.dataset.articleAdInjected === 'true') {
+            return;
+          }
+
+          const ad = createAdSlot();
+          if (!ad) return;
+
+          const quickReadHeading = Array.from(
+            container.querySelectorAll(':scope > h2, :scope > h3')
+          ).find((element) => headingText(element).includes('quick read'));
+
+          if (quickReadHeading instanceof HTMLElement) {
+            const quickReadEnd = findQuickReadEnd(quickReadHeading);
+            quickReadEnd.insertAdjacentElement('afterend', ad);
+            container.dataset.articleAdInjected = 'true';
+            return;
+          }
+
+          const fallbackTargets = Array.from(
+            container.querySelectorAll(':scope > p, :scope > ul, :scope > ol')
+          ).filter((element) => element instanceof HTMLElement);
+
+          const fallbackAnchor = fallbackTargets[Math.min(2, fallbackTargets.length - 1)];
+          if (fallbackAnchor instanceof HTMLElement) {
+            fallbackAnchor.insertAdjacentElement('afterend', ad);
+            container.dataset.articleAdInjected = 'true';
+          }
+        };
+
         const injectInto = (container) => {
           if (!(container instanceof HTMLElement) || container.dataset.inlineSubscribeInjected === 'true') {
             return;
@@ -291,7 +373,10 @@ const subscribeCity = getCityConfigBySection(section);
         function installInlinePrompts() {
           document
             .querySelectorAll('[data-article-body]')
-            .forEach((container) => injectInto(container));
+            .forEach((container) => {
+              injectInto(container);
+              installArticleAd(container);
+            });
         }
 
         const installJumpNavigation = () => {
@@ -436,6 +521,10 @@ const subscribeCity = getCityConfigBySection(section);
           </div>
         </a>
       </section>
+    )}
+
+    {pollQuestion && (
+      <ArticlePollWidget slug={slug} question={pollQuestion} />
     )}
   </main>
 </Layout>

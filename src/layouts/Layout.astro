@@ -101,83 +101,85 @@ const organizationSchema = {
 </head>
 
 <body class="bg-white text-black">
-  <header class="site-header border-b border-gray-200">
-    <div class="site-header-inner mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-      <a href="/" class="logo text-xl">
-        Collin County Journal
-      </a>
+  <div class="site-topbar">
+    <header class="site-header border-b border-gray-200">
+      <div class="site-header-inner mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+        <a href="/" class="logo text-xl">
+          Collin County Journal
+        </a>
 
-      <button
-        class="menu-toggle text-2xl"
-        aria-label="Open navigation"
-        aria-expanded="false"
-        aria-controls="mobile-menu"
-        type="button"
-      >
-        ☰
-      </button>
+        <button
+          class="menu-toggle text-2xl"
+          aria-label="Open navigation"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+          type="button"
+        >
+          ☰
+        </button>
 
-      <nav class="desktop-nav flex items-center gap-6 text-sm font-medium">
-        <a href="/">Home</a>
+        <nav class="desktop-nav flex items-center gap-6 text-sm font-medium">
+          <a href="/">Home</a>
 
-        <div class="relative">
-          <button
-            class="cities-toggle flex items-center gap-1"
-            aria-label="Open cities navigation"
-            aria-expanded="false"
-            aria-controls="cities-menu"
-            type="button"
-          >
-            Cities
-            <span aria-hidden="true">▾</span>
-          </button>
+          <div class="relative">
+            <button
+              class="cities-toggle flex items-center gap-1"
+              aria-label="Open cities navigation"
+              aria-expanded="false"
+              aria-controls="cities-menu"
+              type="button"
+            >
+              Cities
+              <span aria-hidden="true">▾</span>
+            </button>
 
-          <div
-            id="cities-menu"
-            class="cities-menu absolute right-0 top-full z-50 mt-3 hidden min-w-[220px] rounded-xl border border-gray-200 bg-white p-2 shadow-lg"
-          >
-            <a class="block rounded-lg px-3 py-2 hover:bg-gray-100" href="/anna-journal/">Anna Journal</a>
-            <a class="block rounded-lg px-3 py-2 hover:bg-gray-100" href="/celina-journal/">Celina Journal</a>
-            <a class="block rounded-lg px-3 py-2 hover:bg-gray-100" href="/melissa-journal/">Melissa Journal</a>
-            <a class="block rounded-lg px-3 py-2 hover:bg-gray-100" href="https://theprincetonjournal.com" target="_blank" rel="noopener noreferrer">Princeton Journal</a>
-            <a class="block rounded-lg px-3 py-2 hover:bg-gray-100" href="/prosper-journal/">Prosper Journal</a>
+            <div
+              id="cities-menu"
+              class="cities-menu absolute right-0 top-full z-50 mt-3 hidden min-w-[220px] rounded-xl border border-gray-200 bg-white p-2 shadow-lg"
+            >
+              <a class="block rounded-lg px-3 py-2 hover:bg-gray-100" href="/anna-journal/">Anna Journal</a>
+              <a class="block rounded-lg px-3 py-2 hover:bg-gray-100" href="/celina-journal/">Celina Journal</a>
+              <a class="block rounded-lg px-3 py-2 hover:bg-gray-100" href="/melissa-journal/">Melissa Journal</a>
+              <a class="block rounded-lg px-3 py-2 hover:bg-gray-100" href="https://theprincetonjournal.com" target="_blank" rel="noopener noreferrer">Princeton Journal</a>
+              <a class="block rounded-lg px-3 py-2 hover:bg-gray-100" href="/prosper-journal/">Prosper Journal</a>
+            </div>
           </div>
-        </div>
 
-        <a href="/us-news/">US News</a>
-        <a href="/about/">About</a>
-        <a href="/contact/">Contact</a>
-      </nav>
-    </div>
+          <a href="/us-news/">US News</a>
+          <a href="/about/">About</a>
+          <a href="/contact/">Contact</a>
+        </nav>
+      </div>
 
-    <div id="mobile-menu" class="mobile-menu border-t border-gray-200">
-      <nav class="mobile-nav mx-auto flex max-w-6xl flex-col gap-4 px-6 py-4 text-sm font-medium">
-        <a href="/">Home</a>
-        <a href="/anna-journal/">Anna Journal</a>
-        <a href="/celina-journal/">Celina Journal</a>
-        <a href="/melissa-journal/">Melissa Journal</a>
-        <a href="https://theprincetonjournal.com" target="_blank" rel="noopener noreferrer">Princeton Journal</a>
-        <a href="/prosper-journal/">Prosper Journal</a>
-        <a href="/us-news/">US News</a>
-        <a href="/about/">About</a>
-        <a href="/contact/">Contact</a>
-      </nav>
-    </div>
-  </header>
+      <div id="mobile-menu" class="mobile-menu border-t border-gray-200">
+        <nav class="mobile-nav mx-auto flex max-w-6xl flex-col gap-4 px-6 py-4 text-sm font-medium">
+          <a href="/">Home</a>
+          <a href="/anna-journal/">Anna Journal</a>
+          <a href="/celina-journal/">Celina Journal</a>
+          <a href="/melissa-journal/">Melissa Journal</a>
+          <a href="https://theprincetonjournal.com" target="_blank" rel="noopener noreferrer">Princeton Journal</a>
+          <a href="/prosper-journal/">Prosper Journal</a>
+          <a href="/us-news/">US News</a>
+          <a href="/about/">About</a>
+          <a href="/contact/">Contact</a>
+        </nav>
+      </div>
+    </header>
 
-  <a href="/support/" class="support-ticker" aria-label="Support Collin County Journal">
-    <div class="support-ticker-track">
-      <span>Support CCJ</span>
-      <span>Keep independent reporting going across Anna, Celina, Melissa, Princeton, and Prosper</span>
-      <span>Back the reporting system behind Collin County Journal</span>
-      <span>Support CCJ</span>
-      <span>Keep independent reporting going across Anna, Celina, Melissa, Princeton, and Prosper</span>
-      <span>Back the reporting system behind Collin County Journal</span>
-      <span>Support CCJ</span>
-      <span>Keep independent reporting going across Anna, Celina, Melissa, Princeton, and Prosper</span>
-      <span>Back the reporting system behind Collin County Journal</span>
-    </div>
-  </a>
+    <a href="/support/" class="support-ticker" aria-label="Support Collin County Journal">
+      <div class="support-ticker-track">
+        <span>Support CCJ</span>
+        <span>Keep independent reporting going across Anna, Celina, Melissa, Princeton, and Prosper</span>
+        <span>Back the reporting system behind Collin County Journal</span>
+        <span>Support CCJ</span>
+        <span>Keep independent reporting going across Anna, Celina, Melissa, Princeton, and Prosper</span>
+        <span>Back the reporting system behind Collin County Journal</span>
+        <span>Support CCJ</span>
+        <span>Keep independent reporting going across Anna, Celina, Melissa, Princeton, and Prosper</span>
+        <span>Back the reporting system behind Collin County Journal</span>
+      </div>
+    </a>
+  </div>
 
   <slot />
 
@@ -188,8 +190,8 @@ const organizationSchema = {
   />
 
   <footer class="mt-20 border-t border-gray-200">
-    <div class="mx-auto max-w-6xl px-6 py-10">
-      <div class="flex flex-wrap gap-6 text-sm font-medium text-gray-700">
+    <div class="mx-auto max-w-6xl px-6 py-10 text-center">
+      <div class="flex flex-wrap justify-center gap-x-6 gap-y-3 text-sm font-medium text-gray-700">
         <a href="/about/">About</a>
         <a href="/staff/">Staff</a>
         <a href="/privacy/">Privacy Policy</a>

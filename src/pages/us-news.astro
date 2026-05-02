@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
+import AdSlot from '../components/AdSlot.astro';
 import ScrollableArticleRail from '../components/ScrollableArticleRail.astro';
 import OptimizedImage from '../components/OptimizedImage.astro';
 import { imageWidths } from '../lib/images.js';
@@ -33,7 +34,7 @@ const postsData = sortedPosts.map((post) => ({
   image: post.data.image || null,
   href: `/posts/${post.id.replace(/\.md$/, '')}/`,
   content: post.body || '',
-  readingTime: getReadingTime(post.body || ''),
+  readingTime: post.data.readingTime || getReadingTime(post.body || ''),
   ctaLabel: 'Read full story',
 }));
 
@@ -176,6 +177,8 @@ const pageSchemas = [
         </a>
       </section>
     )}
+
+    <AdSlot className="mt-12" />
 
     {remainingStories.length > 0 && (
       <section class="mt-12">

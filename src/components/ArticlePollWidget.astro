@@ -1,0 +1,270 @@
+---
+const {
+  slug,
+  question = 'Should this move forward?',
+} = Astro.props;
+
+const storageKey = `ccj-poll-widget:${slug}`;
+---
+
+<aside
+  class="article-poll-widget"
+  data-article-poll
+  data-poll-slug={slug}
+  data-poll-storage-key={storageKey}
+  hidden
+>
+  <button
+    type="button"
+    class="article-poll-close"
+    data-poll-close
+    aria-label="Close poll"
+  >
+    ×
+  </button>
+
+  <p class="article-poll-label">Reader Vote</p>
+  <h2 class="article-poll-question" data-poll-question>{question}</h2>
+
+  <div class="article-poll-results" data-poll-results>
+    <div class="article-poll-result-row">
+      <span>Against</span>
+      <strong data-poll-count="against">7,329</strong>
+    </div>
+    <div class="article-poll-meter" aria-hidden="true">
+      <span data-poll-meter="against" style="width: 62%;"></span>
+    </div>
+
+    <div class="article-poll-result-row">
+      <span>For</span>
+      <strong data-poll-count="for">4,448</strong>
+    </div>
+    <div class="article-poll-meter" aria-hidden="true">
+      <span data-poll-meter="for" style="width: 38%;"></span>
+    </div>
+
+    <div class="article-poll-result-row" data-poll-not-sure-row hidden>
+      <span>Not sure</span>
+      <strong data-poll-count="not_sure">0</strong>
+    </div>
+    <div class="article-poll-meter" data-poll-not-sure-meter hidden aria-hidden="true">
+      <span data-poll-meter="not_sure"></span>
+    </div>
+  </div>
+
+  <form class="article-poll-form" data-poll-form>
+    <div class="article-poll-options" role="group" aria-label="Vote choice">
+      <label>
+        <input type="radio" name="choice" value="against" required />
+        <span>Against it</span>
+      </label>
+      <label>
+        <input type="radio" name="choice" value="for" required />
+        <span>For it</span>
+      </label>
+      <label>
+        <input type="radio" name="choice" value="not_sure" required />
+        <span>Not sure</span>
+      </label>
+    </div>
+
+    <p class="article-poll-privacy">
+      Your email stays confidential and isn't shown publicly. CCJ uses it only to prevent repeat voting and improve future coverage.
+    </p>
+
+    <label class="article-poll-field">
+      <span>Email <sup>*</sup></span>
+      <input
+        type="email"
+        name="email"
+        autocomplete="email"
+        placeholder="Email (Required)"
+        required
+      />
+    </label>
+
+    <label class="article-poll-field">
+      <span>Comment</span>
+      <textarea
+        name="comment"
+        rows="2"
+        maxlength="1200"
+        placeholder="Comment (Optional)"
+      ></textarea>
+    </label>
+
+    <button type="submit" class="article-poll-submit" data-poll-submit>
+      Vote
+    </button>
+  </form>
+
+  <p class="article-poll-status" data-poll-status aria-live="polite"></p>
+</aside>
+
+<script>
+  (() => {
+    const widget = document.querySelector('[data-article-poll]');
+    if (!(widget instanceof HTMLElement)) return;
+
+    const slug = widget.dataset.pollSlug;
+    const storageKey = widget.dataset.pollStorageKey;
+    const form = widget.querySelector('[data-poll-form]');
+    const status = widget.querySelector('[data-poll-status]');
+    const resultsPanel = widget.querySelector('[data-poll-results]');
+    const submitButton = widget.querySelector('[data-poll-submit]');
+    const closeButton = widget.querySelector('[data-poll-close]');
+
+    if (!slug || !storageKey || !(form instanceof HTMLFormElement)) return;
+
+    const formatNumber = (value) => Number(value || 0).toLocaleString('en-US');
+
+    const setStatus = (message, tone = '') => {
+      if (!(status instanceof HTMLElement)) return;
+      status.textContent = message;
+      status.dataset.tone = tone;
+    };
+
+    const readJsonResponse = async (response) => {
+      const contentType = response.headers.get('content-type') || '';
+      if (!contentType.includes('application/json')) {
+        throw new Error('Voting opens after this update is deployed.');
+      }
+
+      return response.json();
+    };
+
+    const updateResults = (payload) => {
+      const totals = payload?.totals || payload?.results?.totals;
+      if (!totals || !(resultsPanel instanceof HTMLElement)) return;
+
+      const totalVotes =
+        Number(totals.for || 0) +
+        Number(totals.against || 0) +
+        Number(totals.not_sure || 0);
+
+      ['against', 'for', 'not_sure'].forEach((choice) => {
+      const count = Number(totals[choice] || 0);
+        const countEl = widget.querySelector(`[data-poll-count="${choice}"]`);
+        const meterEl = widget.querySelector(`[data-poll-meter="${choice}"]`);
+
+        if (countEl instanceof HTMLElement) {
+          countEl.textContent = formatNumber(count);
+        }
+
+        if (meterEl instanceof HTMLElement) {
+          meterEl.style.width = totalVotes > 0
+            ? `${Math.max(4, Math.round((count / totalVotes) * 100))}%`
+            : '0%';
+        }
+      });
+
+      const hasNotSure = Number(totals.not_sure || 0) > 0;
+      widget.querySelector('[data-poll-not-sure-row]')?.toggleAttribute('hidden', !hasNotSure);
+      widget.querySelector('[data-poll-not-sure-meter]')?.toggleAttribute('hidden', !hasNotSure);
+      resultsPanel.hidden = false;
+    };
+
+    const updateSelectedChoice = () => {
+      const formData = new FormData(form);
+      const choice = formData.get('choice');
+      if (typeof choice === 'string') {
+        widget.dataset.selectedChoice = choice;
+      } else {
+        delete widget.dataset.selectedChoice;
+      }
+    };
+
+    const openWidget = () => {
+      if (window.localStorage.getItem(storageKey) === 'dismissed') return;
+      widget.hidden = false;
+      window.setTimeout(() => widget.classList.add('is-visible'), 1500);
+    };
+
+    closeButton?.addEventListener('click', () => {
+      widget.classList.remove('is-visible');
+      window.localStorage.setItem(storageKey, 'dismissed');
+      window.setTimeout(() => {
+        widget.hidden = true;
+      }, 220);
+    });
+
+    const loadResults = async () => {
+      try {
+        const response = await fetch(`/.netlify/functions/article-poll?slug=${encodeURIComponent(slug)}`, {
+          headers: {
+            Accept: 'application/json',
+          },
+        });
+
+        if (!response.ok) throw new Error('Poll unavailable');
+        const payload = await readJsonResponse(response);
+        updateResults(payload);
+        openWidget();
+      } catch {
+        openWidget();
+      }
+    };
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      updateSelectedChoice();
+
+      const formData = new FormData(form);
+      const choice = formData.get('choice');
+      const email = formData.get('email');
+      const comment = formData.get('comment');
+
+      if (typeof choice !== 'string' || typeof email !== 'string') {
+        setStatus('Choose a side and enter your email.', 'error');
+        return;
+      }
+
+      if (submitButton instanceof HTMLButtonElement) {
+        submitButton.disabled = true;
+        submitButton.textContent = 'Submitting...';
+      }
+
+      try {
+        const response = await fetch('/.netlify/functions/article-poll', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+          body: JSON.stringify({
+            slug,
+            choice,
+            email,
+            comment: typeof comment === 'string' ? comment : '',
+          }),
+        });
+
+        const payload = await readJsonResponse(response);
+
+        if (!response.ok && !payload.alreadyVoted) {
+          throw new Error(payload.error || 'Vote failed');
+        }
+
+        updateResults(payload.results ? payload : { results: payload });
+        form.hidden = true;
+        setStatus(
+          payload.alreadyVoted
+            ? 'This email already voted. Results are shown above.'
+            : 'Vote counted. Results are shown above.',
+          payload.alreadyVoted ? 'notice' : 'success'
+        );
+      } catch (error) {
+        setStatus(error?.message || 'Vote could not be submitted.', 'error');
+      } finally {
+        if (submitButton instanceof HTMLButtonElement) {
+          submitButton.disabled = false;
+          submitButton.textContent = 'Vote';
+        }
+      }
+    });
+
+    form.addEventListener('change', updateSelectedChoice);
+
+    loadResults();
+  })();
+</script>

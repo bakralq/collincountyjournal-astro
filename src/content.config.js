@@ -13,6 +13,7 @@ const postsCollection = defineCollection({
     image: z.string().optional(),
     imageCaption: z.string().optional(),
     imageSourceUrl: z.string().optional(),
+    readingTime: z.number().optional(),
     preview: z.string().optional(),
     draft: z.boolean().optional().default(false),
   }),
