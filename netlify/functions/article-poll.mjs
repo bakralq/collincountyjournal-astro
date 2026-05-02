@@ -1,14 +1,14 @@
 import crypto from 'node:crypto';
 import { getDatabase } from '@netlify/database';
 
-const json = (statusCode, body) => ({
-  statusCode,
-  headers: {
+const json = (status, body) =>
+  new Response(JSON.stringify(body), {
+    status,
+    headers: {
     'Content-Type': 'application/json',
     'Cache-Control': 'no-store',
   },
-  body: JSON.stringify(body),
-});
+  });
 
 const normalizeEmail = (email = '') => email.trim().toLowerCase();
 
@@ -34,10 +34,13 @@ const normalizeChoice = (choice = '') => {
   return '';
 };
 
-const getClientIp = (headers = {}) =>
-  headers['x-nf-client-connection-ip'] ||
-  headers['client-ip'] ||
-  headers['x-forwarded-for']?.split(',')[0]?.trim() ||
+const getHeader = (headers, name) =>
+  typeof headers?.get === 'function' ? headers.get(name) : headers?.[name];
+
+const getClientIp = (headers) =>
+  getHeader(headers, 'x-nf-client-connection-ip') ||
+  getHeader(headers, 'client-ip') ||
+  getHeader(headers, 'x-forwarded-for')?.split(',')[0]?.trim() ||
   '';
 
 const ensurePollSchema = async (db) => {
@@ -161,10 +164,11 @@ const getPollResults = async (db, slug) => {
   return formatResults(poll, groupedVotes);
 };
 
-export const handler = async (event) => {
-  const isDebug = event.queryStringParameters?.debug === '1';
+export default async function handler(request) {
+  const url = new URL(request.url);
+  const isDebug = url.searchParams.get('debug') === '1';
 
-  if (event.httpMethod === 'OPTIONS') {
+  if (request.method === 'OPTIONS') {
     return json(204, {});
   }
 
@@ -172,8 +176,8 @@ export const handler = async (event) => {
     const db = getDatabase();
     await ensurePollSchema(db);
 
-    if (event.httpMethod === 'GET') {
-      const slug = event.queryStringParameters?.slug || '';
+    if (request.method === 'GET') {
+      const slug = url.searchParams.get('slug') || '';
       if (!slug) return json(400, { error: 'Missing poll slug.' });
 
       const results = await getPollResults(db, slug);
@@ -182,11 +186,11 @@ export const handler = async (event) => {
       return json(200, results);
     }
 
-    if (event.httpMethod !== 'POST') {
+    if (request.method !== 'POST') {
       return json(405, { error: 'Method not allowed.' });
     }
 
-    const payload = JSON.parse(event.body || '{}');
+    const payload = await request.json().catch(() => ({}));
     const slug = typeof payload.slug === 'string' ? payload.slug.trim() : '';
     const email = normalizeEmail(payload.email);
     const choice = normalizeChoice(payload.choice);
@@ -218,10 +222,10 @@ export const handler = async (event) => {
 
     const emailHash = hashValue(email);
     const emailDomain = email.split('@')[1] || '';
-    const ipHash = getClientIp(event.headers)
-      ? hashValue(getClientIp(event.headers))
+    const ipHash = getClientIp(request.headers)
+      ? hashValue(getClientIp(request.headers))
       : '';
-    const userAgent = (event.headers['user-agent'] || '').slice(0, 500);
+    const userAgent = (getHeader(request.headers, 'user-agent') || '').slice(0, 500);
 
     try {
       await db.sql`
@@ -279,4 +283,4 @@ export const handler = async (event) => {
         : {}),
     });
   }
-};
+}
