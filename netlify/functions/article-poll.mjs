@@ -12,12 +12,6 @@ const json = (status, body) =>
 
 const normalizeEmail = (email = '') => email.trim().toLowerCase();
 
-const safeDebugValue = (value = '') =>
-  String(value)
-    .replace(/postgres(?:ql)?:\/\/[^\s"]+/gi, '[redacted database url]')
-    .replace(/password=[^&\s"]+/gi, 'password=[redacted]')
-    .slice(0, 500);
-
 const hashValue = (value = '') =>
   crypto.createHash('sha256').update(value).digest('hex');
 
@@ -166,7 +160,6 @@ const getPollResults = async (db, slug) => {
 
 export default async function handler(request) {
   const url = new URL(request.url);
-  const isDebug = url.searchParams.get('debug') === '1';
 
   if (request.method === 'OPTIONS') {
     return json(204, {});
@@ -271,16 +264,6 @@ export default async function handler(request) {
     console.error('article-poll function failed', error);
     return json(500, {
       error: 'Poll is unavailable right now.',
-      ...(isDebug
-        ? {
-            debug: {
-              name: safeDebugValue(error?.name),
-              code: safeDebugValue(error?.code),
-              type: safeDebugValue(error?.constructor?.name),
-              message: safeDebugValue(error?.message),
-            },
-          }
-        : {}),
     });
   }
 }
