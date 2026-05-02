@@ -12,6 +12,12 @@ const json = (statusCode, body) => ({
 
 const normalizeEmail = (email = '') => email.trim().toLowerCase();
 
+const safeDebugValue = (value = '') =>
+  String(value)
+    .replace(/postgres(?:ql)?:\/\/[^\s"]+/gi, '[redacted database url]')
+    .replace(/password=[^&\s"]+/gi, 'password=[redacted]')
+    .slice(0, 500);
+
 const hashValue = (value = '') =>
   crypto.createHash('sha256').update(value).digest('hex');
 
@@ -35,8 +41,6 @@ const getClientIp = (headers = {}) =>
   '';
 
 const ensurePollSchema = async (db) => {
-  await db.sql`create extension if not exists pgcrypto`;
-
   await db.sql`
     create table if not exists article_polls (
       id bigserial primary key,
@@ -55,7 +59,7 @@ const ensurePollSchema = async (db) => {
 
   await db.sql`
     create table if not exists article_poll_votes (
-      id uuid primary key default gen_random_uuid(),
+      id uuid primary key,
       poll_id bigint not null references article_polls(id) on delete cascade,
       slug text not null,
       email_hash text not null,
@@ -158,6 +162,8 @@ const getPollResults = async (db, slug) => {
 };
 
 export const handler = async (event) => {
+  const isDebug = event.queryStringParameters?.debug === '1';
+
   if (event.httpMethod === 'OPTIONS') {
     return json(204, {});
   }
@@ -220,6 +226,7 @@ export const handler = async (event) => {
     try {
       await db.sql`
         insert into article_poll_votes (
+          id,
           poll_id,
           slug,
           email_hash,
@@ -230,6 +237,7 @@ export const handler = async (event) => {
           user_agent
         )
         values (
+          ${crypto.randomUUID()},
           ${poll.id},
           ${slug},
           ${emailHash},
@@ -259,6 +267,16 @@ export const handler = async (event) => {
     console.error('article-poll function failed', error);
     return json(500, {
       error: 'Poll is unavailable right now.',
+      ...(isDebug
+        ? {
+            debug: {
+              name: safeDebugValue(error?.name),
+              code: safeDebugValue(error?.code),
+              type: safeDebugValue(error?.constructor?.name),
+              message: safeDebugValue(error?.message),
+            },
+          }
+        : {}),
     });
   }
 };

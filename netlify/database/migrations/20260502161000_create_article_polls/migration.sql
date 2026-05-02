@@ -1,5 +1,3 @@
-create extension if not exists pgcrypto;
-
 create table if not exists article_polls (
   id bigserial primary key,
   slug text not null unique,
@@ -15,7 +13,7 @@ create table if not exists article_polls (
 );
 
 create table if not exists article_poll_votes (
-  id uuid primary key default gen_random_uuid(),
+  id uuid primary key,
   poll_id bigint not null references article_polls(id) on delete cascade,
   slug text not null,
   email_hash text not null,
